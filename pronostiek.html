@@ -1196,8 +1196,15 @@ async function submitForm() {
   }));
 
   if (missing > 0) {
-    const go = confirm(`Je hebt nog ${missing} wedstrijd(en) niet ingevuld. Toch insturen?`);
-    if (!go) return;
+    // Gebruik data-attribuut om tweede klik te detecteren ipv confirm()
+    const btn = document.querySelector('[onclick="submitForm()"]');
+    if (!btn.dataset.bevestigd) {
+      btn.dataset.bevestigd = '1';
+      showStatus(`⚠ Nog ${missing} wedstrijd(en) niet ingevuld. Klik nogmaals om toch in te sturen.`, 'warning');
+      setTimeout(() => { delete btn.dataset.bevestigd; }, 5000);
+      return;
+    }
+    delete btn.dataset.bevestigd;
   }
 
   const payload = {
