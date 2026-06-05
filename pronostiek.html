@@ -726,7 +726,7 @@ footer {
 <!-- ══ STAP 5 ══ -->
 <section class="section">
   <div class="section-head">
-    <span class="section-num">05</span>
+    <span class="section-num">06</span>
     <span class="section-label">Insturen</span>
   </div>
   <div class="submit-row">
@@ -1220,7 +1220,15 @@ async function submitForm() {
     kampioen: document.getElementById('kampioen').value,
     topscorer: document.getElementById('topscorer').value,
     schifting: document.getElementById('schifting').value,
-    schifting2: document.getElementById('schifting2').value
+    schifting2: document.getElementById('schifting2').value,
+    winnaars: (function(){
+      var w = {};
+      ["A","B","C","D","E","F","G","H","I","J","K","L"].forEach(function(g){
+        var el = document.getElementById('winnaar-'+g);
+        w[g] = el ? el.value : "";
+      });
+      return w;
+    })()
   };
 
   if (WEBHOOK_URL === '__PLACEHOLDER__') {
@@ -1392,6 +1400,53 @@ function calcStand() {
   // Scroll hint: sectie zichtbaar maken
   document.getElementById('stand-section').style.opacity = '1';
   updateSchiftingTip();
+  updateWinnaarGrid();
+}
+
+function updateWinnaarGrid() {
+  var grid = document.getElementById('winnaar-grid');
+  if (!grid) return;
+  var letters = ["A","B","C","D","E","F","G","H","I","J","K","L"];
+  // Bereken huidige leider per groep op basis van ingevulde scores
+  var leiders = {};
+  GROUPS.forEach(function(g) {
+    var teams = {};
+    g.matches.forEach(function(m) {
+      [m.home, m.away].forEach(function(t) { if(!teams[t]) teams[t]={pnt:0,ds:0,vg:0}; });
+      var h = parseInt(document.getElementById(m.id+'h').value);
+      var a = parseInt(document.getElementById(m.id+'a').value);
+      if (isNaN(h) || isNaN(a)) return;
+      teams[m.home].vg+=h; teams[m.home].ds+=h-a;
+      teams[m.away].vg+=a; teams[m.away].ds+=a-h;
+      if(h>a){teams[m.home].pnt+=3;}
+      else if(h<a){teams[m.away].pnt+=3;}
+      else{teams[m.home].pnt+=1;teams[m.away].pnt+=1;}
+    });
+    var sorted = Object.keys(teams).sort(function(x,y){
+      if(teams[y].pnt!==teams[x].pnt) return teams[y].pnt-teams[x].pnt;
+      if(teams[y].ds!==teams[x].ds) return teams[y].ds-teams[x].ds;
+      return teams[y].vg-teams[x].vg;
+    });
+    leiders[g.letter] = sorted[0] || "";
+  });
+
+  grid.innerHTML = letters.map(function(g) {
+    var leider = leiders[g] || "";
+    var groep = GROUPS.find(function(x){ return x.letter===g; });
+    var teams = groep ? groep.matches.reduce(function(acc,m){
+      if(!acc.includes(m.home)) acc.push(m.home);
+      if(!acc.includes(m.away)) acc.push(m.away);
+      return acc;
+    },[]) : [];
+    var opts = teams.map(function(t){
+      return "<option value='"+t+"'"+(t===leider?" selected":"")+">"+t+"</option>";
+    }).join("");
+    return "<div class='field'>"+
+      "<label style='font-family:var(--font-mono);font-size:0.68rem;color:var(--muted)'>Groep "+g+"</label>"+
+      "<select id='winnaar-"+g+"' style='background:#fff;border:1px solid var(--border2);border-radius:var(--r);color:var(--ink);font-family:var(--font-body);font-size:0.9rem;padding:8px 12px;width:100%'>"+
+      "<option value=''>— Kies —</option>"+opts+
+      "</select></div>";
+  }).join("");
 }
 
 function updateSchiftingTip() {
