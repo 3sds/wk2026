@@ -1045,7 +1045,7 @@ async function submitForm() {
 
   if (missing > 0) {
     // Gebruik data-attribuut om tweede klik te detecteren ipv confirm()
-    const btn = document.querySelector('[onclick="submitForm()"]');
+    const btn = document.getElementById('submit-btn');
     if (!btn.dataset.bevestigd) {
       btn.dataset.bevestigd = '1';
       showStatus(`⚠ Nog ${missing} wedstrijd(en) niet ingevuld. Klik nogmaals om toch in te sturen.`, 'warning');
@@ -1271,6 +1271,14 @@ generate = function() {
 };
 
 
+// Event listeners na DOM-load
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('submit-btn').addEventListener('click', submitForm);
+  document.getElementById('gen-btn').addEventListener('click', generate);
+  document.getElementById('reroll-btn').addEventListener('click', generate);
+  document.getElementById('expand-btn').addEventListener('click', function(){ toggleAll(false); });
+  document.getElementById('collapse-btn').addEventListener('click', function(){ toggleAll(true); });
+});
 </script>
 </head>
 <body>
@@ -1337,8 +1345,8 @@ generate = function() {
   <div class="mode-grid" id="mode-grid"></div>
   <div class="model-note" id="model-note">Selecteer een model om de methodologie te lezen.</div>
   <div class="rand-actions">
-    <button class="btn btn-primary" id="gen-btn" onclick="generate()">⚄ Genereer scores</button>
-    <button class="btn" id="reroll-btn" style="display:none" onclick="generate()">↺ Opnieuw gooien</button>
+    <button class="btn btn-primary" id="gen-btn">⚄ Genereer scores</button>
+    <button class="btn" id="reroll-btn" style="display:none">↺ Opnieuw gooien</button>
   </div>
 </section>
 
@@ -1356,8 +1364,8 @@ generate = function() {
     <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
   </div>
   <div class="toggle-row">
-    <button onclick="toggleAll(false)">▾ Alles uitklappen</button>
-    <button onclick="toggleAll(true)">▴ Alles inklappen</button>
+    <button id="expand-btn">▾ Alles uitklappen</button>
+    <button id="collapse-btn">▴ Alles inklappen</button>
   </div>
   <div id="matches-container"></div>
 </section>
@@ -1397,7 +1405,7 @@ generate = function() {
     <span class="section-label">Insturen</span>
   </div>
   <div class="submit-row">
-    <button class="btn btn-primary" onclick="submitForm()" style="font-size:0.9rem;padding:11px 28px">✈ Pronostiek insturen</button>
+    <button class="btn btn-primary" id="submit-btn" style="font-size:0.9rem;padding:11px 28px">✈ Pronostiek insturen</button>
     <div id="status"></div>
   </div>
 </section>
