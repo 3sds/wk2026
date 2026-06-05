@@ -192,21 +192,6 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
     <button class="refresh-btn" onclick="laadData()">↺ Vernieuwen</button>
   </div>
 
-  <!-- LIVE STATS -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:2rem" id="live-stats-wrap">
-    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px;box-shadow:var(--shadow)">
-      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-bottom:4px">⚽ Totaal doelpunten</div>
-      <div style="font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--ink)" id="stat-doelpunten">—</div>
-    </div>
-    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px;box-shadow:var(--shadow)">
-      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-bottom:4px">📐 Verste schot (m)</div>
-      <div style="font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--ink)" id="stat-schot">—</div>
-    </div>
-    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px;box-shadow:var(--shadow)">
-      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-bottom:6px">🥇 Topscorers</div>
-      <div id="stat-topscorers" style="font-family:var(--font-body);font-size:0.82rem;color:var(--ink);line-height:1.7">—</div>
-    </div>
-  </div>
 
   <!-- PODIUM -->
   <section class="section">
@@ -242,6 +227,22 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
       </table>
     </div>
   </section>
+
+  <!-- LIVE STATS -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:2rem" id="live-stats-wrap">
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px;box-shadow:var(--shadow)">
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-bottom:4px">⚽ Totaal doelpunten</div>
+      <div style="font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--ink)" id="stat-doelpunten">—</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px;box-shadow:var(--shadow)">
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-bottom:4px">📐 Verste schot (m)</div>
+      <div style="font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--ink)" id="stat-schot">—</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px;box-shadow:var(--shadow)">
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-bottom:6px">🥇 Topscorers</div>
+      <div id="stat-topscorers" style="font-family:var(--font-body);font-size:0.82rem;color:var(--ink);line-height:1.7">—</div>
+    </div>
+  </div>
 
   <!-- PUNTENSYSTEEM -->
   <section class="section">
@@ -280,9 +281,9 @@ const KAMPIOEN_VLAG = {
 };
 
 const MODEL_LABELS = {
-  random:"Gokken zoals Didier",fifa:"FIFA ranking",historisch:"De geschiedenis herhaalt zich",
-  god:"Statistiek",bbp:"De onzichtbare hand",bier:"🍺",
-  choco:"Ze smelten de paashaas",maximus:"Maximus",manueel:"Manueel"
+  random:"🎲",fifa:"🏅",historisch:"📜",
+  god:"⚗️",bbp:"📈",bier:"🍺",
+  choco:"🍫",maximus:"🐱",manueel:"✏️"
 };
 
 var huidigTab = "totaal";
