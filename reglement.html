@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reglement — De grote DS WK Pronostiek 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1410;--ink2:#3d3328;--muted:#8a7d6a;--muted2:#b5a990;
+  --paper:#faf6ef;--paper2:#f2ead8;--paper3:#e8ddc8;
+  --red:#c8102e;--red2:#a00c24;--gold:#b8860b;
+  --green:#2d6a45;
+  --border:rgba(26,20,16,0.12);--border2:rgba(26,20,16,0.22);
+  --shadow:0 2px 12px rgba(26,20,16,0.10);
+  --font-head:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --r:8px;--rl:14px;
+}
+html{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.7}
+body{padding-top:0;max-width:720px;margin:0 auto;padding:0 1.25rem 5rem}
+
+.masthead{border-bottom:3px double var(--ink);padding:2rem 0 0;margin-bottom:2.5rem;position:relative}
+.masthead::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(200,16,46,0.05),transparent);pointer-events:none}
+.masthead-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.masthead-meta{text-align:right;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);line-height:1.7;padding-top:4px}
+.masthead-meta strong{color:var(--ink2)}
+.masthead-title-wrap{text-align:center;padding:1.2rem 0 1.4rem}
+.masthead-eyebrow{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.masthead-h1{font-family:var(--font-head);font-size:clamp(1.8rem,5vw,3rem);font-weight:900;line-height:1;letter-spacing:-.02em}
+.masthead-h1 em{font-style:italic;color:var(--red)}
+.masthead-sub{font-family:var(--font-body);font-size:0.82rem;color:var(--muted);margin-top:.6rem;font-style:italic}
+.masthead-rule{display:flex;align-items:center;gap:.75rem;margin-top:1rem}
+.masthead-rule span{flex:1;height:1px;background:var(--ink)}
+.oct{font-size:1.4rem;line-height:1}
+
+/* ARTIKEL */
+.artikel{margin-bottom:2.5rem}
+.artikel-titel{font-family:var(--font-head);font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:.75rem}
+.artikel-nr{font-family:var(--font-mono);font-size:0.6rem;color:var(--red);font-weight:500;border:1px solid var(--red);border-radius:3px;padding:1px 5px;flex-shrink:0}
+p{margin-bottom:.75rem;color:var(--ink)}
+p:last-child{margin-bottom:0}
+
+/* PUNTEN TABEL */
+.pts-table{width:100%;border-collapse:collapse;margin:1rem 0;background:#fff;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow)}
+.pts-table th{padding:8px 14px;text-align:left;font-family:var(--font-mono);font-size:0.65rem;color:#fff;font-weight:500;background:var(--red)}
+.pts-table th:last-child{text-align:right}
+.pts-table td{padding:8px 14px;border-bottom:1px solid var(--border);font-size:0.85rem;color:var(--ink)}
+.pts-table td:last-child{text-align:right;font-family:var(--font-mono);font-weight:500;color:var(--red2)}
+.pts-table tr:last-child td{border-bottom:none}
+.pts-table tr:hover td{background:var(--paper)}
+.pts-table .sectie td{background:var(--paper2);font-family:var(--font-mono);font-size:0.65rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.pts-table .sectie td:last-child{color:var(--muted)}
+
+/* NOTA */
+.nota{font-family:var(--font-mono);font-size:0.72rem;color:var(--ink2);padding:10px 14px;background:var(--paper2);border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0;margin:1rem 0;line-height:1.6}
+
+/* TIJDLIJN */
+.tijdlijn{list-style:none;margin:1rem 0}
+.tijdlijn li{display:flex;gap:1rem;margin-bottom:.75rem;align-items:flex-start}
+.tijdlijn-datum{font-family:var(--font-mono);font-size:0.68rem;color:var(--red);font-weight:500;min-width:80px;padding-top:2px}
+.tijdlijn-tekst{font-size:0.85rem;color:var(--ink)}
+
+footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);border-top:3px double var(--ink);padding-top:1.5rem;line-height:1.8}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.artikel{animation:fadeUp .35s ease both}
+.artikel:nth-child(1){animation-delay:.05s}
+.artikel:nth-child(2){animation-delay:.10s}
+.artikel:nth-child(3){animation-delay:.15s}
+.artikel:nth-child(4){animation-delay:.20s}
+.artikel:nth-child(5){animation-delay:.25s}
+.artikel:nth-child(6){animation-delay:.30s}
+.artikel:nth-child(7){animation-delay:.35s}
+
+/* ── NAVIGATIE ── */
+.ds-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  border-bottom: 2px solid var(--red);
+  padding: 0;
+}
+.ds-nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 46px;
+}
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+.nav-logo em { font-style: italic; color: #f08090; }
+.nav-links {
+  display: flex;
+  gap: 4px;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background .12s, color .12s;
+  white-space: nowrap;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.nav-links a.active { background: var(--red); color: #fff; }
+.nav-links a.nav-placeholder { opacity: .4; cursor: default; pointer-events: none; }
+@media(max-width:560px){
+  .nav-links a { padding: 5px 7px; font-size: 0.62rem; }
+}
+</style>
+</head>
+<body>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="scorebord.html">Scorebord</a><a href="pronostiek.html">Groepsfase</a><a href="knockout.html">Knock-out</a><a href="data.html" class="nav-placeholder">Data-analyse</a><a href="reglement.html" class="active">Reglement</a></div></div></nav>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <div>
+      <svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="De Standaard">
+        <rect width="180" height="44" fill="none"/>
+        <rect x="0" y="0" width="6" height="44" fill="#c8102e"/>
+        <text x="14" y="32" font-family="'Playfair Display',Georgia,serif" font-size="26" font-weight="900" fill="#1a1410" letter-spacing="-0.5">De Standaard</text>
+      </svg>
+    </div>
+    <div class="masthead-meta">
+      <strong>WK 2026</strong> · Reglement<br>
+      Editie 2026<br>
+      Intern gebruik
+    </div>
+  </div>
+  <div class="masthead-title-wrap">
+    <div class="masthead-eyebrow">Officieuze redactiepronostiek</div>
+    <h1 class="masthead-h1">De grote <em>DS</em> WK Pronostiek</h1>
+    <p class="masthead-sub">Reglement · editie 2026 · VS, Canada, Mexico</p>
+  </div>
+  <div class="masthead-rule">
+    <span></span><div class="oct">🐙</div><span></span><div class="oct">⚽</div><span></span><div class="oct">🏆</div><span></span>
+  </div>
+</header>
+
+<div class="artikel">
+  <div class="artikel-titel"><span class="artikel-nr">01</span> Deelname</div>
+  <p>De grote DS WK Pronostiek staat open voor alle medewerkers van de redactie. Deelname kost <strong>2 euro</strong>, te betalen aan de organisatie vóór de deadline. Elke deelnemer vult het pronostiekformulier in vóór de start van de groepsfase op <strong>11 juni 2026</strong>.</p>
+  <p>Wie na de deadline inzendt, wordt niet opgenomen in de ranglijst. Eens ingezonden kan een pronostiek worden aangepast tot de aftrap van de eerste wedstrijd. Daarna zijn de scores definitief.</p>
+</div>
+
+<div class="artikel">
+  <div class="artikel-titel"><span class="artikel-nr">02</span> Het formulier</div>
+  <p>Het pronostiekformulier bestaat uit twee delen:</p>
+  <p><strong>Groepsfase:</strong> voor elk van de 72 groepswedstrijden vul je een exacte score in. Wie de velden liever niet manueel invult, kan gebruik maken van de randomizer — een selectie van acht wetenschappelijk meer of minder verantwoorde modellen, waaronder het peer-reviewed Poisson-regressiemodel en het Maximus-model.</p>
+  <p><strong>Bonusvragen:</strong> wie wordt wereldkampioen, wie is topscorer, en twee schiftingsvragen voor het geval van een gelijke eindstand.</p>
+  <p>Na de groepsfase volgt een tweede formulier voor de knock-outfase, waarbij je het volledige bracket invult.</p>
+</div>
+
+<div class="artikel">
+  <div class="artikel-titel"><span class="artikel-nr">03</span> Puntensysteem — groepsfase</div>
+
+  <table class="pts-table">
+    <thead><tr><th>Categorie</th><th>Punten</th></tr></thead>
+    <tbody>
+      <tr class="sectie"><td colspan="2">Wedstrijdresultaten</td></tr>
+      <tr><td>Juiste score (exact)</td><td>5</td></tr>
+      <tr><td>Juiste uitslag (W/G/V), zonder exacte score</td><td>2</td></tr>
+      <tr class="sectie"><td colspan="2">Groepsklassement</td></tr>
+      <tr><td>Juiste groepswinnaar (nr. 1)</td><td>4</td></tr>
+      <tr><td>Juiste nummer 2</td><td>3</td></tr>
+      <tr><td>Juiste nummer 3 die doorgaat</td><td>2</td></tr>
+      <tr class="sectie"><td colspan="2">Bonusvragen</td></tr>
+      <tr><td>Juiste wereldkampioen</td><td>25</td></tr>
+      <tr><td>Juiste topscorer</td><td>10</td></tr>
+    </tbody>
+  </table>
+
+  <div class="nota">De punten voor groepswinnaar, nummer 2 en nummer 3 worden automatisch berekend op basis van de ingevulde scores — je hoeft daar niets apart voor in te vullen. Wie de exacte score correct heeft, krijgt 5 punten en geen extra punten voor de uitslag.</div>
+</div>
+
+<div class="artikel">
+  <div class="artikel-titel"><span class="artikel-nr">04</span> Puntensysteem — knock-outfase</div>
+  <p>Na de groepsfase vul je het volledige bracket in. Voor elke correct voorspelde winnaar per ronde krijg je punten:</p>
+
+  <table class="pts-table">
+    <thead><tr><th>Ronde</th><th>Punten per correcte voorspelling</th></tr></thead>
+    <tbody>
+      <tr><td>Ronde van 32</td><td>3</td></tr>
+      <tr><td>Achtste finales</td><td>5</td></tr>
+      <tr><td>Kwartfinales</td><td>6</td></tr>
+      <tr><td>Halve finales</td><td>9</td></tr>
+      <tr><td>Finale (juiste winnaar)</td><td>15</td></tr>
+      <tr><td>Kampioen (bonus bovenop finalewinst)</td><td>20</td></tr>
+    </tbody>
+  </table>
+
+  <div class="nota">Bij een gelijkspel na 120 minuten tellen enkel de doelpunten in reguliere speeltijd en verlengingen mee voor de schiftingsvraag. Strafschoppen bepalen wie doorgaat maar tellen niet mee als doelpunten.</div>
+</div>
+
+<div class="artikel">
+  <div class="artikel-titel"><span class="artikel-nr">05</span> Schiftingsvragen</div>
+  <p>Bij gelijke eindstand worden de schiftingsvragen als tiebreaker gebruikt, in deze volgorde:</p>
+
+  <p><strong>Schiftingsvraag 1:</strong> totaal aantal doelpunten in alle 104 wedstrijden van het toernooi (strafschoppen na verlengingen niet meegerekend). Wie het dichtstbij zit, wint.</p>
+
+  <p><strong>Schiftingsvraag 2 — de Diependaele-vraag:</strong> een succesvolle aanval op het middenveld — wat is de verste afstand (in meter, afgerond) vanwaar gescoord wordt op heel het WK? Voor wie wenst: voor succesvolle aanvallen op het middenveld is er maar één adres — Martelaarsplein 7.</p>
+
+  <p>Zijn ook na beide schiftingsvragen twee deelnemers volledig gelijk, dan deelt men de eer.</p>
+</div>
+
+<div class="artikel">
+  <div class="artikel-titel"><span class="artikel-nr">06</span> Tijdlijn</div>
+  <ul class="tijdlijn">
+    <li>
+      <span class="tijdlijn-datum">Tot 11 juni</span>
+      <span class="tijdlijn-tekst">Groepsfase-pronostiek invullen en insturen</span>
+    </li>
+    <li>
+      <span class="tijdlijn-datum">11 jun – 27 jun</span>
+      <span class="tijdlijn-tekst">Groepsfase · scorebord wordt live bijgehouden</span>
+    </li>
+    <li>
+      <span class="tijdlijn-datum">28 juni</span>
+      <span class="tijdlijn-tekst">Start knock-outfase · bracket-formulier beschikbaar</span>
+    </li>
+    <li>
+      <span class="tijdlijn-datum">Tot R32 aftrap</span>
+      <span class="tijdlijn-tekst">Knock-outbracket invullen en insturen</span>
+    </li>
+    <li>
+      <span class="tijdlijn-datum">19 juli</span>
+      <span class="tijdlijn-tekst">Finale · definitieve eindstand bekend</span>
+    </li>
+  </ul>
+</div>
+
+<div class="artikel">
+  <div class="artikel-titel"><span class="artikel-nr">07</span> Overige bepalingen</div>
+  <p>De organisatie behoudt zich het recht voor het puntensysteem bij te stellen bij technische problemen, onvoorziene omstandigheden of uitzonderlijke FIFA-beslissingen (zoals het herschikken van groepen of het afgelasten van wedstrijden).</p>
+  <p>Wedstrijden die niet gespeeld worden, tellen niet mee. Deelnemers die hun bracket nog niet hebben ingezonden bij de start van de knock-outfase, ontvangen nul punten voor die fase.</p>
+  <p>Het Maximus-model heeft zijn eigen interne logica. De organisatie aanvaardt geen klachten over de prestaties van België in door Maximus gegenereerde pronostieken.</p>
+  <p>Dit reglement is opgesteld met behulp van Claude Sonnet 4.6. Blijf vrij.</p>
+</div>
+
+<footer>
+  <div style="font-size:1.1rem;margin-bottom:.5rem">🐙</div>
+  De grote DS WK Pronostiek 2026 · Reglement<br>
+  <span style="opacity:.6">Gegenereerd met Claude Sonnet 4.6 · Blijf vrij</span>
+</footer>
+
+</body>
+</html>

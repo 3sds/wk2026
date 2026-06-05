@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De grote DS WK Pronostiek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --ink:       #1a1410;
+  --ink2:      #3d3328;
+  --muted:     #8a7d6a;
+  --muted2:    #b5a990;
+  --paper:     #faf6ef;
+  --paper2:    #f2ead8;
+  --paper3:    #e8ddc8;
+  --red:       #c8102e;
+  --red2:      #a00c24;
+  --gold:      #b8860b;
+  --gold2:     #d4a017;
+  --green:     #2d6a45;
+  --border:    rgba(26,20,16,0.12);
+  --border2:   rgba(26,20,16,0.22);
+  --shadow:    0 2px 12px rgba(26,20,16,0.10);
+  --shadow-lg: 0 8px 40px rgba(26,20,16,0.14);
+  --font-head: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'DM Mono', monospace;
+  --r:  8px;
+  --rl: 14px;
+}
+
+html { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 15px; }
+body { max-width: 820px; margin: 0 auto; padding: 0 1.25rem 5rem; }
+
+/* ── MASTHEAD ── */
+.masthead {
+  border-bottom: 3px double var(--ink);
+  padding: 2rem 0 0;
+  margin-bottom: 0;
+  position: relative;
+}
+.masthead-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.ds-logo {
+  flex-shrink: 0;
+}
+.ds-logo svg { display: block; }
+.masthead-meta {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  line-height: 1.7;
+  padding-top: 4px;
+}
+.masthead-meta strong { color: var(--ink2); }
+
+.masthead-title-wrap {
+  text-align: center;
+  padding: 1.2rem 0 1.4rem;
+  position: relative;
+}
+.masthead-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.masthead-h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.masthead-h1 em {
+  font-style: italic;
+  color: var(--red);
+}
+.masthead-sub {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+.masthead-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.masthead-rule span { flex: 1; height: 1px; background: var(--ink); }
+.masthead-rule .octopus-wrap { font-size: 1.4rem; line-height: 1; }
+
+/* ── LAYOUT ── */
+.page-body { padding-top: 2rem; }
+.section { margin-bottom: 2.5rem; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.section-num {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--red);
+  font-weight: 500;
+  letter-spacing: .08em;
+  border: 1px solid var(--red);
+  border-radius: 3px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+}
+.section-label {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  flex: 1;
+}
+.section-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: .06em;
+  background: var(--paper2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+/* ── NAME ROW ── */
+.name-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+input[type=text], input[type=number] {
+  background: #fff;
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 9px 13px;
+  transition: border-color .15s, box-shadow .15s;
+  width: 100%;
+  -moz-appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+input:focus {
+  outline: none;
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(200,16,46,0.08);
+}
+input::placeholder { color: var(--muted2); font-style: italic; }
+
+/* ── PROGRESS ── */
+.progress-wrap { margin-bottom: 2rem; }
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.progress-track {
+  height: 3px;
+  background: var(--paper3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red2), var(--red));
+  border-radius: 2px;
+  transition: width .4s ease;
+  width: 0%;
+}
+
+/* ── MODE CARDS ── */
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+@media(max-width:620px){ .mode-grid { grid-template-columns: repeat(2,1fr); } }
+
+.mode-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 11px 10px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+  user-select: none;
+}
+.mode-card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
+.mode-card.selected {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px rgba(200,16,46,0.12), var(--shadow);
+}
+.mode-icon { font-size: 1.2rem; margin-bottom: 5px; }
+.mode-name {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+.mode-desc { font-size: 0.68rem; color: var(--muted); line-height: 1.3; font-style: italic; }
+
+.model-note {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink2);
+  padding: 10px 14px;
+  background: #fff;
+  border-left: 3px solid var(--red);
+  border-radius: 0 var(--r) var(--r) 0;
+  margin-bottom: 1rem;
+  min-height: 38px;
+  line-height: 1.6;
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.rand-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn {
+  background: #fff;
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: background .12s, border-color .12s, box-shadow .12s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover { background: var(--paper2); border-color: var(--border2); box-shadow: var(--shadow); }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: .4; cursor: default; transform: none; }
+.btn-primary {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--red2); border-color: var(--red2); }
+.btn-success {
+  background: rgba(45,106,69,0.08);
+  border-color: var(--green);
+  color: var(--green);
+}
+.btn-success:hover { background: rgba(45,106,69,0.14); }
+
+/* ── GROUP BLOCKS ── */
+.group-block {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  overflow: hidden;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow);
+}
+.group-header {
+  padding: 9px 16px;
+  background: var(--paper2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background .12s;
+}
+.group-header:hover { background: var(--paper3); }
+.group-letter {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  background: var(--red);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: .04em;
+}
+.group-teams { font-size: 0.75rem; color: var(--muted); flex: 1; font-style: italic; }
+.group-chevron { font-size: 0.65rem; color: var(--muted); transition: transform .2s; }
+.group-block.collapsed .group-chevron { transform: rotate(-90deg); }
+.group-block.collapsed .group-body { display: none; }
+
+.match-row {
+  display: grid;
+  grid-template-columns: 1fr 50px 20px 50px 1fr;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background .08s;
+}
+.match-row:hover { background: var(--paper); }
+.match-row:last-child { border-bottom: none; }
+.team-home { text-align: right; font-size: 0.82rem; font-weight: 600; color: var(--ink); font-family: var(--font-body); }
+.team-away { text-align: left;  font-size: 0.82rem; font-weight: 600; color: var(--ink); font-family: var(--font-body); }
+.score-input {
+  width: 100% !important;
+  text-align: center !important;
+  padding: 5px 2px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  border-radius: 6px !important;
+}
+.score-input.filled {
+  border-color: rgba(200,16,46,0.35) !important;
+  color: var(--red2) !important;
+  background: rgba(200,16,46,0.03) !important;
+}
+.sep { text-align: center; font-size: 0.8rem; color: var(--muted); font-family: var(--font-mono); }
+
+.toggle-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.toggle-row button {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: color .12s, border-color .12s;
+}
+.toggle-row button:hover { color: var(--ink); border-color: var(--border2); }
+
+/* ── BONUS ── */
+.bonus-grid { display: flex; flex-direction: column; gap: 16px; }
+.bonus-field label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* ── SUBMIT ── */
+.webhook-banner {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  padding: 10px 14px;
+  background: var(--paper2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.webhook-banner code {
+  color: var(--gold);
+  background: rgba(184,134,11,0.1);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+.submit-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+#status {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  display: none;
+}
+#status.success { color: var(--green); }
+#status.danger  { color: var(--red); }
+#status.warning { color: var(--gold); }
+#status.info    { color: var(--muted); }
+
+/* ── STAND ── */
+.stand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 10px; }
+.stand-block {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.stand-block-header {
+  padding: 8px 14px;
+  background: var(--paper2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stand-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+.stand-table th {
+  padding: 5px 10px;
+  text-align: right;
+  color: var(--muted);
+  font-weight: 400;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  border-bottom: 1px solid var(--border);
+}
+.stand-table th:first-child { text-align: left; }
+.stand-table td {
+  padding: 6px 10px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+.stand-table td:first-child { text-align: left; font-weight: 600; }
+.stand-table tr:last-child td { border-bottom: none; }
+.stand-table tr.door-direct td { color: var(--red2); }
+.stand-table tr.door-direct td:first-child::before { content: '✓ '; font-size: 0.65rem; opacity: .6; }
+.stand-table tr.door-derde td { color: var(--green); }
+.stand-table tr.door-derde td:first-child::before { content: '? '; font-size: 0.65rem; opacity: .7; }
+.stand-table tr.uitgeschakeld td { opacity: .35; }
+.badge-pos {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.pos-1 { background: rgba(200,16,46,0.12); color: var(--red2); border: 1px solid rgba(200,16,46,0.22); }
+.pos-2 { background: rgba(200,16,46,0.06); color: var(--red2); border: 1px solid rgba(200,16,46,0.14); }
+.pos-3 { background: rgba(45,106,69,0.08); color: var(--green); border: 1px solid rgba(45,106,69,0.18); }
+.pos-4 { background: var(--paper2); color: var(--muted); border: 1px solid var(--border); }
+
+.derde-ranking {
+  margin-top: 1rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.derde-ranking-header {
+  padding: 10px 16px;
+  background: var(--paper2);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--muted);
+}
+.derde-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+.derde-table th {
+  padding: 5px 12px;
+  text-align: right;
+  color: var(--muted);
+  font-weight: 400;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  border-bottom: 1px solid var(--border);
+}
+.derde-table th:first-child, .derde-table th:nth-child(2) { text-align: left; }
+.derde-table td {
+  padding: 6px 12px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+.derde-table td:first-child { text-align: left; font-family: var(--font-mono); font-size: 0.67rem; color: var(--muted); font-weight: 500; }
+.derde-table td:nth-child(2) { text-align: left; font-weight: 600; }
+.derde-table tr:last-child td { border-bottom: none; }
+.derde-table tr.through td { color: var(--green); }
+.derde-table tr.through td:first-child { color: var(--green); }
+.stand-placeholder {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  padding: 20px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── DIVIDERS ── */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem 0;
+  color: var(--muted2);
+  font-size: 0.7rem;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  margin-top: 4rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  border-top: 3px double var(--ink);
+  padding-top: 1.5rem;
+  line-height: 1.8;
+}
+
+/* ── ANIMATIES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-body > .section {
+  animation: fadeUp .4s ease both;
+}
+.page-body > .section:nth-child(1) { animation-delay: .05s; }
+.page-body > .section:nth-child(2) { animation-delay: .12s; }
+.page-body > .section:nth-child(3) { animation-delay: .19s; }
+.page-body > .section:nth-child(4) { animation-delay: .26s; }
+.page-body > .section:nth-child(5) { animation-delay: .33s; }
+.page-body > .section:nth-child(6) { animation-delay: .40s; }
+
+/* ── NAVIGATIE ── */
+.ds-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  border-bottom: 2px solid var(--red);
+  padding: 0;
+}
+.ds-nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 46px;
+}
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+.nav-logo em { font-style: italic; color: #f08090; }
+.nav-links {
+  display: flex;
+  gap: 4px;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background .12s, color .12s;
+  white-space: nowrap;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.nav-links a.active { background: var(--red); color: #fff; }
+.nav-links a.nav-placeholder { opacity: .4; cursor: default; pointer-events: none; }
+@media(max-width:560px){
+  .nav-links a { padding: 5px 7px; font-size: 0.62rem; }
+}
+</style>
+</head>
+<body>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="scorebord.html">Scorebord</a><a href="pronostiek.html" class="active">Groepsfase</a><a href="knockout.html">Knock-out</a><a href="data.html" class="nav-placeholder">Data-analyse</a><a href="reglement.html">Reglement</a></div></div></nav>
+
+<!-- ══ MASTHEAD ══ -->
+<header class="masthead">
+  <div class="masthead-top">
+    <!-- DS logo: typografisch gereconstrueerd in SVG -->
+    <div class="ds-logo">
+      <svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="De Standaard">
+        <rect width="180" height="44" fill="none"/>
+        <!-- Rode balk links, kenmerkend DS-element -->
+        <rect x="0" y="0" width="6" height="44" fill="#c8102e"/>
+        <!-- "De Standaard" in Playfair-stijl bold serif -->
+        <text x="14" y="32" font-family="'Playfair Display', Georgia, serif" font-size="26" font-weight="900" fill="#1a1410" letter-spacing="-0.5">De Standaard</text>
+      </svg>
+    </div>
+    <div class="masthead-meta">
+      <strong>WK 2026</strong> · Speciale editie<br>
+      11 juni – 19 juli 2026<br>
+      VS · Canada · Mexico
+    </div>
+  </div>
+
+  <div class="masthead-title-wrap">
+    <div class="masthead-eyebrow">Officieuze redactiepronostiek — intern gebruik</div>
+    <h1 class="masthead-h1">De grote <em>DS</em> WK Pronostiek</h1>
+    <p class="masthead-sub">72 groepswedstrijden · 1 winnaar</p>
+  </div>
+
+  <div class="masthead-rule">
+    <span></span>
+    <div class="octopus-wrap" >🐙</div>
+    <span></span>
+    <div class="octopus-wrap">⚽</div>
+    <span></span>
+    <div class="octopus-wrap">🏆</div>
+    <span></span>
+  </div>
+</header>
+
+<div class="page-body">
+
+<!-- ══ STAP 1 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <span class="section-label">Jouw naam</span>
+  </div>
+  <div class="name-grid">
+    <div class="field"><label for="fname">Voornaam</label><input type="text" id="fname" placeholder="Jan"></div>
+    <div class="field"><label for="lname">Achternaam</label><input type="text" id="lname" placeholder="Janssen"></div>
+  </div>
+</section>
+
+<!-- ══ STAP 2 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <span class="section-label">Randomizer</span>
+    <span class="section-badge">optioneel</span>
+  </div>
+  <div class="mode-grid" id="mode-grid"></div>
+  <div class="model-note" id="model-note">Selecteer een model om de methodologie te lezen.</div>
+  <div class="rand-actions">
+    <button class="btn btn-primary" id="gen-btn" onclick="generate()">⚄ Genereer scores</button>
+    <button class="btn" id="reroll-btn" style="display:none" onclick="generate()">↺ Opnieuw gooien</button>
+  </div>
+</section>
+
+<!-- ══ STAP 3 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <span class="section-label">Scores invullen</span>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span id="prog-text">0 van 72 wedstrijden ingevuld</span>
+      <span id="prog-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+  </div>
+  <div class="toggle-row">
+    <button onclick="toggleAll(false)">▾ Alles uitklappen</button>
+    <button onclick="toggleAll(true)">▴ Alles inklappen</button>
+  </div>
+  <div id="matches-container"></div>
+</section>
+
+<!-- ══ STAP 4 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <span class="section-label">Bonusvragen</span>
+  </div>
+  <div class="bonus-grid">
+    <div class="field bonus-field">
+      <label for="kampioen">🥇 Wereldkampioen 2026</label>
+      <input type="text" id="kampioen" placeholder="bv. België">
+    </div>
+    <div class="field bonus-field">
+      <label for="topscorer">⚽ Topscorer van het toernooi</label>
+      <input type="text" id="topscorer" placeholder="bv. Kylian Mbappé">
+    </div>
+    <div class="field bonus-field">
+      <label for="schifting">🎯 Schiftingsvraag 1 — totaal doelpunten in 104 wedstrijden (penalty's na verlengingen niet meegerekend)</label>
+      <input type="number" id="schifting" placeholder="bv. 156" min="0" max="600">
+      <div id="schifting-tip" style="font-size:0.8rem;font-family:var(--font-body);color:var(--ink2);background:var(--paper2);border-left:3px solid var(--red);padding:8px 12px;border-radius:0 var(--r) var(--r) 0;margin-top:8px;line-height:1.6;display:none"></div>
+    </div>
+    <div class="field bonus-field">
+      <label for="schifting2">📐 Schiftingsvraag 2 — wat is de verste afstand (in meter, afgerond) vanwaar gescoord wordt?</label>
+      <input type="number" id="schifting2" placeholder="bv. 47" min="1" max="100">
+      <div style="font-size:0.8rem;font-family:var(--font-body);color:var(--ink2);background:var(--paper2);border-left:3px solid var(--red);padding:8px 12px;border-radius:0 var(--r) var(--r) 0;margin-top:8px;line-height:1.6;">Tip: voor succesvolle aanvallen op het middenveld, één adres: Martelaarsplein 7.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAP 5 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <span class="section-label">Insturen</span>
+  </div>
+  <div class="submit-row">
+    <button class="btn btn-primary" onclick="submitForm()" style="font-size:0.9rem;padding:11px 28px">✈ Pronostiek insturen</button>
+    <div id="status"></div>
+  </div>
+</section>
+
+<!-- ══ STAND ══ -->
+<section class="section" id="stand-section">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <span class="section-label">Klassement groepsfase</span>
+  </div>
+  <div id="stand-placeholder" class="stand-placeholder">Vul wedstrijden in om de stand te zien.</div>
+  <div class="stand-grid" id="stand-grid" style="display:none"></div>
+  <div class="derde-ranking" id="derde-ranking" style="display:none">
+    <div class="derde-ranking-header">Ranking beste nummers 3 — top 8 gaan door (✓ = geplaatst · ? = onzeker)</div>
+    <table class="derde-table">
+      <thead><tr><th>#</th><th>Land</th><th>Gr</th><th>Pnt</th><th>DS</th><th>VG</th><th>W</th></tr></thead>
+      <tbody id="derde-body"></tbody>
+    </table>
+  </div>
+</section>
+
+</div><!-- .page-body -->
+
+<footer>
+  <div style="font-size:1.1rem;margin-bottom:.5rem">🐙</div>
+  De grote DS WK Pronostiek &nbsp;·&nbsp; WK 2026<br>
+  <span style="opacity:.6">Gegenereerd met Claude Sonnet 4.6 &nbsp;·&nbsp; Blijf vrij</span>
+</footer>
+
+<script>
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxIBSYYVlf1ixg9mwtkF7_cNvYPvx82UeHinUC3PPAvo5svsvjfUpHEz0d_WczFG0NH/exec";
+
+const FIFA = {
+  "Frankrijk":1877,"Spanje":1876,"Argentinië":1875,"Engeland":1826,
+  "Portugal":1764,"Brazilië":1761,"Nederland":1758,"Marokko":1756,
+  "België":1735,"Duitsland":1730,"Kroatië":1717,"Italië":1700,
+  "Colombia":1693,"Senegal":1689,"Mexico":1681,"VS":1673,
+  "Uruguay":1673,"Japan":1660,"Zwitserland":1649,"Ecuador":1580,
+  "Australië":1560,"Zuid-Korea":1555,"Iran":1530,"Schotland":1525,
+  "Tsjechië":1510,"Bosnië":1490,"Oekraïne":1485,"Panama":1470,
+  "Noorwegen":1465,"Ivoorkust":1455,"Saudi-Arabië":1450,"Paraguay":1445,
+  "Ghana":1430,"Turkije":1415,"Oostenrijk":1410,"Egypte":1400,
+  "Algerije":1390,"Tunesië":1380,"Haïti":1200,"Kaapverdië":1195,
+  "Jordanië":1185,"Oezbekistan":1175,"Congo DR":1165,
+  "Nieuw-Zeeland":1160,"Irak":1150,"Curaçao":1130,"Zuid-Afrika":1125,
+  "Qatar":1320,"Canada":1560
+};
+
+const BBP = {
+  "VS":63000,"Australië":55000,"Engeland":49000,"Duitsland":48000,
+  "Nederland":57000,"Zwitserland":91000,"België":50000,"Oostenrijk":52000,
+  "Noorwegen":82000,"Spanje":32000,"Frankrijk":43000,"Italië":33000,
+  "Kroatië":21000,"Portugal":24000,"Japan":33000,"Zuid-Korea":33000,
+  "Uruguay":16000,"Argentinië":12000,"Brazilië":8800,"Colombia":6500,
+  "Mexico":9500,"Ecuador":5600,"Paraguay":5200,"Panama":14000,
+  "Saudi-Arabië":26000,"Iran":3600,"Jordanië":4500,"Irak":5000,
+  "Marokko":3400,"Egypte":3500,"Tunesië":3800,"Algerije":4000,
+  "Senegal":1600,"Ghana":2400,"Ivoorkust":2300,"Congo DR":550,
+  "Zuid-Afrika":6000,"Kaapverdië":3500,"Nieuw-Zeeland":44000,
+  "Schotland":44000,"Qatar":62000,"Canada":52000,"Haïti":1700,
+  "Bosnië":8000,"Oekraïne":4200,"Curaçao":18000,"Oezbekistan":2100,
+  "Turkije":11000,"Tsjechië":26000,"Noord-Ierland":30000
+};
+
+const BIER = {
+  "Tsjechië":188,"Oostenrijk":100,"Duitsland":99,"Haïti":85,
+  "Noorwegen":82,"Schotland":80,"Kroatië":78,"Bosnië":75,
+  "Australië":74,"België":73,"Nederland":72,"Oekraïne":70,
+  "VS":70,"Polen":68,"Engeland":67,"Japan":67,"Portugal":64,
+  "Zwitserland":63,"Nieuw-Zeeland":63,"Zuid-Afrika":60,"Spanje":57,
+  "Ecuador":55,"Mexico":55,"Brazilië":54,"Colombia":52,"Panama":50,
+  "Paraguay":48,"Argentinië":46,"Uruguay":45,"Zuid-Korea":46,
+  "Curaçao":40,"Turkije":18,"Kaapverdië":28,"Ivoorkust":22,
+  "Ghana":22,"Congo DR":20,"Oezbekistan":12,"Senegal":12,
+  "Egypte":6,"Tunesië":5,"Marokko":4,"Algerije":3,"Jordanië":3,
+  "Saudi-Arabië":1,"Qatar":2,"Iran":1,"Irak":1,"Frankrijk":35,
+  "Italië":38,"Canada":75
+};
+
+const CHOCO = {
+  "Zwitserland":10.3,"Duitsland":9.2,"Oostenrijk":8.8,"Engeland":8.5,
+  "Noorwegen":8.3,"België":6.8,"Nederland":6.5,"Schotland":6.2,
+  "Australië":5.8,"VS":5.5,"Spanje":5.1,"Kroatië":4.8,
+  "Italië":4.5,"Portugal":4.2,"Canada":4.0,"Tsjechië":4.0,
+  "Nieuw-Zeeland":4.5,"Japan":3.8,"Brazilië":3.2,"Argentinië":3.0,
+  "Uruguay":2.8,"Zuid-Korea":2.6,"Mexico":2.4,"Colombia":2.2,
+  "Oekraïne":2.0,"Ecuador":1.8,"Paraguay":1.5,"Bosnië":1.5,
+  "Turkije":1.5,"Zuid-Afrika":1.4,"Panama":1.2,"Ghana":0.9,
+  "Ivoorkust":0.8,"Senegal":0.5,"Marokko":0.5,"Egypte":0.5,
+  "Tunesië":0.5,"Algerije":0.4,"Saudi-Arabië":0.3,"Iran":0.3,
+  "Jordanië":0.3,"Irak":0.2,"Kaapverdië":0.3,"Haïti":0.2,
+  "Congo DR":0.2,"Oezbekistan":0.3,"Curaçao":0.5,"Qatar":0.2,
+  "Frankrijk":5.0
+};
+
+const WC_FREQ = {
+  "Brazilië":1.9,"Duitsland":1.8,"Argentinië":1.9,"Spanje":1.7,
+  "Frankrijk":1.7,"Portugal":1.6,"Nederland":1.6,"Engeland":1.5,
+  "België":1.5,"Kroatië":1.5,"Colombia":1.4,"Uruguay":1.5,
+  "Mexico":1.3,"VS":1.2,"Senegal":1.3,"Marokko":1.3,
+  "Japan":1.3,"Zuid-Korea":1.2,"Ecuador":1.1,"Australië":1.1,
+  "Ghana":1.1,"Zwitserland":1.3,"Iran":1.1,"Tunesië":1.0,
+  "Algerije":1.1,"Ivoorkust":1.1,"Noorwegen":1.0,"Schotland":0.9,
+  "Egypte":0.9,"Saudi-Arabië":1.0,"Qatar":0.8,"Tsjechië":1.1,
+  "Bosnië":0.9,"Oekraïne":1.0,"Panama":0.9,"Paraguay":1.0,
+  "Zuid-Afrika":1.0,"Kaapverdië":0.7,"Jordanië":0.7,"Haïti":0.7,
+  "Oezbekistan":0.7,"Congo DR":0.8,"Curaçao":0.6,"Irak":0.8,
+  "Nieuw-Zeeland":0.7,"Turkije":1.1,"Canada":0.9,"Oostenrijk":1.1
+};
+
+// Historische WK scores (964 wedstrijden t/m 2022), gewogen frequentie
+// Formaat: [thuis, uit, gewicht]
+const WC_SCORES = [
+  [1,0,182],[2,1,152],[2,0,111],[1,1,92],[0,0,78],
+  [3,1,68],[3,0,57],[3,2,43],[2,2,35],[4,1,31],
+  [4,0,24],[4,2,17],[6,1,11],[5,2,9],[5,0,7],
+  [3,3,7],[5,1,7],[6,0,5],[4,3,3],[7,1,3],
+  [0,1,182],[1,2,152],[0,2,111],[1,3,68],[0,3,57],
+  [2,3,43],[1,4,31],[0,4,24],[2,4,17],[1,6,11],
+  [2,5,9],[0,5,7],[2,3,43],[3,4,3],[1,7,3]
+];
+
+// Cumulatieve gewichten voor snelle sampling
+const WC_TOTAL = WC_SCORES.reduce((s,x)=>s+x[2],0);
+
+
+function sampleHistoricalScore() {
+  let r = Math.random() * WC_TOTAL, cum = 0;
+  for (const [h,a,w] of WC_SCORES) {
+    cum += w;
+    if (r < cum) return [h, a];
+  }
+  return [1, 0];
+}
+
+const GROUPS = [
+  {letter:"A",teams:"Mexico · Zuid-Korea · Zuid-Afrika · Tsjechië",matches:[
+    {id:"A1",home:"Mexico",away:"Zuid-Afrika"},
+    {id:"A2",home:"Zuid-Korea",away:"Tsjechië"},
+    {id:"A3",home:"Tsjechië",away:"Zuid-Afrika"},
+    {id:"A4",home:"Mexico",away:"Zuid-Korea"},
+    {id:"A5",home:"Mexico",away:"Tsjechië"},
+    {id:"A6",home:"Zuid-Afrika",away:"Zuid-Korea"}
+  ]},
+  {letter:"B",teams:"Canada · Zwitserland · Qatar · Italië/Bosnië/Wales/N-Ierland",matches:[
+    {id:"B1",home:"Canada",away:"Bosnië"},
+    {id:"B2",home:"Qatar",away:"Zwitserland"},
+    {id:"B3",home:"Zwitserland",away:"Bosnië"},
+    {id:"B4",home:"Canada",away:"Qatar"},
+    {id:"B5",home:"Zwitserland",away:"Canada"},
+    {id:"B6",home:"Bosnië",away:"Qatar"}
+  ]},
+  {letter:"C",teams:"Brazilië · Marokko · Schotland · Haïti",matches:[
+    {id:"C1",home:"Brazilië",away:"Marokko"},
+    {id:"C2",home:"Haïti",away:"Schotland"},
+    {id:"C3",home:"Schotland",away:"Marokko"},
+    {id:"C4",home:"Brazilië",away:"Haïti"},
+    {id:"C5",home:"Schotland",away:"Brazilië"},
+    {id:"C6",home:"Marokko",away:"Haïti"}
+  ]},
+  {letter:"D",teams:"VS · Australië · Paraguay · Turkije/Roemenië/Slowakije",matches:[
+    {id:"D1",home:"VS",away:"Paraguay"},
+    {id:"D2",home:"Australië",away:"Turkije"},
+    {id:"D3",home:"VS",away:"Australië"},
+    {id:"D4",home:"Turkije",away:"Paraguay"},
+    {id:"D5",home:"Turkije",away:"VS"},
+    {id:"D6",home:"Paraguay",away:"Australië"}
+  ]},
+  {letter:"E",teams:"Duitsland · Ecuador · Ivoorkust · Curaçao",matches:[
+    {id:"E1",home:"Duitsland",away:"Curaçao"},
+    {id:"E2",home:"Ivoorkust",away:"Ecuador"},
+    {id:"E3",home:"Duitsland",away:"Ivoorkust"},
+    {id:"E4",home:"Ecuador",away:"Curaçao"},
+    {id:"E5",home:"Ecuador",away:"Duitsland"},
+    {id:"E6",home:"Curaçao",away:"Ivoorkust"}
+  ]},
+  {letter:"F",teams:"Nederland · Japan · Tunesië · Oekraïne/Zweden/Polen",matches:[
+    {id:"F1",home:"Nederland",away:"Japan"},
+    {id:"F2",home:"Oekraïne",away:"Tunesië"},
+    {id:"F3",home:"Nederland",away:"Oekraïne"},
+    {id:"F4",home:"Tunesië",away:"Japan"},
+    {id:"F5",home:"Japan",away:"Oekraïne"},
+    {id:"F6",home:"Tunesië",away:"Nederland"}
+  ]},
+  {letter:"G",teams:"België · Iran · Egypte · Nieuw-Zeeland",matches:[
+    {id:"G1",home:"België",away:"Egypte"},
+    {id:"G2",home:"Iran",away:"Nieuw-Zeeland"},
+    {id:"G3",home:"België",away:"Iran"},
+    {id:"G4",home:"Nieuw-Zeeland",away:"Egypte"},
+    {id:"G5",home:"Egypte",away:"Iran"},
+    {id:"G6",home:"Nieuw-Zeeland",away:"België"}
+  ]},
+  {letter:"H",teams:"Spanje · Uruguay · Saudi-Arabië · Kaapverdië",matches:[
+    {id:"H1",home:"Spanje",away:"Kaapverdië"},
+    {id:"H2",home:"Saudi-Arabië",away:"Uruguay"},
+    {id:"H3",home:"Spanje",away:"Saudi-Arabië"},
+    {id:"H4",home:"Uruguay",away:"Kaapverdië"},
+    {id:"H5",home:"Kaapverdië",away:"Saudi-Arabië"},
+    {id:"H6",home:"Uruguay",away:"Spanje"}
+  ]},
+  {letter:"I",teams:"Frankrijk · Senegal · Noorwegen · Irak/Bolivia",matches:[
+    {id:"I1",home:"Frankrijk",away:"Senegal"},
+    {id:"I2",home:"Irak",away:"Noorwegen"},
+    {id:"I3",home:"Frankrijk",away:"Irak"},
+    {id:"I4",home:"Noorwegen",away:"Senegal"},
+    {id:"I5",home:"Noorwegen",away:"Frankrijk"},
+    {id:"I6",home:"Senegal",away:"Irak"}
+  ]},
+  {letter:"J",teams:"Argentinië · Oostenrijk · Algerije · Jordanië",matches:[
+    {id:"J1",home:"Argentinië",away:"Algerije"},
+    {id:"J2",home:"Oostenrijk",away:"Jordanië"},
+    {id:"J3",home:"Argentinië",away:"Oostenrijk"},
+    {id:"J4",home:"Jordanië",away:"Algerije"},
+    {id:"J5",home:"Algerije",away:"Oostenrijk"},
+    {id:"J6",home:"Jordanië",away:"Argentinië"}
+  ]},
+  {letter:"K",teams:"Portugal · Colombia · Oezbekistan · Congo DR/Jamaica",matches:[
+    {id:"K1",home:"Portugal",away:"Congo DR"},
+    {id:"K2",home:"Oezbekistan",away:"Colombia"},
+    {id:"K3",home:"Portugal",away:"Oezbekistan"},
+    {id:"K4",home:"Colombia",away:"Congo DR"},
+    {id:"K5",home:"Colombia",away:"Portugal"},
+    {id:"K6",home:"Congo DR",away:"Oezbekistan"}
+  ]},
+  {letter:"L",teams:"Engeland · Kroatië · Panama · Ghana",matches:[
+    {id:"L1",home:"Engeland",away:"Kroatië"},
+    {id:"L2",home:"Ghana",away:"Panama"},
+    {id:"L3",home:"Engeland",away:"Ghana"},
+    {id:"L4",home:"Panama",away:"Kroatië"},
+    {id:"L5",home:"Panama",away:"Engeland"},
+    {id:"L6",home:"Kroatië",away:"Ghana"}
+  ]}
+];
+
+const MODES = [
+  {id:"random", icon:"⚄", name:"Volledig random",   desc:"Gokken zoals Didier Reynders.",
+   note:"Elke score is volledig willekeurig. Doelpunten liggen tussen 0 en 4, alle uitkomsten zijn gelijkwaardig."},
+  {id:"fifa",   icon:"🏅", name:"FIFA ranking",      desc:"Sterkere teams scoren meer.",
+   note:"Rankingverschil (april 2026) bepaalt de kansverhouding en de verwachte doelpunten via een Poisson-verdeling."},
+  {id:"historisch", icon:"📜", name:"Historische scores",  desc:"De geschiedenis herhaalt zich.",
+   note:"Trekt een gewogen willekeurige score uit de historische WK-frequentietabel (1930–2022: 1-0 meest voorkomend, daarna 2-1, 2-0 …) en past die aan op basis van het FIFA-rankingverschil: de sterkere ploeg krijgt de hogere score toegewezen."},
+  {id:"god",    icon:"⚗️", name:"Statistiek",  desc:"Lies, damned lies, and statistics.",
+   note:"Log-lineair Poisson-regressiemodel naar Dixon & Coles (1997) en Macrì Demartino et al. (2024): de verwachte doelpunten per team worden berekend als λ = exp(α + β₁·FIFA_z + β₂·WKratio_z + β₃·bier_z), waarbij alle factoren genormaliseerd zijn naar z-scores. Basisverwachting α = ln(1.35) (WK-groepsfasegemiddelde). Coëfficiënten: FIFA dominant (β=0.25), historische WK-doelpuntenratio matig (β=0.15), bierconsumptie als culturele proxy (β=0.07). De Poisson-verdeling genereert vervolgens de effectieve score."},
+  {id:"bbp",    icon:"📈", name:"BBP per capita",    desc:"De onzichtbare hand van God.",
+   note:"BBP per capita als proxy voor voetbalinfrastructuur. Het log-verschil tussen landen stuurt de doelpuntenverwachting."},
+  {id:"bier",   icon:"🍺", name:"Bierconsumptie",   desc:"🍺",
+   note:"Tsjechië drinkt 188 liter per hoofd per jaar. Iran 1. De rest spreekt voor zich."},
+  {id:"choco",  icon:"🍫", name:"Chocolade",         desc:"Ze smelten de paashaas.",
+   note:"Van praline naar finale: chocoladeconsumptie per hoofd (kg/jaar). Zwitserland domineert."},
+  {id:"maximus",    icon:"🐱", name:"Maximus",              desc:"Eendracht maakt macht.",
+   note:"Maximus, de Schotse vouwoor van Bart De Wever, heeft de scores bepaald door willekeurig over een toetsenbord te lopen. Hoge entropie, lage voorspelbaarheid, sterke coalitievorming."}
+];
+
+// ══════════════════════════════════════════════
+//  BUILD UI
+// ══════════════════════════════════════════════
+(function buildModes() {
+  const grid = document.getElementById('mode-grid');
+  MODES.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'mode-card';
+    card.id = 'card-' + m.id;
+    card.innerHTML = `<div class="mode-icon">${m.icon}</div><div class="mode-name">${m.name}</div><div class="mode-desc">${m.desc}</div>`;
+    card.onclick = () => selectMode(m.id);
+    grid.appendChild(card);
+  });
+})();
+
+(function buildMatches() {
+  const container = document.getElementById('matches-container');
+  GROUPS.forEach(g => {
+    const block = document.createElement('div');
+    block.className = 'group-block';
+    block.id = 'group-' + g.letter;
+
+    let inner = `
+      <div class="group-header" onclick="toggleGroup('${g.letter}')">
+        <span class="group-letter">Groep ${g.letter}</span>
+        <span class="group-teams">${g.teams}</span>
+        <span class="group-chevron">▾</span>
+      </div>
+      <div class="group-body">`;
+
+    g.matches.forEach(m => {
+      inner += `
+        <div class="match-row">
+          <div class="team-home">${m.home}</div>
+          <input type="number" min="0" max="20" id="${m.id}h" class="score-input" placeholder="—" oninput="onScoreInput(this)">
+          <div class="sep">–</div>
+          <input type="number" min="0" max="20" id="${m.id}a" class="score-input" placeholder="—" oninput="onScoreInput(this)">
+          <div class="team-away">${m.away}</div>
+        </div>`;
+    });
+
+    inner += `</div>`;
+    block.innerHTML = inner;
+    container.appendChild(block);
+  });
+})();
+
+// ══════════════════════════════════════════════
+//  INTERACTIE
+// ══════════════════════════════════════════════
+function selectMode(id) {
+  selectedMode = id;
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('card-' + id).classList.add('selected');
+  const m = MODES.find(x => x.id === id);
+  document.getElementById('model-note').textContent = m.note;
+
+}
+
+function toggleGroup(letter) {
+  document.getElementById('group-' + letter).classList.toggle('collapsed');
+}
+
+function toggleAll(collapse) {
+  GROUPS.forEach(g => {
+    const el = document.getElementById('group-' + g.letter);
+    if (collapse) el.classList.add('collapsed');
+    else el.classList.remove('collapsed');
+  });
+}
+
+function onScoreInput(input) {
+  input.classList.toggle('filled', input.value !== '');
+  updateProgress();
+}
+
+function updateProgress() {
+  let filled = 0;
+  GROUPS.forEach(g => g.matches.forEach(m => {
+    const h = document.getElementById(m.id + 'h').value;
+    const a = document.getElementById(m.id + 'a').value;
+    if (h !== '' && a !== '') filled++;
+  }));
+  const pct = Math.round(filled / 72 * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = filled + ' van 72 wedstrijden ingevuld';
+  document.getElementById('prog-pct').textContent = pct + '%';
+}
+
+// ══════════════════════════════════════════════
+//  RANDOMIZER ENGINE
+// ══════════════════════════════════════════════
+function get(map, team, fallback = 1000) {
+  return map[team] || fallback;
+}
+
+function poisson(lambda) {
+  lambda = Math.max(0.1, lambda);
+  let L = Math.exp(-lambda), p = 1, k = 0;
+  do { k++; p *= Math.random(); } while (p > L);
+  return Math.min(k - 1, 9);
+}
+
+function genScore(home, away, mode) {
+  let lh, la;
+  if (mode === 'random') {
+    lh = 0.3 + Math.random() * 2.2;
+    la = 0.3 + Math.random() * 2.2;
+  } else if (mode === 'fifa') {
+    const rh = get(FIFA, home), ra = get(FIFA, away);
+    const diff = (rh - ra) / 500;
+    lh = 1.3 + diff * 0.9; la = 1.3 - diff * 0.9;
+  } else if (mode === 'bbp') {
+    const bh = get(BBP, home, 5000), ba = get(BBP, away, 5000);
+    const d = (Math.log(bh) - Math.log(ba)) / 3;
+    lh = 1.2 + d * 0.7; la = 1.2 - d * 0.7;
+  } else if (mode === 'bier') {
+    const bh = get(BIER, home, 20), ba = get(BIER, away, 20);
+    const d = (bh - ba) / 100;
+    lh = 1.0 + d * 1.6; la = 1.0 - d * 1.6;
+  } else if (mode === 'choco') {
+    const ch = get(CHOCO, home, 2), ca = get(CHOCO, away, 2);
+    const d = (Math.log(ch + 0.1) - Math.log(ca + 0.1)) / 2;
+    lh = 1.2 + d * 0.8; la = 1.2 - d * 0.8;
+  } else if (mode === 'god') {
+    // Log-lineair Poisson-model geïnspireerd op Macrì Demartino et al. (2024) en
+    // Dixon & Coles (1997): λ = exp(α + Σ βᵢ·xᵢ_z)
+    // Factoren genormaliseerd naar z-scores op basis van de 48 WK-deelnemers
+    const FIFA_MEAN = 1450, FIFA_SD = 200;
+    const WC_MEAN   = 1.05, WC_SD   = 0.28;
+    const BIER_MEAN = 52,   BIER_SD  = 48;
+
+    const fh_z = (get(FIFA,     home, FIFA_MEAN) - FIFA_MEAN) / FIFA_SD;
+    const fa_z = (get(FIFA,     away, FIFA_MEAN) - FIFA_MEAN) / FIFA_SD;
+    const wh_z = (get(WC_FREQ,  home, WC_MEAN)  - WC_MEAN)   / WC_SD;
+    const wa_z = (get(WC_FREQ,  away, WC_MEAN)  - WC_MEAN)   / WC_SD;
+    const bh_z = (get(BIER,     home, BIER_MEAN) - BIER_MEAN) / BIER_SD;
+    const ba_z = (get(BIER,     away, BIER_MEAN) - BIER_MEAN) / BIER_SD;
+
+    // α = ln(1.35) ≈ baseline doelpuntenverwachting WK groepsfase
+    // β-coëfficiënten conform literatuur: FIFA sterkste predictor
+    const ALPHA = Math.log(1.35);
+    const B_FIFA = 0.25, B_WC = 0.15, B_BIER = 0.07;
+
+    lh = Math.exp(ALPHA + B_FIFA * fh_z + B_WC * wh_z + B_BIER * bh_z);
+    la = Math.exp(ALPHA + B_FIFA * fa_z + B_WC * wa_z + B_BIER * ba_z);
+  } else if (mode === 'historisch') {
+    // Trek een historische score en ken de hogere score toe aan de sterkere ploeg
+    let [sh, sa] = sampleHistoricalScore();
+    const rh = get(FIFA, home, 1200), ra = get(FIFA, away, 1200);
+    if (ra > rh) { const tmp = sh; sh = sa; sa = tmp; }
+    return [sh, sa];  // direct teruggeven, geen Poisson nodig
+  } else if (mode === 'maximus') {
+    // Maximus loopt over het toetsenbord: willekeurig maar met kattenlogica
+    // Schotse vouworen hebben een lichte voorkeur voor lage getallen (kleine pootjes)
+    const catWeights = [0.35, 0.30, 0.18, 0.10, 0.05, 0.02];
+    function catRoll() {
+      let r = Math.random(), cum = 0;
+      for (let i = 0; i < catWeights.length; i++) {
+        cum += catWeights[i];
+        if (r < cum) return i;
+      }
+      return 0;
+    }
+    let ch = catRoll(), ca = catRoll();
+    // Maximus laat België altijd verliezen
+    if (home === 'België') {
+      while (ch >= ca) { ch = catRoll(); ca = Math.max(catRoll(), 1); }
+    } else if (away === 'België') {
+      while (ca >= ch) { ca = catRoll(); ch = Math.max(catRoll(), 1); }
+    }
+    return [ch, ca];
+  }
+  lh = Math.max(0.2, Math.min(3.8, lh));
+  la = Math.max(0.2, Math.min(3.8, la));
+  return [poisson(lh), poisson(la)];
+}
+
+function generate() {
+  if (!selectedMode) { alert('Selecteer eerst een model.'); return; }
+  GROUPS.forEach(g => g.matches.forEach(m => {
+    const [h, a] = genScore(m.home, m.away, selectedMode);
+    const ih = document.getElementById(m.id + 'h');
+    const ia = document.getElementById(m.id + 'a');
+    ih.value = h; ia.value = a;
+    ih.classList.add('filled'); ia.classList.add('filled');
+  }));
+  updateProgress();
+  document.getElementById('reroll-btn').style.display = 'inline-flex';
+  // Maximus weet het zeker
+  if (selectedMode === 'maximus') {
+    document.getElementById('kampioen').value = 'Vlaanderen';
+  }
+}
+
+// ══════════════════════════════════════════════
+//  SUBMIT
+// ══════════════════════════════════════════════
+async function submitForm() {
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  if (!fname || !lname) { showStatus('Vul eerst je naam in.', 'danger'); return; }
+
+  const scores = {};
+  let missing = 0;
+  GROUPS.forEach(g => g.matches.forEach(m => {
+    const h = document.getElementById(m.id + 'h').value;
+    const a = document.getElementById(m.id + 'a').value;
+    scores[m.id] = (h !== '' && a !== '') ? h + '-' + a : '';
+    if (h === '' || a === '') missing++;
+  }));
+
+  if (missing > 0) {
+    const go = confirm(`Je hebt nog ${missing} wedstrijd(en) niet ingevuld. Toch insturen?`);
+    if (!go) return;
+  }
+
+  const payload = {
+    model: selectedMode || 'manueel',
+    naam: fname + ' ' + lname,
+    tijdstip: new Date().toISOString(),
+    scores,
+    kampioen: document.getElementById('kampioen').value,
+    topscorer: document.getElementById('topscorer').value,
+    schifting: document.getElementById('schifting').value,
+    schifting2: document.getElementById('schifting2').value
+  };
+
+  if (WEBHOOK_URL === '__PLACEHOLDER__') {
+    showStatus('⚠ Geen webhook URL ingesteld. Zie console voor payload.', 'warning');
+    console.log('Payload klaar:', JSON.stringify(payload, null, 2));
+    return;
+  }
+
+  showStatus('Bezig met versturen…', 'info');
+  try {
+    const resp = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify(payload)
+    });
+    showStatus('✓ Pronostiek ontvangen! Succes!', 'success');
+  } catch (e) {
+    showStatus('Fout bij verzending. Probeer opnieuw.', 'danger');
+  }
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.className = type;
+  el.style.display = 'block';
+  el.textContent = msg;
+}
+
+// ══════════════════════════════════════════════
+//  STAND BEREKENING
+// ══════════════════════════════════════════════
+function calcStand() {
+  // Per groep: stats bijhouden per team
+  const groupStats = {};
+  let anyFilled = false;
+
+  GROUPS.forEach(g => {
+    const teams = [...new Set(g.matches.flatMap(m => [m.home, m.away]))];
+    const stats = {};
+    teams.forEach(t => { stats[t] = { pnt:0, gs:0, gt:0, w:0, g:0, v:0, sp:0 }; });
+
+    // Onderlinge resultaten opslaan voor tiebreaker
+    const onderlinge = {};
+    teams.forEach(t => { onderlinge[t] = {}; teams.forEach(u => { if(t!==u) onderlinge[t][u] = {pnt:0,gs:0,gt:0}; }); });
+
+    g.matches.forEach(m => {
+      const hv = document.getElementById(m.id+'h').value;
+      const av = document.getElementById(m.id+'a').value;
+      if (hv === '' || av === '') return;
+      const h = parseInt(hv), a = parseInt(av);
+      anyFilled = true;
+      stats[m.home].sp++; stats[m.away].sp++;
+      stats[m.home].gs += h; stats[m.home].gt += a;
+      stats[m.away].gs += a; stats[m.away].gt += h;
+      if (h > a) {
+        stats[m.home].pnt += 3; stats[m.home].w++;
+        onderlinge[m.home][m.away].pnt += 3;
+      } else if (h < a) {
+        stats[m.away].pnt += 3; stats[m.away].w++;
+        onderlinge[m.away][m.home].pnt += 3;
+      } else {
+        stats[m.home].pnt += 1; stats[m.home].g++;
+        stats[m.away].pnt += 1; stats[m.away].g++;
+        onderlinge[m.home][m.away].pnt += 1;
+        onderlinge[m.away][m.home].pnt += 1;
+      }
+      onderlinge[m.home][m.away].gs += h; onderlinge[m.home][m.away].gt += a;
+      onderlinge[m.away][m.home].gs += a; onderlinge[m.away][m.home].gt += h;
+    });
+
+    // Sorteer: punten → DS → VG → W → onderlinge punten → onderlinge DS → onderlinge VG
+    const sorted = Object.keys(stats).sort((a, b) => {
+      const sa = stats[a], sb = stats[b];
+      if (sb.pnt !== sa.pnt) return sb.pnt - sa.pnt;
+      const dsa = sa.gs - sa.gt, dsb = sb.gs - sb.gt;
+      if (dsb !== dsa) return dsb - dsa;
+      if (sb.gs !== sa.gs) return sb.gs - sa.gs;
+      if (sb.w !== sa.w) return sb.w - sa.w;
+      // onderlinge
+      const oa = onderlinge[a][b], ob = onderlinge[b][a];
+      if (oa && ob) {
+        if (oa.pnt !== ob.pnt) return ob.pnt - oa.pnt;  // let op: ob = b's punten tegen a
+        const odsa = oa.gs - oa.gt, odsb = ob.gs - ob.gt;
+        if (odsb !== odsa) return odsb - odsa;
+        if (oa.gs !== ob.gs) return ob.gs - oa.gs;
+      }
+      return 0;
+    });
+
+    groupStats[g.letter] = { sorted, stats, teams };
+  });
+
+  if (!anyFilled) {
+    document.getElementById('stand-placeholder').style.display = 'block';
+    document.getElementById('stand-grid').style.display = 'none';
+    document.getElementById('derde-ranking').style.display = 'none';
+    return;
+  }
+  document.getElementById('stand-placeholder').style.display = 'none';
+  document.getElementById('stand-grid').style.display = 'grid';
+
+  // Render groepstabellen
+  const grid = document.getElementById('stand-grid');
+  grid.innerHTML = '';
+  const derden = []; // { letter, team, stats }
+
+  GROUPS.forEach(g => {
+    const { sorted, stats } = groupStats[g.letter];
+    const block = document.createElement('div');
+    block.className = 'stand-block';
+
+    let html = `<div class="stand-block-header">
+      <span class="group-letter">Groep ${g.letter}</span>
+    </div>
+    <table class="stand-table">
+      <thead><tr>
+        <th>Land</th><th>Sp</th><th>Pnt</th><th>DS</th><th>VG</th>
+      </tr></thead><tbody>`;
+
+    sorted.forEach((team, i) => {
+      const s = stats[team];
+      const ds = s.gs - s.gt;
+      const pos = i + 1;
+      let rowClass = pos === 4 ? 'uitgeschakeld' : pos <= 2 ? 'door-direct' : 'door-derde';
+      let badge = `<span class="badge-pos pos-${pos}">${pos}</span>`;
+      html += `<tr class="${rowClass}">
+        <td>${badge} ${team}</td>
+        <td>${s.sp}</td><td>${s.pnt}</td>
+        <td>${ds > 0 ? '+' : ''}${ds}</td>
+        <td>${s.gs}</td>
+      </tr>`;
+
+      if (pos === 3) {
+        derden.push({ letter: g.letter, team, pnt: s.pnt, ds: s.gs - s.gt, vg: s.gs, w: s.w, sp: s.sp });
+      }
+    });
+
+    html += '</tbody></table>';
+    block.innerHTML = html;
+    grid.appendChild(block);
+  });
+
+  // Ranking beste nummers 3
+  // Alleen nummers 3 die alle 3 wedstrijden gespeeld hebben meetellen als "zeker"
+  derden.sort((a, b) => {
+    if (b.pnt !== a.pnt) return b.pnt - a.pnt;
+    if (b.ds  !== a.ds)  return b.ds  - a.ds;
+    if (b.vg  !== a.vg)  return b.vg  - a.vg;
+    return b.w - a.w;
+  });
+
+  const derdeBody = document.getElementById('derde-body');
+  derdeBody.innerHTML = '';
+  derden.forEach((d, i) => {
+    const rank = i + 1;
+    const through = rank <= 8;
+    const zeker = d.sp === 3;
+    const status = through ? (zeker ? '✓' : '?') : (zeker ? '✗' : '?');
+    const tr = document.createElement('tr');
+    if (through) tr.className = 'through';
+    tr.innerHTML = `<td>${rank}</td><td>${d.team}</td><td>${d.letter}</td>
+      <td>${d.pnt}</td><td>${d.ds > 0 ? '+' : ''}${d.ds}</td>
+      <td>${d.vg}</td><td>${d.w}</td>`;
+    derdeBody.appendChild(tr);
+  });
+
+  document.getElementById('derde-ranking').style.display = derden.length > 0 ? 'block' : 'none';
+
+  // Scroll hint: sectie zichtbaar maken
+  document.getElementById('stand-section').style.opacity = '1';
+  updateSchiftingTip();
+}
+
+function updateSchiftingTip() {
+  // Tel alle ingevulde doelpunten op
+  let totalGoals = 0, filledMatches = 0;
+  GROUPS.forEach(g => g.matches.forEach(m => {
+    const h = document.getElementById(m.id + 'h').value;
+    const a = document.getElementById(m.id + 'a').value;
+    if (h !== '' && a !== '') {
+      totalGoals += parseInt(h) + parseInt(a);
+      filledMatches++;
+    }
+  }));
+  const tip = document.getElementById('schifting-tip');
+  if (filledMatches === 0) { tip.style.display = 'none'; return; }
+  const projected = Math.round(totalGoals / filledMatches * 104);
+  tip.style.display = 'block';
+  tip.innerHTML = 'Tip: in de voorrondes voorspel jij <strong>' + totalGoals + '</strong> goals. Blijven ze aan hetzelfde tempo scoren, dan wordt er in 104 wedstrijden <strong>' + projected + '</strong> keer gescoord.';
+}
+
+// Herbereken bij elke score-input
+const origOnScore = onScoreInput;
+function onScoreInput(input) {
+  input.classList.toggle('filled', input.value !== '');
+  updateProgress();
+  calcStand();
+}
+
+// Herbereken ook na generate()
+const origGenerate = generate;
+generate = function() {
+  origGenerate();
+  calcStand();
+};
+
+</script>
+</body>
+</html>

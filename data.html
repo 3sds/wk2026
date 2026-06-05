@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Het grote DS WK Scorebord 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1410;--ink2:#3d3328;--muted:#8a7d6a;--muted2:#b5a990;
+  --paper:#faf6ef;--paper2:#f2ead8;--paper3:#e8ddc8;
+  --red:#c8102e;--red2:#a00c24;--gold:#b8860b;--gold2:#d4a017;
+  --green:#2d6a45;--silver:#7a7a7a;--bronze:#a0522d;
+  --border:rgba(26,20,16,0.12);--border2:rgba(26,20,16,0.22);
+  --shadow:0 2px 12px rgba(26,20,16,0.10);
+  --font-head:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --r:8px;--rl:14px;
+}
+html{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:15px}
+body{max-width:900px;margin:0 auto;padding:0 1.25rem 5rem}
+
+/* MASTHEAD */
+.masthead{border-bottom:3px double var(--ink);padding:2rem 0 0;margin-bottom:2rem;position:relative}
+.masthead::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(200,16,46,0.05),transparent);pointer-events:none}
+.masthead-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.ds-logo svg{display:block}
+.masthead-meta{text-align:right;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);line-height:1.7;padding-top:4px}
+.masthead-meta strong{color:var(--ink2)}
+.masthead-title-wrap{text-align:center;padding:1.2rem 0 1.4rem}
+.masthead-eyebrow{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.masthead-h1{font-family:var(--font-head);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1;letter-spacing:-.02em;color:var(--ink)}
+.masthead-h1 em{font-style:italic;color:var(--red)}
+.masthead-sub{font-family:var(--font-body);font-size:0.82rem;color:var(--muted);margin-top:.6rem;font-style:italic}
+.masthead-rule{display:flex;align-items:center;gap:.75rem;margin-top:1rem}
+.masthead-rule span{flex:1;height:1px;background:var(--ink)}
+.masthead-rule .oct{font-size:1.4rem;line-height:1}
+
+/* STATUS BAR */
+.status-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:2rem;padding:10px 16px;background:var(--paper2);border:1px solid var(--border);border-radius:var(--rl);font-family:var(--font-mono);font-size:0.7rem;color:var(--muted)}
+.status-bar strong{color:var(--ink2)}
+.refresh-btn{background:none;border:1px solid var(--border2);border-radius:var(--r);padding:4px 12px;font-family:var(--font-mono);font-size:0.68rem;cursor:pointer;color:var(--ink2);transition:background .12s}
+.refresh-btn:hover{background:var(--paper3)}
+
+/* PODIUM */
+.podium-wrap{margin-bottom:2.5rem}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin-bottom:1.5rem}
+.podium-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+.podium-medal{font-size:1.6rem;line-height:1}
+.podium-naam{font-family:var(--font-head);font-weight:700;font-size:0.9rem;text-align:center;color:var(--ink)}
+.podium-kampioen{font-size:1.1rem}
+.podium-pts{font-family:var(--font-mono);font-size:0.7rem;color:var(--muted)}
+.podium-block{border-radius:var(--r) var(--r) 0 0;width:110px;display:flex;align-items:center;justify-content:center}
+.podium-block.goud{height:90px;background:linear-gradient(180deg,#f5e07a,#d4a017);border:2px solid #b8860b}
+.podium-block.zilver{height:70px;background:linear-gradient(180deg,#e0e0e0,#aaa);border:2px solid #888}
+.podium-block.brons{height:55px;background:linear-gradient(180deg,#d4956a,#a0522d);border:2px solid #8b4513}
+.podium-rank{font-family:var(--font-head);font-weight:900;font-size:1.6rem;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.3)}
+
+/* SECTIE */
+.section{margin-bottom:2.5rem}
+.section-head{display:flex;align-items:baseline;gap:.75rem;margin-bottom:1.1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.section-num{font-family:var(--font-mono);font-size:0.6rem;color:var(--red);font-weight:500;letter-spacing:.08em;border:1px solid var(--red);border-radius:3px;padding:1px 5px;flex-shrink:0}
+.section-label{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--ink);flex:1}
+
+/* RANGLIJST */
+.rang-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow)}
+.rang-table th{padding:8px 12px;text-align:right;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);font-weight:400;background:var(--paper2);border-bottom:1px solid var(--border)}
+.rang-table th:first-child,.rang-table th:nth-child(2){text-align:left}
+.rang-table td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--border);font-family:var(--font-body);font-size:0.82rem;color:var(--ink)}
+.rang-table td:first-child{text-align:left;font-family:var(--font-mono);font-size:0.7rem;color:var(--muted);width:32px}
+.rang-table td:nth-child(2){text-align:left;font-weight:600}
+.rang-table tr:last-child td{border-bottom:none}
+.rang-table tr:hover td{background:var(--paper)}
+.rang-table tr.top1 td{background:rgba(212,160,23,0.08)}
+.rang-table tr.top3 td{background:rgba(200,16,46,0.03)}
+.model-badge{font-family:var(--font-mono);font-size:0.6rem;color:var(--muted);background:var(--paper2);border:1px solid var(--border);border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+.pts-totaal{font-weight:600;color:var(--ink)}
+.pts-highlight{color:var(--red2);font-weight:600}
+
+/* SPEELDAG TABS */
+.tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{font-family:var(--font-mono);font-size:0.7rem;padding:5px 14px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;background:#fff;color:var(--muted);transition:all .12s}
+.tab:hover{border-color:var(--border2);color:var(--ink)}
+.tab.active{background:var(--red);border-color:var(--red);color:#fff}
+
+/* PUNTENSYSTEEM */
+.pts-systeem{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.pts-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;box-shadow:var(--shadow)}
+.pts-card-label{font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-bottom:4px}
+.pts-card-val{font-family:var(--font-head);font-size:1.4rem;font-weight:700;color:var(--red)}
+
+/* LOADING */
+.loading{text-align:center;padding:3rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--muted)}
+
+/* FOOTER */
+footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);border-top:3px double var(--ink);padding-top:1.5rem;line-height:1.8}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.section{animation:fadeUp .35s ease both}
+.section:nth-child(1){animation-delay:.05s}
+.section:nth-child(2){animation-delay:.12s}
+.section:nth-child(3){animation-delay:.19s}
+.section:nth-child(4){animation-delay:.26s}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="ds-logo">
+      <svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="De Standaard">
+        <rect width="180" height="44" fill="none"/>
+        <rect x="0" y="0" width="6" height="44" fill="#c8102e"/>
+        <text x="14" y="32" font-family="'Playfair Display',Georgia,serif" font-size="26" font-weight="900" fill="#1a1410" letter-spacing="-0.5">De Standaard</text>
+      </svg>
+    </div>
+    <div class="masthead-meta">
+      <strong>WK 2026</strong> · Scorebord<br>
+      11 juni – 19 juli 2026<br>
+      <span id="last-update">Laden…</span>
+    </div>
+  </div>
+  <div class="masthead-title-wrap">
+    <div class="masthead-eyebrow">Officieuze redactiepronostiek — intern gebruik</div>
+    <h1 class="masthead-h1">De grote <em>DS</em> WK Data-analyse</h1>
+    <p class="masthead-sub">Live ranglijst · automatisch bijgewerkt</p>
+  </div>
+  <div class="masthead-rule">
+    <span></span><div class="oct">🐙</div><span></span><div class="oct">⚽</div><span></span><div class="oct">🏆</div><span></span>
+  </div>
+</header>
+
+<div style="text-align:center;padding:4rem 1rem;font-family:var(--font-mono);color:var(--muted)">
+  <div style="font-size:3rem;margin-bottom:1rem">📊</div>
+  <div style="font-size:1rem;font-family:var(--font-head);font-weight:700;color:var(--ink);margin-bottom:.5rem">Data-analyse</div>
+  <div style="font-size:0.8rem">Beschikbaar na de groepsfase.</div>
+</div>
+
+<footer>
+  <div style="font-size:1.1rem;margin-bottom:.5rem">🐙</div>
+  Het grote DS WK Scorebord 2026<br>
+  <span style="opacity:.6">Gegenereerd met Claude Sonnet 4.6 · Blijf vrij</span>
+</footer>
+
+<script>
+const SCOREBORD_URL = "https://script.google.com/macros/s/AKfycbxIBSYYVlf1ixg9mwtkF7_cNvYPvx82UeHinUC3PPAvo5svsvjfUpHEz0d_WczFG0NH/exec";
+
+const KAMPIOEN_VLAG = {
+  "Frankrijk":"🇫🇷","Spanje":"🇪🇸","Argentinië":"🇦🇷","Engeland":"🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+  "Portugal":"🇵🇹","Brazilië":"🇧🇷","Nederland":"🇳🇱","Marokko":"🇲🇦",
+  "België":"🇧🇪","Duitsland":"🇩🇪","Kroatië":"🇭🇷","Italië":"🇮🇹",
+  "Colombia":"🇨🇴","Senegal":"🇸🇳","Mexico":"🇲🇽","VS":"🇺🇸",
+  "Uruguay":"🇺🇾","Japan":"🇯🇵","Zwitserland":"🇨🇭","Ecuador":"🇪🇨",
+  "Australië":"🇦🇺","Zuid-Korea":"🇰🇷","Iran":"🇮🇷","Schotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+  "Tsjechië":"🇨🇿","Bosnië":"🇧🇦","Oekraïne":"🇺🇦","Panama":"🇵🇦",
+  "Noorwegen":"🇳🇴","Ivoorkust":"🇨🇮","Saudi-Arabië":"🇸🇦","Paraguay":"🇵🇾",
+  "Ghana":"🇬🇭","Turkije":"🇹🇷","Oostenrijk":"🇦🇹","Egypte":"🇪🇬",
+  "Algerije":"🇩🇿","Tunesië":"🇹🇳","Haïti":"🇭🇹","Kaapverdië":"🇨🇻",
+  "Jordanië":"🇯🇴","Oezbekistan":"🇺🇿","Congo DR":"🇨🇩","Nieuw-Zeeland":"🇳🇿",
+  "Irak":"🇮🇶","Curaçao":"🇨🇼","Zuid-Afrika":"🇿🇦","Qatar":"🇶🇦",
+  "Canada":"🇨🇦","Vlaanderen":"🇧🇪"
+};
+
+const MODEL_LABELS = {
+  random:"Gokken zoals Didier",fifa:"FIFA ranking",historisch:"De geschiedenis herhaalt zich",
+  god:"Statistiek",bbp:"De onzichtbare hand",bier:"🍺",
+  choco:"Ze smelten de paashaas",maximus:"Maximus",manueel:"Manueel"
+};
+
+var huidigTab = "totaal";
+var data = null;
+
+function vlag(land){ return KAMPIOEN_VLAG[land] || "🏳️"; }
+function modelLabel(m){ return MODEL_LABELS[m] || m; }
+
+function laadData() {
+  document.getElementById("last-update").textContent = "Laden…";
+  // Verwijder vorige JSONP script tag
+  var old = document.getElementById("jsonp-script");
+  if (old) old.parentNode.removeChild(old);
+  // JSONP callback
+  window.__scorebordCallback = function(result) {
+    data = result;
+    renderAlles();
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    document.getElementById("last-update").textContent =
+      "Bijgewerkt: " + new Date().toLocaleTimeString("nl-BE");
+  };
+  var script = document.createElement("script");
+  script.id = "jsonp-script";
+  script.src = SCOREBORD_URL + "?actie=scorebord&callback=__scorebordCallback";
+  script.onerror = function() {
+    document.getElementById("loading").textContent = "Fout bij laden. Controleer de SCOREBORD_URL.";
+  };
+  document.body.appendChild(script);
+}
+
+function renderAlles() {
+  if (!data || !data.deelnemers) return;
+  var d = data.deelnemers;
+  document.getElementById("stat-gespeeld").textContent = data.meta.aantalGespeeld || 0;
+  document.getElementById("stat-deelnemers").textContent = d.length;
+  renderPodium(d);
+  renderRanglijst(d, huidigTab);
+  renderPuntensysteem(data.meta.puntensysteem);
+  renderLiveStats(data.meta);
+}
+
+function renderPodium(d) {
+  var el = document.getElementById("podium");
+  if (d.length === 0) { el.innerHTML = "<p style='font-family:var(--font-mono);font-size:.75rem;color:var(--muted)'>Nog geen deelnemers.</p>"; return; }
+
+  var top = d.slice(0, Math.min(3, d.length));
+  var volgorde = top.length === 1 ? [0] : top.length === 2 ? [1,0] : [1,0,2];
+  var klassen  = ["zilver","goud","brons"];
+  var medailles = ["🥈","🥇","🥉"];
+  var ranken    = [2,1,3];
+
+  el.innerHTML = volgorde.map(function(i) {
+    if (!top[i]) return "";
+    var kl = klassen[volgorde.indexOf(i)];
+    var rank = ranken[volgorde.indexOf(i)];
+    return '<div class="podium-item">' +
+      '<div class="podium-medal">' + medailles[volgorde.indexOf(i)] + '</div>' +
+      '<div class="podium-naam">' + top[i].naam + '</div>' +
+      '<div class="podium-kampioen">' + vlag(top[i].kampioen) + '</div>' +
+      '<div class="podium-block ' + kl + '"><span class="podium-rank">' + rank + '</span></div>' +
+      '<div class="podium-pts">' + top[i].ptn.totaal + ' pt</div>' +
+      '</div>';
+  }).join("");
+}
+
+function toonTab(tab, btn) {
+  huidigTab = tab;
+  document.querySelectorAll(".tab").forEach(function(b){ b.classList.remove("active"); });
+  btn.classList.add("active");
+  if (data) renderRanglijst(data.deelnemers, tab);
+}
+
+function renderRanglijst(d, tab) {
+  var cols = {
+    totaal:    {label:"Totaal",    fn:function(x){return x.ptn.totaal}},
+    groep:     {label:"Voorrondes",fn:function(x){return x.ptn.groep}},
+    sd1:       {label:"Speeldag 1",fn:function(x){return x.ptn.sd1}},
+    sd2:       {label:"Speeldag 2",fn:function(x){return x.ptn.sd2}},
+    sd3:       {label:"Speeldag 3",fn:function(x){return x.ptn.sd3}},
+    kwalificatie: {label:"Kwalificatie",fn:function(x){return x.ptn.doorkomer||0}},
+    bonus:     {label:"Bonus",     fn:function(x){return x.ptn.bonus}},
+    knockout:  {label:"Knockout",   fn:function(x){return x.ptn.knockout||0}}
+  };
+
+  // Sorteer op geselecteerde kolom
+  var sorted = d.slice().sort(function(a,b){ return cols[tab].fn(b) - cols[tab].fn(a); });
+
+  document.getElementById("rang-head").innerHTML =
+    "<tr><th>#</th><th>Deelnemer</th><th>🏆</th>" +
+    "<th>" + cols[tab].label + "</th>" +
+    (tab==="totaal" ? "<th>Voorrondes</th><th>Kwalificatie</th><th>Bonus</th>" : "") +
+    "</tr>";
+
+  document.getElementById("rang-body").innerHTML = sorted.map(function(p, i) {
+    var rowClass = i===0 ? "top1" : i<3 ? "top3" : "";
+    var pts = cols[tab].fn(p);
+    return "<tr class='" + rowClass + "'>" +
+      "<td>" + (i+1) + "</td>" +
+      "<td>" + p.naam +
+        "<span class='model-badge'>" + modelLabel(p.model) + "</span></td>" +
+      "<td>" + vlag(p.kampioen) + "</td>" +
+      "<td class='pts-highlight'>" + pts + "</td>" +
+      (tab==="totaal" ?
+        "<td>" + p.ptn.groep + "</td>" +
+        "<td>" + (p.ptn.doorkomer||0) + "</td>" +
+        "<td>" + p.ptn.bonus + "</td>" : "") +
+      "</tr>";
+  }).join("");
+}
+
+function renderLiveStats(meta) {
+  document.getElementById("stat-doelpunten").textContent =
+    meta.totaalDoelpunten > 0 ? meta.totaalDoelpunten : "—";
+  document.getElementById("stat-schot").textContent =
+    meta.versteSchot > 0 ? meta.versteSchot + " m" : "—";
+
+  var ts = meta.topscorers || [];
+  if (ts.length === 0) {
+    document.getElementById("stat-topscorers").textContent = "—";
+    return;
+  }
+  // Toon top 3, inclusief ties
+  var top3 = [];
+  var prevGoals = -1;
+  var rank = 0;
+  ts.forEach(function(p, i) {
+    if (p.goals !== prevGoals) { rank = top3.length + 1; prevGoals = p.goals; }
+    if (rank <= 3) top3.push(p);
+  });
+  document.getElementById("stat-topscorers").innerHTML = top3.map(function(p){
+    return "<strong>" + p.naam + "</strong> <span style='color:var(--muted);font-size:.75rem'>" +
+      p.land + " · " + p.goals + " goals" +
+      (p.assists ? " · " + p.assists + " ass." : "") + "</span>";
+  }).join("<br>");
+}
+
+function renderPuntensysteem(ps) {
+  if (!ps) return;
+  var items = [
+    {l:"Juiste uitslag",       v:ps.uitslag},
+    {l:"Juiste score",         v:ps.score},
+    {l:"Groepswinnaar",        v:ps.groepswinnaar},
+    {l:"Nummer 2",             v:ps.nummer2},
+    {l:"Beste derde",          v:ps.besteDerde},
+    {l:"Kampioen (groep)",     v:ps.kampioen},
+    {l:"Topscorer",            v:ps.topscorer},
+    {l:"Schiftingen",          v:"tiebreaker"},
+    {l:"R32 winnaar",          v:ps.koR32||3},
+    {l:"R16 winnaar",          v:ps.koR16||5},
+    {l:"Kwartfinalist",        v:ps.koQF||6},
+    {l:"Halvefinalist",        v:ps.koSF||9},
+    {l:"Finalist",             v:ps.koFinale||15},
+    {l:"Kampioen (knockout)",  v:ps.koKampioen||20}
+  ];
+  document.getElementById("pts-systeem").innerHTML = items.map(function(x){
+    return "<div class='pts-card'>" +
+      "<div class='pts-card-label'>" + x.l + "</div>" +
+      "<div class='pts-card-val'>" + x.v + (typeof x.v==="number"?" pt":"") + "</div>" +
+      "</div>";
+  }).join("");
+}
+
+laadData();
+setInterval(laadData, 60000); // automatisch vernieuwen elke minuut
+</script>
+</body>
+</html>

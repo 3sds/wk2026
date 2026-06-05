@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DS WK Knockout Pronostiek 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1410;--ink2:#3d3328;--muted:#8a7d6a;--muted2:#b5a990;
+  --paper:#faf6ef;--paper2:#f2ead8;--paper3:#e8ddc8;
+  --red:#c8102e;--red2:#a00c24;--gold:#b8860b;
+  --green:#2d6a45;
+  --border:rgba(26,20,16,0.12);--border2:rgba(26,20,16,0.22);
+  --shadow:0 2px 12px rgba(26,20,16,0.10);
+  --font-head:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --r:8px;--rl:14px;
+}
+html{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:15px}
+body{padding-top:0;max-width:900px;margin:0 auto;padding:0 1.25rem 5rem}
+
+/* MASTHEAD */
+.masthead{border-bottom:3px double var(--ink);padding:2rem 0 0;margin-bottom:2rem;position:relative}
+.masthead::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(200,16,46,0.05),transparent);pointer-events:none}
+.masthead-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.masthead-meta{text-align:right;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);line-height:1.7;padding-top:4px}
+.masthead-meta strong{color:var(--ink2)}
+.masthead-title-wrap{text-align:center;padding:1.2rem 0 1.4rem}
+.masthead-eyebrow{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.masthead-h1{font-family:var(--font-head);font-size:clamp(1.8rem,5vw,3rem);font-weight:900;line-height:1;letter-spacing:-.02em}
+.masthead-h1 em{font-style:italic;color:var(--red)}
+.masthead-sub{font-family:var(--font-body);font-size:0.82rem;color:var(--muted);margin-top:.6rem;font-style:italic}
+.masthead-rule{display:flex;align-items:center;gap:.75rem;margin-top:1rem}
+.masthead-rule span{flex:1;height:1px;background:var(--ink)}
+.oct{font-size:1.4rem;line-height:1}
+
+/* SECTIONS */
+.section{margin-bottom:2.5rem}
+.section-head{display:flex;align-items:baseline;gap:.75rem;margin-bottom:1.1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.section-num{font-family:var(--font-mono);font-size:0.6rem;color:var(--red);font-weight:500;letter-spacing:.08em;border:1px solid var(--red);border-radius:3px;padding:1px 5px;flex-shrink:0}
+.section-label{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--ink);flex:1}
+
+/* NAAM */
+.name-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-family:var(--font-mono);font-size:0.68rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+input[type=text]{background:#fff;border:1px solid var(--border2);border-radius:var(--r);color:var(--ink);font-family:var(--font-body);font-size:0.95rem;padding:9px 13px;transition:border-color .15s,box-shadow .15s;width:100%}
+input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(200,16,46,0.08)}
+input::placeholder{color:var(--muted2);font-style:italic}
+
+/* BRACKET */
+.bracket-wrap{overflow-x:auto;padding-bottom:1rem}
+.bracket{display:flex;gap:0;align-items:stretch;min-width:800px}
+.ronde{display:flex;flex-direction:column;flex:1;min-width:140px}
+.ronde-title{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;padding:6px 0 10px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.ronde-duels{display:flex;flex-direction:column;flex:1;justify-content:space-around;gap:6px;padding:0 4px}
+.duel{background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.team-btn{width:100%;padding:7px 10px;text-align:left;font-family:var(--font-body);font-size:0.78rem;font-weight:400;color:var(--ink);background:none;border:none;cursor:pointer;transition:background .1s;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.team-btn:last-child{border-bottom:none}
+.team-btn:hover{background:var(--paper2)}
+.team-btn.gekozen{background:var(--red);color:#fff;font-weight:600}
+.team-btn.gekozen:hover{background:var(--red2)}
+.team-btn.tbd{color:var(--muted2);font-style:italic;cursor:default}
+.team-btn.tbd:hover{background:none}
+.duel-connector{width:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.connector-line{width:2px;height:100%;background:var(--border)}
+
+/* KAMPIOEN */
+.kampioen-display{background:#fff;border:2px solid var(--gold);border-radius:var(--rl);padding:1.5rem;text-align:center;box-shadow:var(--shadow)}
+.kampioen-trophy{font-size:2.5rem;margin-bottom:.5rem}
+.kampioen-naam{font-family:var(--font-head);font-size:1.4rem;font-weight:900;color:var(--ink)}
+.kampioen-label{font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.1em}
+
+/* PROGRESSIE */
+.progress-wrap{margin-bottom:2rem}
+.progress-label{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:0.68rem;color:var(--muted);margin-bottom:6px}
+.progress-track{height:3px;background:var(--paper3);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--red2),var(--red));border-radius:2px;transition:width .4s ease;width:0%}
+
+/* KNOPPEN */
+.btn{background:#fff;border:1px solid var(--border2);border-radius:var(--r);color:var(--ink);font-family:var(--font-body);font-size:0.82rem;font-weight:600;padding:9px 18px;cursor:pointer;transition:background .12s,border-color .12s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:var(--paper2)}
+.btn:active{transform:scale(0.98)}
+.btn-primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn-primary:hover{background:var(--red2);border-color:var(--red2)}
+.submit-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+#status{font-family:var(--font-mono);font-size:0.75rem;display:none}
+#status.success{color:var(--green)}
+#status.danger{color:var(--red)}
+#status.info{color:var(--muted)}
+
+/* LOADING */
+.loading{text-align:center;padding:3rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--muted)}
+.banner{font-family:var(--font-mono);font-size:0.75rem;color:var(--ink2);background:var(--paper2);border-left:3px solid var(--red);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin-bottom:1.5rem;line-height:1.6}
+
+footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);border-top:3px double var(--ink);padding-top:1.5rem;line-height:1.8}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.section{animation:fadeUp .35s ease both}
+.section:nth-child(1){animation-delay:.05s}
+.section:nth-child(2){animation-delay:.12s}
+.section:nth-child(3){animation-delay:.19s}
+.section:nth-child(4){animation-delay:.26s}
+.section:nth-child(5){animation-delay:.33s}
+
+/* ── NAVIGATIE ── */
+.ds-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  border-bottom: 2px solid var(--red);
+  padding: 0;
+}
+.ds-nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 46px;
+}
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+.nav-logo em { font-style: italic; color: #f08090; }
+.nav-links {
+  display: flex;
+  gap: 4px;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background .12s, color .12s;
+  white-space: nowrap;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.nav-links a.active { background: var(--red); color: #fff; }
+.nav-links a.nav-placeholder { opacity: .4; cursor: default; pointer-events: none; }
+@media(max-width:560px){
+  .nav-links a { padding: 5px 7px; font-size: 0.62rem; }
+}
+</style>
+</head>
+<body>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="scorebord.html">Scorebord</a><a href="pronostiek.html">Groepsfase</a><a href="knockout.html" class="active">Knock-out</a><a href="data.html" class="nav-placeholder">Data-analyse</a><a href="reglement.html">Reglement</a></div></div></nav>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <div>
+      <svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="De Standaard">
+        <rect width="180" height="44" fill="none"/>
+        <rect x="0" y="0" width="6" height="44" fill="#c8102e"/>
+        <text x="14" y="32" font-family="'Playfair Display',Georgia,serif" font-size="26" font-weight="900" fill="#1a1410" letter-spacing="-0.5">De Standaard</text>
+      </svg>
+    </div>
+    <div class="masthead-meta">
+      <strong>WK 2026</strong> · Knockout-fase<br>
+      Vanaf 28 juni 2026
+    </div>
+  </div>
+  <div class="masthead-title-wrap">
+    <div class="masthead-eyebrow">Officieuze redactiepronostiek — intern gebruik</div>
+    <h1 class="masthead-h1">De grote <em>DS</em> WK Pronostiek<br><em>Knockout-fase</em></h1>
+    <p class="masthead-sub">Wie gaat er door? Voorspel het volledige bracket.</p>
+  </div>
+  <div class="masthead-rule">
+    <span></span><div class="oct">🐙</div><span></span><div class="oct">⚽</div><span></span><div class="oct">🏆</div><span></span>
+  </div>
+</header>
+
+<div id="loading" class="loading">Bracket laden…</div>
+<div id="content" style="display:none">
+
+  <!-- STAP 1: NAAM -->
+  <section class="section">
+    <div class="section-head"><span class="section-num">01</span><span class="section-label">Jouw naam</span></div>
+    <div class="name-grid">
+      <div class="field"><label for="fname">Voornaam</label><input type="text" id="fname" placeholder="Jan"></div>
+      <div class="field"><label for="lname">Achternaam</label><input type="text" id="lname" placeholder="Janssen"></div>
+    </div>
+  </section>
+
+  <!-- STAP 2: BRACKET -->
+  <section class="section">
+    <div class="section-head"><span class="section-num">02</span><span class="section-label">Bracket</span></div>
+    <div class="banner">Klik op een team om hen te laten doorgaan. De winnaar schuift automatisch door naar de volgende ronde.</div>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="prog-text">0 van 31 duels ingevuld</span>
+        <span id="prog-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+    </div>
+    <div class="bracket-wrap">
+      <div class="bracket" id="bracket"></div>
+    </div>
+  </section>
+
+  <!-- STAP 3: KAMPIOEN -->
+  <section class="section">
+    <div class="section-head"><span class="section-num">03</span><span class="section-label">Jouw kampioen</span></div>
+    <div class="kampioen-display" id="kampioen-display">
+      <div class="kampioen-trophy">🏆</div>
+      <div class="kampioen-naam" id="kampioen-naam">Nog niet bepaald</div>
+      <div class="kampioen-label">Wordt bepaald door jouw bracket</div>
+    </div>
+  </section>
+
+  <!-- STAP 4: INSTUREN -->
+  <section class="section">
+    <div class="section-head"><span class="section-num">04</span><span class="section-label">Insturen</span></div>
+    <div class="submit-row">
+      <button class="btn btn-primary" onclick="submitForm()">✈ Pronostiek insturen</button>
+      <div id="status"></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div style="font-size:1.1rem;margin-bottom:.5rem">🐙</div>
+  De grote DS WK Pronostiek 2026 · Knockout-fase<br>
+  <span style="opacity:.6">Gegenereerd met Claude Sonnet 4.6 · Blijf vrij</span>
+</footer>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbxIBSYYVlf1ixg9mwtkF7_cNvYPvx82UeHinUC3PPAvo5svsvjfUpHEz0d_WczFG0NH/exec";
+
+// Bracket state: keuzes[rondeId][matchId] = gekozen team
+var keuzes = {};
+var bracketData = null;
+
+// Rondes definitie
+var RONDES = [
+  {id:"R32", label:"Ronde van 32", matches:16, volgende:"R16"},
+  {id:"R16", label:"Achtste finales", matches:8,  volgende:"QF"},
+  {id:"QF",  label:"Kwartfinales",   matches:4,  volgende:"SF"},
+  {id:"SF",  label:"Halve finales",  matches:2,  volgende:"F"},
+  {id:"F",   label:"Finale",         matches:1,  volgende:null}
+];
+
+async function laadBracket() {
+  try {
+    const r = await fetch(API_URL + "?actie=bracket");
+    bracketData = await r.json();
+
+    if (!bracketData.groepsvolledig) {
+      document.getElementById("loading").textContent =
+        "De groepsfase is nog niet volledig gespeeld. Dit formulier wordt beschikbaar zodra alle uitslagen bekend zijn.";
+      return;
+    }
+
+    initBracket(bracketData.r32);
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("content").style.display = "block";
+  } catch(e) {
+    document.getElementById("loading").textContent =
+      "Fout bij laden. Controleer de API_URL.";
+  }
+}
+
+function initBracket(r32) {
+  // Initialiseer keuzes voor alle rondes
+  RONDES.forEach(function(r){
+    keuzes[r.id] = {};
+    for(var i=1;i<=r.matches;i++) keuzes[r.id][r.id+"-"+i] = null;
+  });
+
+  // Vul R32 teams in vanuit de bracket data
+  r32.forEach(function(m){
+    keuzes["R32"][m.id] = {t1: m.t1, t2: m.t2, winner: null};
+  });
+
+  // Initialiseer lege duels voor latere rondes
+  var rondeMatches = {R16:8, QF:4, SF:2, F:1};
+  Object.keys(rondeMatches).forEach(function(ronde){
+    for(var i=1;i<=rondeMatches[ronde];i++){
+      var id = ronde+"-"+i;
+      keuzes[ronde][id] = {t1:null, t2:null, winner:null};
+    }
+  });
+
+  renderBracket();
+}
+
+function renderBracket() {
+  var container = document.getElementById("bracket");
+  container.innerHTML = "";
+
+  RONDES.forEach(function(ronde) {
+    var col = document.createElement("div");
+    col.className = "ronde";
+    col.innerHTML = '<div class="ronde-title">' + ronde.label + '</div>';
+
+    var duelsWrap = document.createElement("div");
+    duelsWrap.className = "ronde-duels";
+    duelsWrap.id = "ronde-" + ronde.id;
+
+    var matchIds = Object.keys(keuzes[ronde.id]).sort();
+    matchIds.forEach(function(matchId){
+      var match = keuzes[ronde.id][matchId];
+      var duel = document.createElement("div");
+      duel.className = "duel";
+      duel.id = "duel-" + matchId;
+
+      var t1 = match && match.t1 ? match.t1 : null;
+      var t2 = match && match.t2 ? match.t2 : null;
+      var winner = match ? match.winner : null;
+
+      duel.innerHTML = maakTeamBtn(matchId, t1, winner, "t1") +
+                       maakTeamBtn(matchId, t2, winner, "t2");
+      duelsWrap.appendChild(duel);
+    });
+
+    col.appendChild(duelsWrap);
+    container.appendChild(col);
+  });
+
+  updateProgress();
+  updateKampioen();
+}
+
+function maakTeamBtn(matchId, team, winner, pos) {
+  if (!team) {
+    return '<button class="team-btn tbd" disabled>— TBD —</button>';
+  }
+  var gekozen = winner === team ? ' gekozen' : '';
+  return '<button class="team-btn' + gekozen + '" onclick="kiesWinnaar(\'' +
+    matchId + '\',\'' + team.replace(/'/g,"\\'") + '\')">' + team + '</button>';
+}
+
+function kiesWinnaar(matchId, team) {
+  // Bepaal welke ronde
+  var ronde = matchId.split("-")[0];
+  var match = keuzes[ronde][matchId];
+  if (!match || !match.t1 || !match.t2) return;
+
+  var oudeWinnaar = match.winner;
+  match.winner = team;
+
+  // Propageer naar volgende ronde
+  propageer(ronde, matchId, oudeWinnaar, team);
+  renderBracket();
+}
+
+function propageer(ronde, matchId, oudeWinnaar, nieuweWinnaar) {
+  var rondeIdx = RONDES.findIndex(function(r){ return r.id===ronde; });
+  if (rondeIdx === -1 || rondeIdx === RONDES.length-1) return;
+
+  var volgende = RONDES[rondeIdx+1];
+  var matchNr = parseInt(matchId.split("-").pop());
+  var volgendeMatchNr = Math.ceil(matchNr/2);
+  var volgendeMatchId = volgende.id + "-" + volgendeMatchNr;
+  var isT1 = matchNr % 2 === 1;
+
+  var volgendeMatch = keuzes[volgende.id][volgendeMatchId];
+  if (!volgendeMatch) return;
+
+  // Als de oude winnaar in de volgende ronde staat als winnaar, reset die ook
+  if (oudeWinnaar && volgendeMatch.winner === oudeWinnaar) {
+    propageer(volgende.id, volgendeMatchId, oudeWinnaar, null);
+    volgendeMatch.winner = null;
+  }
+
+  if (isT1) {
+    volgendeMatch.t1 = nieuweWinnaar;
+  } else {
+    volgendeMatch.t2 = nieuweWinnaar;
+  }
+
+  // Als de nieuwe winnaar null is, reset ook de volgende ronde positie
+  if (!nieuweWinnaar) {
+    if (volgendeMatch.winner === oudeWinnaar) volgendeMatch.winner = null;
+  }
+}
+
+function updateProgress() {
+  var totaal = 31; // 16+8+4+2+1
+  var ingevuld = 0;
+  RONDES.forEach(function(r){
+    Object.keys(keuzes[r.id]).forEach(function(id){
+      if(keuzes[r.id][id] && keuzes[r.id][id].winner) ingevuld++;
+    });
+  });
+  var pct = Math.round(ingevuld/totaal*100);
+  document.getElementById("prog-fill").style.width = pct+"%";
+  document.getElementById("prog-text").textContent = ingevuld+" van "+totaal+" duels ingevuld";
+  document.getElementById("prog-pct").textContent = pct+"%";
+}
+
+function updateKampioen() {
+  var finale = keuzes["F"]["F-1"];
+  var kampioen = finale && finale.winner ? finale.winner : null;
+  document.getElementById("kampioen-naam").textContent = kampioen || "Nog niet bepaald";
+}
+
+async function submitForm() {
+  var fname = document.getElementById("fname").value.trim();
+  var lname = document.getElementById("lname").value.trim();
+  if (!fname || !lname) { showStatus("Vul eerst je naam in.", "danger"); return; }
+
+  // Bouw keuzes-object op
+  var alleKeuzes = {};
+  RONDES.forEach(function(r){
+    Object.keys(keuzes[r.id]).forEach(function(id){
+      var m = keuzes[r.id][id];
+      alleKeuzes[id] = m && m.winner ? m.winner : "";
+    });
+  });
+
+  var finale = keuzes["F"]["F-1"];
+  var kampioen = finale && finale.winner ? finale.winner : "";
+
+  // Check volledigheid
+  var leeg = Object.values(alleKeuzes).filter(function(v){ return !v; }).length;
+  if (leeg > 0) {
+    var go = confirm("Je hebt nog "+leeg+" duel(s) niet ingevuld. Toch insturen?");
+    if (!go) return;
+  }
+
+  var payload = {
+    type: "knockout",
+    naam: fname + " " + lname,
+    tijdstip: new Date().toISOString(),
+    keuzes: alleKeuzes,
+    kampioen: kampioen
+  };
+
+  showStatus("Bezig met versturen…", "info");
+  try {
+    await fetch(API_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify(payload)
+    });
+    showStatus("✓ Knockout-pronostiek ontvangen!", "success");
+  } catch(e) {
+    showStatus("Fout bij verzending. Probeer opnieuw.", "danger");
+  }
+}
+
+function showStatus(msg, type) {
+  var el = document.getElementById("status");
+  el.className = type;
+  el.style.display = "block";
+  el.textContent = msg;
+}
+
+laadBracket();
+</script>
+</body>
+</html>
