@@ -604,7 +604,164 @@ footer {
   .nav-links a { padding: 5px 7px; font-size: 0.62rem; }
 }
 </style>
-<script defer>
+</head>
+<body>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html" class="active">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html" class="nav-placeholder">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
+
+<!-- ══ MASTHEAD ══ -->
+<header class="masthead">
+  <div class="masthead-top">
+    <!-- DS logo: typografisch gereconstrueerd in SVG -->
+    <div class="ds-logo">
+      <svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="De Standaard">
+        <rect width="180" height="44" fill="none"/>
+        <!-- Rode balk links, kenmerkend DS-element -->
+        <rect x="0" y="0" width="6" height="44" fill="#c8102e"/>
+        <!-- "De Standaard" in Playfair-stijl bold serif -->
+        <text x="14" y="32" font-family="'Playfair Display', Georgia, serif" font-size="26" font-weight="900" fill="#1a1410" letter-spacing="-0.5">De Standaard</text>
+      </svg>
+    </div>
+    <div class="masthead-meta">
+      <strong>WK 2026</strong> · Speciale editie<br>
+      11 juni – 19 juli 2026<br>
+      VS · Canada · Mexico
+    </div>
+  </div>
+
+  <div class="masthead-title-wrap">
+    <div class="masthead-eyebrow">Officieuze redactiepronostiek — intern gebruik</div>
+    <h1 class="masthead-h1">De grote <em>DS</em> WK Pronostiek</h1>
+    <p class="masthead-sub">72 groepswedstrijden · 1 winnaar</p>
+  </div>
+
+  <div class="masthead-rule">
+    <span></span>
+    <div class="octopus-wrap" >🐙</div>
+    <span></span>
+    <div class="octopus-wrap">⚽</div>
+    <span></span>
+    <div class="octopus-wrap">🏆</div>
+    <span></span>
+  </div>
+</header>
+
+<div class="page-body">
+
+<!-- ══ STAP 1 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <span class="section-label">Jouw naam</span>
+  </div>
+  <div class="name-grid">
+    <div class="field"><label for="fname">Voornaam</label><input type="text" id="fname" placeholder="Jan"></div>
+    <div class="field"><label for="lname">Achternaam</label><input type="text" id="lname" placeholder="Janssen"></div>
+  </div>
+</section>
+
+<!-- ══ STAP 2 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <span class="section-label">Randomizer</span>
+    <span class="section-badge">optioneel</span>
+  </div>
+  <div class="mode-grid" id="mode-grid"></div>
+  <div class="model-note" id="model-note">Selecteer een model om de methodologie te lezen.</div>
+  <div class="rand-actions">
+    <button class="btn btn-primary" id="gen-btn" onclick="generate()">⚄ Genereer scores</button>
+    <button class="btn" id="geen-model-btn" onclick="selecteerGeenModel()">✎ Manueel invullen</button>
+    <button class="btn" id="reroll-btn" style="display:none" onclick="generate()">↺ Opnieuw gooien</button>
+  </div>
+</section>
+
+<!-- ══ STAP 3 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <span class="section-label">Scores invullen</span>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span id="prog-text">0 van 72 wedstrijden ingevuld</span>
+      <span id="prog-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+  </div>
+  <div class="toggle-row">
+    <button onclick="toggleAll(false)">▾ Alles uitklappen</button>
+    <button onclick="toggleAll(true)">▴ Alles inklappen</button>
+  </div>
+  <div id="matches-container"></div>
+</section>
+
+<!-- ══ STAP 4 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <span class="section-label">Bonusvragen</span>
+  </div>
+  <div class="bonus-grid">
+    <div class="field bonus-field">
+      <label for="kampioen">🥇 Wereldkampioen 2026</label>
+      <input type="text" id="kampioen" placeholder="bv. België">
+    </div>
+    <div class="field bonus-field">
+      <label for="topscorer">⚽ Topscorer van het toernooi</label>
+      <input type="text" id="topscorer" placeholder="bv. Kylian Mbappé">
+    </div>
+    <div class="field bonus-field">
+      <label for="schifting">🎯 Schiftingsvraag 1 — totaal doelpunten in 104 wedstrijden (penalty's na verlengingen niet meegerekend)</label>
+      <input type="number" id="schifting" placeholder="bv. 156" min="0" max="600">
+      <div id="schifting-tip" style="font-size:0.8rem;font-family:var(--font-body);color:var(--ink2);background:var(--paper2);border-left:3px solid var(--red);padding:8px 12px;border-radius:0 var(--r) var(--r) 0;margin-top:8px;line-height:1.6;display:none"></div>
+    </div>
+    <div class="field bonus-field">
+      <label for="schifting2">📐 Schiftingsvraag 2 — wat is de verste afstand (in meter, afgerond) vanwaar gescoord wordt?</label>
+      <input type="number" id="schifting2" placeholder="bv. 47" min="1" max="100">
+      <div style="font-size:0.8rem;font-family:var(--font-body);color:var(--ink2);background:var(--paper2);border-left:3px solid var(--red);padding:8px 12px;border-radius:0 var(--r) var(--r) 0;margin-top:8px;line-height:1.6;">Tip: voor succesvolle aanvallen op het middenveld, één adres: Martelaarsplein 7.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAP 5 ══ -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <span class="section-label">Insturen</span>
+  </div>
+  <div class="submit-row">
+    <button class="btn btn-primary" onclick="submitForm()" style="font-size:0.9rem;padding:11px 28px">✈ Pronostiek insturen</button>
+    <div id="status"></div>
+  </div>
+</section>
+
+<!-- ══ STAND ══ -->
+<section class="section" id="stand-section">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <span class="section-label">Klassement groepsfase</span>
+  </div>
+  <div id="stand-placeholder" class="stand-placeholder">Vul wedstrijden in om de stand te zien.</div>
+  <div class="stand-grid" id="stand-grid" style="display:none"></div>
+  <div class="derde-ranking" id="derde-ranking" style="display:none">
+    <div class="derde-ranking-header">Ranking beste nummers 3 — top 8 gaan door (✓ = geplaatst · ? = onzeker)</div>
+    <table class="derde-table">
+      <thead><tr><th>#</th><th>Land</th><th>Gr</th><th>Pnt</th><th>DS</th><th>VG</th><th>W</th></tr></thead>
+      <tbody id="derde-body"></tbody>
+    </table>
+  </div>
+</section>
+
+</div><!-- .page-body -->
+
+<footer>
+  <div style="font-size:1.1rem;margin-bottom:.5rem">🐙</div>
+  De grote DS WK Pronostiek &nbsp;·&nbsp; WK 2026<br>
+  <span style="opacity:.6">Gegenereerd met Claude Sonnet 4.6 &nbsp;·&nbsp; Blijf vrij</span>
+</footer>
+
+
+<script>
 
 let selectedMode = null;
 
@@ -1279,162 +1436,5 @@ function selecteerGeenModel() {
   document.getElementById('reroll-btn').style.display = 'none';
 }
 </script>
-</head>
-<body>
-<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html" class="active">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html" class="nav-placeholder">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
-
-<!-- ══ MASTHEAD ══ -->
-<header class="masthead">
-  <div class="masthead-top">
-    <!-- DS logo: typografisch gereconstrueerd in SVG -->
-    <div class="ds-logo">
-      <svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="De Standaard">
-        <rect width="180" height="44" fill="none"/>
-        <!-- Rode balk links, kenmerkend DS-element -->
-        <rect x="0" y="0" width="6" height="44" fill="#c8102e"/>
-        <!-- "De Standaard" in Playfair-stijl bold serif -->
-        <text x="14" y="32" font-family="'Playfair Display', Georgia, serif" font-size="26" font-weight="900" fill="#1a1410" letter-spacing="-0.5">De Standaard</text>
-      </svg>
-    </div>
-    <div class="masthead-meta">
-      <strong>WK 2026</strong> · Speciale editie<br>
-      11 juni – 19 juli 2026<br>
-      VS · Canada · Mexico
-    </div>
-  </div>
-
-  <div class="masthead-title-wrap">
-    <div class="masthead-eyebrow">Officieuze redactiepronostiek — intern gebruik</div>
-    <h1 class="masthead-h1">De grote <em>DS</em> WK Pronostiek</h1>
-    <p class="masthead-sub">72 groepswedstrijden · 1 winnaar</p>
-  </div>
-
-  <div class="masthead-rule">
-    <span></span>
-    <div class="octopus-wrap" >🐙</div>
-    <span></span>
-    <div class="octopus-wrap">⚽</div>
-    <span></span>
-    <div class="octopus-wrap">🏆</div>
-    <span></span>
-  </div>
-</header>
-
-<div class="page-body">
-
-<!-- ══ STAP 1 ══ -->
-<section class="section">
-  <div class="section-head">
-    <span class="section-num">01</span>
-    <span class="section-label">Jouw naam</span>
-  </div>
-  <div class="name-grid">
-    <div class="field"><label for="fname">Voornaam</label><input type="text" id="fname" placeholder="Jan"></div>
-    <div class="field"><label for="lname">Achternaam</label><input type="text" id="lname" placeholder="Janssen"></div>
-  </div>
-</section>
-
-<!-- ══ STAP 2 ══ -->
-<section class="section">
-  <div class="section-head">
-    <span class="section-num">02</span>
-    <span class="section-label">Randomizer</span>
-    <span class="section-badge">optioneel</span>
-  </div>
-  <div class="mode-grid" id="mode-grid"></div>
-  <div class="model-note" id="model-note">Selecteer een model om de methodologie te lezen.</div>
-  <div class="rand-actions">
-    <button class="btn btn-primary" id="gen-btn" onclick="generate()">⚄ Genereer scores</button>
-    <button class="btn" id="geen-model-btn" onclick="selecteerGeenModel()">✎ Manueel invullen</button>
-    <button class="btn" id="reroll-btn" style="display:none" onclick="generate()">↺ Opnieuw gooien</button>
-  </div>
-</section>
-
-<!-- ══ STAP 3 ══ -->
-<section class="section">
-  <div class="section-head">
-    <span class="section-num">03</span>
-    <span class="section-label">Scores invullen</span>
-  </div>
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span id="prog-text">0 van 72 wedstrijden ingevuld</span>
-      <span id="prog-pct">0%</span>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
-  </div>
-  <div class="toggle-row">
-    <button onclick="toggleAll(false)">▾ Alles uitklappen</button>
-    <button onclick="toggleAll(true)">▴ Alles inklappen</button>
-  </div>
-  <div id="matches-container"></div>
-</section>
-
-<!-- ══ STAP 4 ══ -->
-<section class="section">
-  <div class="section-head">
-    <span class="section-num">04</span>
-    <span class="section-label">Bonusvragen</span>
-  </div>
-  <div class="bonus-grid">
-    <div class="field bonus-field">
-      <label for="kampioen">🥇 Wereldkampioen 2026</label>
-      <input type="text" id="kampioen" placeholder="bv. België">
-    </div>
-    <div class="field bonus-field">
-      <label for="topscorer">⚽ Topscorer van het toernooi</label>
-      <input type="text" id="topscorer" placeholder="bv. Kylian Mbappé">
-    </div>
-    <div class="field bonus-field">
-      <label for="schifting">🎯 Schiftingsvraag 1 — totaal doelpunten in 104 wedstrijden (penalty's na verlengingen niet meegerekend)</label>
-      <input type="number" id="schifting" placeholder="bv. 156" min="0" max="600">
-      <div id="schifting-tip" style="font-size:0.8rem;font-family:var(--font-body);color:var(--ink2);background:var(--paper2);border-left:3px solid var(--red);padding:8px 12px;border-radius:0 var(--r) var(--r) 0;margin-top:8px;line-height:1.6;display:none"></div>
-    </div>
-    <div class="field bonus-field">
-      <label for="schifting2">📐 Schiftingsvraag 2 — wat is de verste afstand (in meter, afgerond) vanwaar gescoord wordt?</label>
-      <input type="number" id="schifting2" placeholder="bv. 47" min="1" max="100">
-      <div style="font-size:0.8rem;font-family:var(--font-body);color:var(--ink2);background:var(--paper2);border-left:3px solid var(--red);padding:8px 12px;border-radius:0 var(--r) var(--r) 0;margin-top:8px;line-height:1.6;">Tip: voor succesvolle aanvallen op het middenveld, één adres: Martelaarsplein 7.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ STAP 5 ══ -->
-<section class="section">
-  <div class="section-head">
-    <span class="section-num">05</span>
-    <span class="section-label">Insturen</span>
-  </div>
-  <div class="submit-row">
-    <button class="btn btn-primary" onclick="submitForm()" style="font-size:0.9rem;padding:11px 28px">✈ Pronostiek insturen</button>
-    <div id="status"></div>
-  </div>
-</section>
-
-<!-- ══ STAND ══ -->
-<section class="section" id="stand-section">
-  <div class="section-head">
-    <span class="section-num">06</span>
-    <span class="section-label">Klassement groepsfase</span>
-  </div>
-  <div id="stand-placeholder" class="stand-placeholder">Vul wedstrijden in om de stand te zien.</div>
-  <div class="stand-grid" id="stand-grid" style="display:none"></div>
-  <div class="derde-ranking" id="derde-ranking" style="display:none">
-    <div class="derde-ranking-header">Ranking beste nummers 3 — top 8 gaan door (✓ = geplaatst · ? = onzeker)</div>
-    <table class="derde-table">
-      <thead><tr><th>#</th><th>Land</th><th>Gr</th><th>Pnt</th><th>DS</th><th>VG</th><th>W</th></tr></thead>
-      <tbody id="derde-body"></tbody>
-    </table>
-  </div>
-</section>
-
-</div><!-- .page-body -->
-
-<footer>
-  <div style="font-size:1.1rem;margin-bottom:.5rem">🐙</div>
-  De grote DS WK Pronostiek &nbsp;·&nbsp; WK 2026<br>
-  <span style="opacity:.6">Gegenereerd met Claude Sonnet 4.6 &nbsp;·&nbsp; Blijf vrij</span>
-</footer>
-
-
 </body>
 </html>
