@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Het grote DS WK Scorebord 2026</title>
+<title>Data-analyse — De grote DS WK Pronostiek 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --ink:#1a1410;--ink2:#3d3328;--muted:#8a7d6a;--muted2:#b5a990;
@@ -121,236 +122,72 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
 .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
 .nav-links a.active { background: var(--red); color: #fff; }
 @media(max-width:560px){ .nav-links a { padding: 5px 7px; font-size: 0.62rem; } }
+
+/* ── DATA PAGINA ── */
+.page-body { padding-top: 2rem; }
+.section { margin-bottom: 3rem; }
+.section-head { display:flex;align-items:baseline;gap:.75rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border); }
+.section-num { font-family:var(--font-mono);font-size:0.6rem;color:var(--red);font-weight:500;letter-spacing:.08em;border:1px solid var(--red);border-radius:3px;padding:1px 5px;flex-shrink:0; }
+.section-label { font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--ink); }
+.update-note { font-family:var(--font-mono);font-size:0.72rem;color:var(--muted);padding:8px 14px;background:var(--paper2);border-left:3px solid var(--gold);border-radius:0 var(--r) var(--r) 0;margin-bottom:1rem;line-height:1.5; }
+.chart-wrap { background:#fff;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow);text-align:center;padding:1rem; }
+.chart-img { max-width:100%;height:auto;display:block;margin:0 auto; }
+.chart-note { font-family:var(--font-mono);font-size:0.68rem;color:var(--muted);margin-top:.75rem;text-align:center; }
+.over-tekst { font-size:0.9rem;color:var(--ink2);line-height:1.7;margin-bottom:.75rem; }
+.placeholder-note { font-family:var(--font-mono);font-size:0.75rem;color:var(--muted);padding:3rem 1rem;text-align:center;background:var(--paper2);border-radius:var(--r); }
+
+
 </style>
 </head>
 <body>
 <nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html" class="active">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
 
-<header class="masthead">
-  <div class="masthead-top">
-    <div class="ds-logo">
-      <svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="De Standaard">
-        <rect width="180" height="44" fill="none"/>
-        <rect x="0" y="0" width="6" height="44" fill="#c8102e"/>
-        <text x="14" y="32" font-family="'Playfair Display',Georgia,serif" font-size="26" font-weight="900" fill="#1a1410" letter-spacing="-0.5">De Standaard</text>
-      </svg>
-    </div>
-    <div class="masthead-meta">
-      <strong>WK 2026</strong> · Scorebord<br>
-      11 juni – 19 juli 2026<br>
-      <span id="last-update">Laden…</span>
-    </div>
-  </div>
-  <div class="masthead-title-wrap">
-    <div class="masthead-eyebrow">Officieuze redactiepronostiek — intern gebruik</div>
-    <h1 class="masthead-h1">De grote <em>DS</em> WK Data-analyse</h1>
-    <p class="masthead-sub">Live ranglijst · automatisch bijgewerkt</p>
-  </div>
-  <div class="masthead-rule">
-    <span></span><div class="oct">🐙</div><span></span><div class="oct">⚽</div><span></span><div class="oct">🏆</div><span></span>
-  </div>
-</header>
+<div class="page-body">
 
-<div style="text-align:center;padding:4rem 1rem;font-family:var(--font-mono);color:var(--muted)">
-  <div style="font-size:3rem;margin-bottom:1rem">📊</div>
-  <div style="font-size:1rem;font-family:var(--font-head);font-weight:700;color:var(--ink);margin-bottom:.5rem">Data-analyse</div>
-  <div style="font-size:0.8rem">Data-analyse is beschikbaar na speeldag 1.</div>
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-label">Grootste kanshebber per model</span>
+    </div>
+    <div class="chart-wrap">
+      <img src="mc_kansen_winnen.png" alt="Grootste kanshebber per model" class="chart-img" onerror="this.parentElement.innerHTML=plaatshouder('mc_kansen_winnen.png')">
+    </div>
+    <p class="chart-note">10.000 Monte Carlo simulaties per model · groepsfase + volledige knock-outfase</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-label">Kans België om kampioen te worden</span>
+    </div>
+    <div class="chart-wrap">
+      <img src="mc_belgie_kampioen.png" alt="Kans België om kampioen te worden" class="chart-img" onerror="this.parentElement.innerHTML=plaatshouder('mc_belgie_kampioen.png')">
+    </div>
+    <p class="chart-note">Kans per model · 10.000 Monte Carlo simulaties</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <span class="section-label">Meer analyses</span>
+    </div>
+    <div class="update-note">
+      ⏳ Update verwacht na speeldag 1 (14 juni 2026)
+    </div>
+  </section>
+
 </div>
 
 <footer>
   <div style="font-size:1.1rem;margin-bottom:.5rem">🐙</div>
-  Het grote DS WK Scorebord 2026<br>
+  De grote DS WK Data-analyse 2026<br>
   <span style="opacity:.6">Gegenereerd met Claude Sonnet 4.6 · Blijf vrij</span>
 </footer>
 
 <script>
-const SCOREBORD_URL = "https://script.google.com/macros/s/AKfycbxIBSYYVlf1ixg9mwtkF7_cNvYPvx82UeHinUC3PPAvo5svsvjfUpHEz0d_WczFG0NH/exec";
-
-const KAMPIOEN_VLAG = {
-  "Frankrijk":"🇫🇷","Spanje":"🇪🇸","Argentinië":"🇦🇷","Engeland":"🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-  "Portugal":"🇵🇹","Brazilië":"🇧🇷","Nederland":"🇳🇱","Marokko":"🇲🇦",
-  "België":"🇧🇪","Duitsland":"🇩🇪","Kroatië":"🇭🇷","Italië":"🇮🇹",
-  "Colombia":"🇨🇴","Senegal":"🇸🇳","Mexico":"🇲🇽","VS":"🇺🇸",
-  "Uruguay":"🇺🇾","Japan":"🇯🇵","Zwitserland":"🇨🇭","Ecuador":"🇪🇨",
-  "Australië":"🇦🇺","Zuid-Korea":"🇰🇷","Iran":"🇮🇷","Schotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿",
-  "Tsjechië":"🇨🇿","Bosnië":"🇧🇦","Oekraïne":"🇺🇦","Panama":"🇵🇦",
-  "Noorwegen":"🇳🇴","Ivoorkust":"🇨🇮","Saudi-Arabië":"🇸🇦","Paraguay":"🇵🇾",
-  "Ghana":"🇬🇭","Turkije":"🇹🇷","Oostenrijk":"🇦🇹","Egypte":"🇪🇬",
-  "Algerije":"🇩🇿","Tunesië":"🇹🇳","Haïti":"🇭🇹","Kaapverdië":"🇨🇻",
-  "Jordanië":"🇯🇴","Oezbekistan":"🇺🇿","Congo DR":"🇨🇩","Nieuw-Zeeland":"🇳🇿",
-  "Irak":"🇮🇶","Curaçao":"🇨🇼","Zuid-Afrika":"🇿🇦","Qatar":"🇶🇦",
-  "Canada":"🇨🇦","Vlaanderen":"🇧🇪"
-};
-
-const MODEL_LABELS = {
-  random:"Gokken zoals Didier",fifa:"FIFA ranking",historisch:"De geschiedenis herhaalt zich",
-  god:"Statistiek",bbp:"De onzichtbare hand",bier:"🍺",
-  choco:"Ze smelten de paashaas",maximus:"Maximus",manueel:"Manueel"
-};
-
-var huidigTab = "totaal";
-var data = null;
-
-function vlag(land){ return KAMPIOEN_VLAG[land] || "🏳️"; }
-function modelLabel(m){ return MODEL_LABELS[m] || m; }
-
-function laadData() {
-  document.getElementById("last-update").textContent = "Laden…";
-  // Verwijder vorige JSONP script tag
-  var old = document.getElementById("jsonp-script");
-  if (old) old.parentNode.removeChild(old);
-  // JSONP callback
-  window.__scorebordCallback = function(result) {
-    data = result;
-    renderAlles();
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("content").style.display = "block";
-    document.getElementById("last-update").textContent =
-      "Bijgewerkt: " + new Date().toLocaleTimeString("nl-BE");
-  };
-  var script = document.createElement("script");
-  script.id = "jsonp-script";
-  script.src = SCOREBORD_URL + "?actie=scorebord&callback=__scorebordCallback";
-  script.onerror = function() {
-    document.getElementById("loading").textContent = "Fout bij laden. Controleer de SCOREBORD_URL.";
-  };
-  document.body.appendChild(script);
+function plaatshouder(naam) {
+  return '<div class="placeholder-note">📊 ' + naam + ' wordt hier getoond zodra de PNG geüpload is naar GitHub.</div>';
 }
-
-function renderAlles() {
-  if (!data || !data.deelnemers) return;
-  var d = data.deelnemers;
-  document.getElementById("stat-gespeeld").textContent = data.meta.aantalGespeeld || 0;
-  document.getElementById("stat-deelnemers").textContent = d.length;
-  renderPodium(d);
-  renderRanglijst(d, huidigTab);
-  renderPuntensysteem(data.meta.puntensysteem);
-  renderLiveStats(data.meta);
-}
-
-function renderPodium(d) {
-  var el = document.getElementById("podium");
-  if (d.length === 0) { el.innerHTML = "<p style='font-family:var(--font-mono);font-size:.75rem;color:var(--muted)'>Nog geen deelnemers.</p>"; return; }
-
-  var top = d.slice(0, Math.min(3, d.length));
-  var volgorde = top.length === 1 ? [0] : top.length === 2 ? [1,0] : [1,0,2];
-  var klassen  = ["zilver","goud","brons"];
-  var medailles = ["🥈","🥇","🥉"];
-  var ranken    = [2,1,3];
-
-  el.innerHTML = volgorde.map(function(i) {
-    if (!top[i]) return "";
-    var kl = klassen[volgorde.indexOf(i)];
-    var rank = ranken[volgorde.indexOf(i)];
-    return '<div class="podium-item">' +
-      '<div class="podium-medal">' + medailles[volgorde.indexOf(i)] + '</div>' +
-      '<div class="podium-naam">' + top[i].naam + '</div>' +
-      '<div class="podium-kampioen">' + vlag(top[i].kampioen) + '</div>' +
-      '<div class="podium-block ' + kl + '"><span class="podium-rank">' + rank + '</span></div>' +
-      '<div class="podium-pts">' + top[i].ptn.totaal + ' pt</div>' +
-      '</div>';
-  }).join("");
-}
-
-function toonTab(tab, btn) {
-  huidigTab = tab;
-  document.querySelectorAll(".tab").forEach(function(b){ b.classList.remove("active"); });
-  btn.classList.add("active");
-  if (data) renderRanglijst(data.deelnemers, tab);
-}
-
-function renderRanglijst(d, tab) {
-  var cols = {
-    totaal:    {label:"Totaal",    fn:function(x){return x.ptn.totaal}},
-    groep:     {label:"Voorrondes",fn:function(x){return x.ptn.groep}},
-    sd1:       {label:"Speeldag 1",fn:function(x){return x.ptn.sd1}},
-    sd2:       {label:"Speeldag 2",fn:function(x){return x.ptn.sd2}},
-    sd3:       {label:"Speeldag 3",fn:function(x){return x.ptn.sd3}},
-    kwalificatie: {label:"Kwalificatie",fn:function(x){return x.ptn.doorkomer||0}},
-    bonus:     {label:"Bonus",     fn:function(x){return x.ptn.bonus}},
-    knockout:  {label:"Knockout",   fn:function(x){return x.ptn.knockout||0}}
-  };
-
-  // Sorteer op geselecteerde kolom
-  var sorted = d.slice().sort(function(a,b){ return cols[tab].fn(b) - cols[tab].fn(a); });
-
-  document.getElementById("rang-head").innerHTML =
-    "<tr><th>#</th><th>Deelnemer</th><th>🏆</th>" +
-    "<th>" + cols[tab].label + "</th>" +
-    (tab==="totaal" ? "<th>Voorrondes</th><th>Kwalificatie</th><th>Bonus</th>" : "") +
-    "</tr>";
-
-  document.getElementById("rang-body").innerHTML = sorted.map(function(p, i) {
-    var rowClass = i===0 ? "top1" : i<3 ? "top3" : "";
-    var pts = cols[tab].fn(p);
-    return "<tr class='" + rowClass + "'>" +
-      "<td>" + (i+1) + "</td>" +
-      "<td>" + p.naam +
-        "<span class='model-badge'>" + modelLabel(p.model) + "</span></td>" +
-      "<td>" + vlag(p.kampioen) + "</td>" +
-      "<td class='pts-highlight'>" + pts + "</td>" +
-      (tab==="totaal" ?
-        "<td>" + p.ptn.groep + "</td>" +
-        "<td>" + (p.ptn.doorkomer||0) + "</td>" +
-        "<td>" + p.ptn.bonus + "</td>" : "") +
-      "</tr>";
-  }).join("");
-}
-
-function renderLiveStats(meta) {
-  document.getElementById("stat-doelpunten").textContent =
-    meta.totaalDoelpunten > 0 ? meta.totaalDoelpunten : "—";
-  document.getElementById("stat-schot").textContent =
-    meta.versteSchot > 0 ? meta.versteSchot + " m" : "—";
-
-  var ts = meta.topscorers || [];
-  if (ts.length === 0) {
-    document.getElementById("stat-topscorers").textContent = "—";
-    return;
-  }
-  // Toon top 3, inclusief ties
-  var top3 = [];
-  var prevGoals = -1;
-  var rank = 0;
-  ts.forEach(function(p, i) {
-    if (p.goals !== prevGoals) { rank = top3.length + 1; prevGoals = p.goals; }
-    if (rank <= 3) top3.push(p);
-  });
-  document.getElementById("stat-topscorers").innerHTML = top3.map(function(p){
-    return "<strong>" + p.naam + "</strong> <span style='color:var(--muted);font-size:.75rem'>" +
-      p.land + " · " + p.goals + " goals" +
-      (p.assists ? " · " + p.assists + " ass." : "") + "</span>";
-  }).join("<br>");
-}
-
-function renderPuntensysteem(ps) {
-  if (!ps) return;
-  var items = [
-    {l:"Juiste uitslag",       v:ps.uitslag},
-    {l:"Juiste score",         v:ps.score},
-    {l:"Groepswinnaar",        v:ps.groepswinnaar},
-    {l:"Nummer 2",             v:ps.nummer2},
-    {l:"Beste derde",          v:ps.besteDerde},
-    {l:"Kampioen (groep)",     v:ps.kampioen},
-    {l:"Topscorer",            v:ps.topscorer},
-    {l:"Schiftingen",          v:"tiebreaker"},
-    {l:"R32 winnaar",          v:ps.koR32||3},
-    {l:"R16 winnaar",          v:ps.koR16||5},
-    {l:"Kwartfinalist",        v:ps.koQF||6},
-    {l:"Halvefinalist",        v:ps.koSF||9},
-    {l:"Finalist",             v:ps.koFinale||15},
-    {l:"Kampioen (knockout)",  v:ps.koKampioen||20}
-  ];
-  document.getElementById("pts-systeem").innerHTML = items.map(function(x){
-    return "<div class='pts-card'>" +
-      "<div class='pts-card-label'>" + x.l + "</div>" +
-      "<div class='pts-card-val'>" + x.v + (typeof x.v==="number"?" pt":"") + "</div>" +
-      "</div>";
-  }).join("");
-}
-
-laadData();
-setInterval(laadData, 60000); // automatisch vernieuwen elke minuut
 </script>
 </body>
 </html>
