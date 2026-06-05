@@ -494,7 +494,6 @@ function renderPuntensysteem(ps) {
     {l:"── Bonus ──", v:"", header:true},
     {l:"Kampioen (voorspeld in groepsfase)", v:ps.kampioen},
     {l:"Topscorer",            v:ps.topscorer},
-    {l:"Schiftingen",          v:"tiebreaker"}
   ];
   document.getElementById("pts-systeem").innerHTML = items.map(function(x){
     if (x.header) return "<div style='grid-column:1/-1;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:8px 0 2px;border-bottom:1px solid var(--border);margin-top:4px'>" + x.l.replace(/──\s*/g,'').replace(/\s*──/g,'') + "</div>";
