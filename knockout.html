@@ -53,8 +53,8 @@ input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(200,1
 input::placeholder{color:var(--muted2);font-style:italic}
 
 /* BRACKET */
-.bracket-wrap{overflow-x:auto;padding-bottom:1rem}
-.bracket{display:flex;gap:0;align-items:stretch;min-width:800px}
+.tabel-wrap{overflow-x:auto;padding-bottom:1rem}
+.tabel{display:flex;gap:0;align-items:stretch;min-width:800px}
 .ronde{display:flex;flex-direction:column;flex:1;min-width:140px}
 .ronde-title{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;padding:6px 0 10px;border-bottom:1px solid var(--border);margin-bottom:8px}
 .ronde-duels{display:flex;flex-direction:column;flex:1;justify-content:space-around;gap:6px;padding:0 4px}
@@ -158,7 +158,7 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
 </style>
 </head>
 <body>
-<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html" class="active">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html" class="nav-placeholder">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html" class="active">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
 
 <header class="masthead">
   <div class="masthead-top">
@@ -177,14 +177,14 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
   <div class="masthead-title-wrap">
     <div class="masthead-eyebrow">Officieuze redactiepronostiek — intern gebruik</div>
     <h1 class="masthead-h1">De grote <em>DS</em> WK Pronostiek<br><em>Knockout-fase</em></h1>
-    <p class="masthead-sub">Wie gaat er door? Voorspel het volledige bracket.</p>
+    <p class="masthead-sub">Wie gaat er door? Voorspel het volledige tabel.</p>
   </div>
   <div class="masthead-rule">
     <span></span><div class="oct">🐙</div><span></span><div class="oct">⚽</div><span></span><div class="oct">🏆</div><span></span>
   </div>
 </header>
 
-<div id="loading" class="loading">Bracket laden…</div>
+<div id="loading" class="loading">Tabel laden…</div>
 <div id="content" style="display:none">
 
   <!-- STAP 1: NAAM -->
@@ -198,7 +198,7 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
 
   <!-- STAP 2: BRACKET -->
   <section class="section">
-    <div class="section-head"><span class="section-num">02</span><span class="section-label">Bracket</span></div>
+    <div class="section-head"><span class="section-num">02</span><span class="section-label">Tabel</span></div>
     <div class="banner">Klik op een team om hen te laten doorgaan. De winnaar schuift automatisch door naar de volgende ronde.</div>
     <div class="progress-wrap">
       <div class="progress-label">
@@ -207,8 +207,8 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
       </div>
       <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
     </div>
-    <div class="bracket-wrap">
-      <div class="bracket" id="bracket"></div>
+    <div class="tabel-wrap">
+      <div class="tabel" id="tabel"></div>
     </div>
   </section>
 
@@ -218,7 +218,7 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
     <div class="kampioen-display" id="kampioen-display">
       <div class="kampioen-trophy">🏆</div>
       <div class="kampioen-naam" id="kampioen-naam">Nog niet bepaald</div>
-      <div class="kampioen-label">Wordt bepaald door jouw bracket</div>
+      <div class="kampioen-label">Wordt bepaald door jouw tabel</div>
     </div>
   </section>
 
@@ -242,9 +242,9 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbxIBSYYVlf1ixg9mwtkF7_cNvYPvx82UeHinUC3PPAvo5svsvjfUpHEz0d_WczFG0NH/exec";
 
-// Bracket state: keuzes[rondeId][matchId] = gekozen team
+// Tabel state: keuzes[rondeId][matchId] = gekozen team
 var keuzes = {};
-var bracketData = null;
+var tabelData = null;
 
 // Rondes definitie
 var RONDES = [
@@ -255,18 +255,18 @@ var RONDES = [
   {id:"F",   label:"Finale",         matches:1,  volgende:null}
 ];
 
-async function laadBracket() {
+async function laadTabel() {
   try {
-    const r = await fetch(API_URL + "?actie=bracket");
-    bracketData = await r.json();
+    const r = await fetch(API_URL + "?actie=tabel");
+    tabelData = await r.json();
 
-    if (!bracketData.groepsvolledig) {
+    if (!tabelData.groepsvolledig) {
       document.getElementById("loading").textContent =
         "De groepsfase is nog niet volledig gespeeld. Dit formulier wordt beschikbaar zodra alle uitslagen bekend zijn.";
       return;
     }
 
-    initBracket(bracketData.r32);
+    initTabel(tabelData.r32);
     document.getElementById("loading").style.display = "none";
     document.getElementById("content").style.display = "block";
   } catch(e) {
@@ -275,14 +275,14 @@ async function laadBracket() {
   }
 }
 
-function initBracket(r32) {
+function initTabel(r32) {
   // Initialiseer keuzes voor alle rondes
   RONDES.forEach(function(r){
     keuzes[r.id] = {};
     for(var i=1;i<=r.matches;i++) keuzes[r.id][r.id+"-"+i] = null;
   });
 
-  // Vul R32 teams in vanuit de bracket data
+  // Vul R32 teams in vanuit de tabel data
   r32.forEach(function(m){
     keuzes["R32"][m.id] = {t1: m.t1, t2: m.t2, winner: null};
   });
@@ -296,11 +296,11 @@ function initBracket(r32) {
     }
   });
 
-  renderBracket();
+  renderTabel();
 }
 
-function renderBracket() {
-  var container = document.getElementById("bracket");
+function renderTabel() {
+  var container = document.getElementById("tabel");
   container.innerHTML = "";
 
   RONDES.forEach(function(ronde) {
@@ -356,7 +356,7 @@ function kiesWinnaar(matchId, team) {
 
   // Propageer naar volgende ronde
   propageer(ronde, matchId, oudeWinnaar, team);
-  renderBracket();
+  renderTabel();
 }
 
 function propageer(ronde, matchId, oudeWinnaar, nieuweWinnaar) {
@@ -468,7 +468,7 @@ function showStatus(msg, type) {
   el.textContent = msg;
 }
 
-laadBracket();
+laadTabel();
 </script>
 </body>
 </html>

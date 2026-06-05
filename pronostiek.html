@@ -606,7 +606,7 @@ footer {
 </style>
 </head>
 <body>
-<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html" class="active">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html" class="nav-placeholder">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html" class="active">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
 
 <!-- ══ MASTHEAD ══ -->
 <header class="masthead">
@@ -711,7 +711,7 @@ footer {
       <input type="text" id="topscorer" placeholder="bv. Kylian Mbappé">
     </div>
     <div class="field bonus-field">
-      <label for="schifting">🎯 Schiftingsvraag 1 — totaal doelpunten in alle 104 wedstrijden (penalty's na verlengingen niet meegerekend)</label>
+      <label for="schifting">🎯 Schiftingsvraag 1 — totaal doelpunten in 104 wedstrijden (penalty's na verlengingen niet meegerekend)</label>
       <input type="number" id="schifting" placeholder="bv. 156" min="0" max="600">
       <div id="schifting-tip" style="font-size:0.8rem;font-family:var(--font-body);color:var(--ink2);background:var(--paper2);border-left:3px solid var(--red);padding:8px 12px;border-radius:0 var(--r) var(--r) 0;margin-top:8px;line-height:1.6;display:none"></div>
     </div>
@@ -774,11 +774,11 @@ const FIFA = {
   "Colombia":1693,"Senegal":1689,"Mexico":1681,"VS":1673,
   "Uruguay":1673,"Japan":1660,"Zwitserland":1649,"Ecuador":1580,
   "Australië":1560,"Zuid-Korea":1555,"Iran":1530,"Schotland":1525,
-  "Tsjechië":1510,"Bosnië":1490,"Oekraïne":1485,"Panama":1470,
-  "Noorwegen":1465,"Ivoorkust":1455,"Saudi-Arabië":1450,"Paraguay":1445,
+  "Tsjechië":1510,"Bosnië":1490,"Zweden":1485,"Panama":1470,
+  "Noorwegen":1465,"Ivoorkust":1455,"Saoedi-Arabië":1450,"Paraguay":1445,
   "Ghana":1430,"Turkije":1415,"Oostenrijk":1410,"Egypte":1400,
   "Algerije":1390,"Tunesië":1380,"Haïti":1200,"Kaapverdië":1195,
-  "Jordanië":1185,"Oezbekistan":1175,"Congo DR":1165,
+  "Jordanië":1185,"Oezbekistan":1175,"DR Congo":1165,
   "Nieuw-Zeeland":1160,"Irak":1150,"Curaçao":1130,"Zuid-Afrika":1125,
   "Qatar":1320,"Canada":1560
 };
@@ -790,27 +790,27 @@ const BBP = {
   "Kroatië":21000,"Portugal":24000,"Japan":33000,"Zuid-Korea":33000,
   "Uruguay":16000,"Argentinië":12000,"Brazilië":8800,"Colombia":6500,
   "Mexico":9500,"Ecuador":5600,"Paraguay":5200,"Panama":14000,
-  "Saudi-Arabië":26000,"Iran":3600,"Jordanië":4500,"Irak":5000,
+  "Saoedi-Arabië":26000,"Iran":3600,"Jordanië":4500,"Irak":5000,
   "Marokko":3400,"Egypte":3500,"Tunesië":3800,"Algerije":4000,
-  "Senegal":1600,"Ghana":2400,"Ivoorkust":2300,"Congo DR":550,
+  "Senegal":1600,"Ghana":2400,"Ivoorkust":2300,"DR Congo":550,
   "Zuid-Afrika":6000,"Kaapverdië":3500,"Nieuw-Zeeland":44000,
   "Schotland":44000,"Qatar":62000,"Canada":52000,"Haïti":1700,
-  "Bosnië":8000,"Oekraïne":4200,"Curaçao":18000,"Oezbekistan":2100,
+  "Bosnië":8000,"Zweden":4200,"Curaçao":18000,"Oezbekistan":2100,
   "Turkije":11000,"Tsjechië":26000,"Noord-Ierland":30000
 };
 
 const BIER = {
   "Tsjechië":188,"Oostenrijk":100,"Duitsland":99,"Haïti":85,
   "Noorwegen":82,"Schotland":80,"Kroatië":78,"Bosnië":75,
-  "Australië":74,"België":73,"Nederland":72,"Oekraïne":70,
+  "Australië":74,"België":73,"Nederland":72,"Zweden":70,
   "VS":70,"Polen":68,"Engeland":67,"Japan":67,"Portugal":64,
   "Zwitserland":63,"Nieuw-Zeeland":63,"Zuid-Afrika":60,"Spanje":57,
   "Ecuador":55,"Mexico":55,"Brazilië":54,"Colombia":52,"Panama":50,
   "Paraguay":48,"Argentinië":46,"Uruguay":45,"Zuid-Korea":46,
   "Curaçao":40,"Turkije":18,"Kaapverdië":28,"Ivoorkust":22,
-  "Ghana":22,"Congo DR":20,"Oezbekistan":12,"Senegal":12,
+  "Ghana":22,"DR Congo":20,"Oezbekistan":12,"Senegal":12,
   "Egypte":6,"Tunesië":5,"Marokko":4,"Algerije":3,"Jordanië":3,
-  "Saudi-Arabië":1,"Qatar":2,"Iran":1,"Irak":1,"Frankrijk":35,
+  "Saoedi-Arabië":1,"Qatar":2,"Iran":1,"Irak":1,"Frankrijk":35,
   "Italië":38,"Canada":75
 };
 
@@ -821,12 +821,12 @@ const CHOCO = {
   "Italië":4.5,"Portugal":4.2,"Canada":4.0,"Tsjechië":4.0,
   "Nieuw-Zeeland":4.5,"Japan":3.8,"Brazilië":3.2,"Argentinië":3.0,
   "Uruguay":2.8,"Zuid-Korea":2.6,"Mexico":2.4,"Colombia":2.2,
-  "Oekraïne":2.0,"Ecuador":1.8,"Paraguay":1.5,"Bosnië":1.5,
+  "Zweden":2.0,"Ecuador":1.8,"Paraguay":1.5,"Bosnië":1.5,
   "Turkije":1.5,"Zuid-Afrika":1.4,"Panama":1.2,"Ghana":0.9,
   "Ivoorkust":0.8,"Senegal":0.5,"Marokko":0.5,"Egypte":0.5,
-  "Tunesië":0.5,"Algerije":0.4,"Saudi-Arabië":0.3,"Iran":0.3,
+  "Tunesië":0.5,"Algerije":0.4,"Saoedi-Arabië":0.3,"Iran":0.3,
   "Jordanië":0.3,"Irak":0.2,"Kaapverdië":0.3,"Haïti":0.2,
-  "Congo DR":0.2,"Oezbekistan":0.3,"Curaçao":0.5,"Qatar":0.2,
+  "DR Congo":0.2,"Oezbekistan":0.3,"Curaçao":0.5,"Qatar":0.2,
   "Frankrijk":5.0
 };
 
@@ -838,10 +838,10 @@ const WC_FREQ = {
   "Japan":1.3,"Zuid-Korea":1.2,"Ecuador":1.1,"Australië":1.1,
   "Ghana":1.1,"Zwitserland":1.3,"Iran":1.1,"Tunesië":1.0,
   "Algerije":1.1,"Ivoorkust":1.1,"Noorwegen":1.0,"Schotland":0.9,
-  "Egypte":0.9,"Saudi-Arabië":1.0,"Qatar":0.8,"Tsjechië":1.1,
-  "Bosnië":0.9,"Oekraïne":1.0,"Panama":0.9,"Paraguay":1.0,
+  "Egypte":0.9,"Saoedi-Arabië":1.0,"Qatar":0.8,"Tsjechië":1.1,
+  "Bosnië":0.9,"Zweden":1.0,"Panama":0.9,"Paraguay":1.0,
   "Zuid-Afrika":1.0,"Kaapverdië":0.7,"Jordanië":0.7,"Haïti":0.7,
-  "Oezbekistan":0.7,"Congo DR":0.8,"Curaçao":0.6,"Irak":0.8,
+  "Oezbekistan":0.7,"DR Congo":0.8,"Curaçao":0.6,"Irak":0.8,
   "Nieuw-Zeeland":0.7,"Turkije":1.1,"Canada":0.9,"Oostenrijk":1.1
 };
 
@@ -871,101 +871,101 @@ function sampleHistoricalScore() {
 }
 
 const GROUPS = [
-  {letter:"A",teams:"Mexico · Zuid-Korea · Zuid-Afrika · Tsjechië",matches:[
-    {id:"A1",home:"Mexico",away:"Zuid-Afrika"},
-    {id:"A2",home:"Zuid-Korea",away:"Tsjechië"},
-    {id:"A3",home:"Tsjechië",away:"Zuid-Afrika"},
-    {id:"A4",home:"Mexico",away:"Zuid-Korea"},
-    {id:"A5",home:"Mexico",away:"Tsjechië"},
-    {id:"A6",home:"Zuid-Afrika",away:"Zuid-Korea"}
+  {letter:"A",teams:"Mexico · Zuid-Afrika · Zuid-Korea · Tsjechië",matches:[
+    {id:"A1",sd:1,home:"Mexico",away:"Zuid-Afrika"},
+    {id:"A2",sd:1,home:"Zuid-Korea",away:"Tsjechië"},
+    {id:"A3",sd:2,home:"Tsjechië",away:"Zuid-Afrika"},
+    {id:"A4",sd:2,home:"Mexico",away:"Zuid-Korea"},
+    {id:"A5",sd:3,home:"Tsjechië",away:"Mexico"},
+    {id:"A6",sd:3,home:"Zuid-Afrika",away:"Zuid-Korea"}
   ]},
-  {letter:"B",teams:"Canada · Zwitserland · Qatar · Italië/Bosnië/Wales/N-Ierland",matches:[
-    {id:"B1",home:"Canada",away:"Bosnië"},
-    {id:"B2",home:"Qatar",away:"Zwitserland"},
-    {id:"B3",home:"Zwitserland",away:"Bosnië"},
-    {id:"B4",home:"Canada",away:"Qatar"},
-    {id:"B5",home:"Zwitserland",away:"Canada"},
-    {id:"B6",home:"Bosnië",away:"Qatar"}
+  {letter:"B",teams:"Canada · Bosnië · Qatar · Zwitserland",matches:[
+    {id:"B1",sd:1,home:"Canada",away:"Bosnië"},
+    {id:"B2",sd:1,home:"Qatar",away:"Zwitserland"},
+    {id:"B3",sd:2,home:"Zwitserland",away:"Bosnië"},
+    {id:"B4",sd:2,home:"Canada",away:"Qatar"},
+    {id:"B5",sd:3,home:"Zwitserland",away:"Canada"},
+    {id:"B6",sd:3,home:"Bosnië",away:"Qatar"}
   ]},
-  {letter:"C",teams:"Brazilië · Marokko · Schotland · Haïti",matches:[
-    {id:"C1",home:"Brazilië",away:"Marokko"},
-    {id:"C2",home:"Haïti",away:"Schotland"},
-    {id:"C3",home:"Schotland",away:"Marokko"},
-    {id:"C4",home:"Brazilië",away:"Haïti"},
-    {id:"C5",home:"Schotland",away:"Brazilië"},
-    {id:"C6",home:"Marokko",away:"Haïti"}
+  {letter:"C",teams:"Brazilië · Marokko · Haïti · Schotland",matches:[
+    {id:"C1",sd:1,home:"Brazilië",away:"Marokko"},
+    {id:"C2",sd:1,home:"Haïti",away:"Schotland"},
+    {id:"C3",sd:2,home:"Schotland",away:"Marokko"},
+    {id:"C4",sd:2,home:"Brazilië",away:"Haïti"},
+    {id:"C5",sd:3,home:"Schotland",away:"Brazilië"},
+    {id:"C6",sd:3,home:"Marokko",away:"Haïti"}
   ]},
-  {letter:"D",teams:"VS · Australië · Paraguay · Turkije/Roemenië/Slowakije",matches:[
-    {id:"D1",home:"VS",away:"Paraguay"},
-    {id:"D2",home:"Australië",away:"Turkije"},
-    {id:"D3",home:"VS",away:"Australië"},
-    {id:"D4",home:"Turkije",away:"Paraguay"},
-    {id:"D5",home:"Turkije",away:"VS"},
-    {id:"D6",home:"Paraguay",away:"Australië"}
+  {letter:"D",teams:"VS · Paraguay · Australië · Turkije",matches:[
+    {id:"D1",sd:1,home:"VS",away:"Paraguay"},
+    {id:"D2",sd:1,home:"Australië",away:"Turkije"},
+    {id:"D3",sd:2,home:"VS",away:"Australië"},
+    {id:"D4",sd:2,home:"Turkije",away:"Paraguay"},
+    {id:"D5",sd:3,home:"Turkije",away:"VS"},
+    {id:"D6",sd:3,home:"Paraguay",away:"Australië"}
   ]},
-  {letter:"E",teams:"Duitsland · Ecuador · Ivoorkust · Curaçao",matches:[
-    {id:"E1",home:"Duitsland",away:"Curaçao"},
-    {id:"E2",home:"Ivoorkust",away:"Ecuador"},
-    {id:"E3",home:"Duitsland",away:"Ivoorkust"},
-    {id:"E4",home:"Ecuador",away:"Curaçao"},
-    {id:"E5",home:"Ecuador",away:"Duitsland"},
-    {id:"E6",home:"Curaçao",away:"Ivoorkust"}
+  {letter:"E",teams:"Duitsland · Curaçao · Ivoorkust · Ecuador",matches:[
+    {id:"E1",sd:1,home:"Duitsland",away:"Curaçao"},
+    {id:"E2",sd:1,home:"Ivoorkust",away:"Ecuador"},
+    {id:"E3",sd:2,home:"Duitsland",away:"Ivoorkust"},
+    {id:"E4",sd:2,home:"Ecuador",away:"Curaçao"},
+    {id:"E5",sd:3,home:"Ecuador",away:"Duitsland"},
+    {id:"E6",sd:3,home:"Curaçao",away:"Ivoorkust"}
   ]},
-  {letter:"F",teams:"Nederland · Japan · Tunesië · Oekraïne/Zweden/Polen",matches:[
-    {id:"F1",home:"Nederland",away:"Japan"},
-    {id:"F2",home:"Oekraïne",away:"Tunesië"},
-    {id:"F3",home:"Nederland",away:"Oekraïne"},
-    {id:"F4",home:"Tunesië",away:"Japan"},
-    {id:"F5",home:"Japan",away:"Oekraïne"},
-    {id:"F6",home:"Tunesië",away:"Nederland"}
+  {letter:"F",teams:"Nederland · Japan · Zweden · Tunesië",matches:[
+    {id:"F1",sd:1,home:"Nederland",away:"Japan"},
+    {id:"F2",sd:1,home:"Zweden",away:"Tunesië"},
+    {id:"F3",sd:2,home:"Nederland",away:"Zweden"},
+    {id:"F4",sd:2,home:"Tunesië",away:"Japan"},
+    {id:"F5",sd:3,home:"Japan",away:"Zweden"},
+    {id:"F6",sd:3,home:"Tunesië",away:"Nederland"}
   ]},
-  {letter:"G",teams:"België · Iran · Egypte · Nieuw-Zeeland",matches:[
-    {id:"G1",home:"België",away:"Egypte"},
-    {id:"G2",home:"Iran",away:"Nieuw-Zeeland"},
-    {id:"G3",home:"België",away:"Iran"},
-    {id:"G4",home:"Nieuw-Zeeland",away:"Egypte"},
-    {id:"G5",home:"Egypte",away:"Iran"},
-    {id:"G6",home:"Nieuw-Zeeland",away:"België"}
+  {letter:"G",teams:"België · Egypte · Iran · Nieuw-Zeeland",matches:[
+    {id:"G1",sd:1,home:"België",away:"Egypte"},
+    {id:"G2",sd:1,home:"Iran",away:"Nieuw-Zeeland"},
+    {id:"G3",sd:2,home:"België",away:"Iran"},
+    {id:"G4",sd:2,home:"Nieuw-Zeeland",away:"Egypte"},
+    {id:"G5",sd:3,home:"Egypte",away:"Iran"},
+    {id:"G6",sd:3,home:"Nieuw-Zeeland",away:"België"}
   ]},
-  {letter:"H",teams:"Spanje · Uruguay · Saudi-Arabië · Kaapverdië",matches:[
-    {id:"H1",home:"Spanje",away:"Kaapverdië"},
-    {id:"H2",home:"Saudi-Arabië",away:"Uruguay"},
-    {id:"H3",home:"Spanje",away:"Saudi-Arabië"},
-    {id:"H4",home:"Uruguay",away:"Kaapverdië"},
-    {id:"H5",home:"Kaapverdië",away:"Saudi-Arabië"},
-    {id:"H6",home:"Uruguay",away:"Spanje"}
+  {letter:"H",teams:"Spanje · Kaapverdië · Saoedi-Arabië · Uruguay",matches:[
+    {id:"H1",sd:1,home:"Spanje",away:"Kaapverdië"},
+    {id:"H2",sd:1,home:"Saoedi-Arabië",away:"Uruguay"},
+    {id:"H3",sd:2,home:"Spanje",away:"Saoedi-Arabië"},
+    {id:"H4",sd:2,home:"Uruguay",away:"Kaapverdië"},
+    {id:"H5",sd:3,home:"Kaapverdië",away:"Saoedi-Arabië"},
+    {id:"H6",sd:3,home:"Uruguay",away:"Spanje"}
   ]},
-  {letter:"I",teams:"Frankrijk · Senegal · Noorwegen · Irak/Bolivia",matches:[
-    {id:"I1",home:"Frankrijk",away:"Senegal"},
-    {id:"I2",home:"Irak",away:"Noorwegen"},
-    {id:"I3",home:"Frankrijk",away:"Irak"},
-    {id:"I4",home:"Noorwegen",away:"Senegal"},
-    {id:"I5",home:"Noorwegen",away:"Frankrijk"},
-    {id:"I6",home:"Senegal",away:"Irak"}
+  {letter:"I",teams:"Frankrijk · Senegal · Irak · Noorwegen",matches:[
+    {id:"I1",sd:1,home:"Frankrijk",away:"Senegal"},
+    {id:"I2",sd:1,home:"Irak",away:"Noorwegen"},
+    {id:"I3",sd:2,home:"Frankrijk",away:"Irak"},
+    {id:"I4",sd:2,home:"Noorwegen",away:"Senegal"},
+    {id:"I5",sd:3,home:"Noorwegen",away:"Frankrijk"},
+    {id:"I6",sd:3,home:"Senegal",away:"Irak"}
   ]},
-  {letter:"J",teams:"Argentinië · Oostenrijk · Algerije · Jordanië",matches:[
-    {id:"J1",home:"Argentinië",away:"Algerije"},
-    {id:"J2",home:"Oostenrijk",away:"Jordanië"},
-    {id:"J3",home:"Argentinië",away:"Oostenrijk"},
-    {id:"J4",home:"Jordanië",away:"Algerije"},
-    {id:"J5",home:"Algerije",away:"Oostenrijk"},
-    {id:"J6",home:"Jordanië",away:"Argentinië"}
+  {letter:"J",teams:"Argentinië · Algerije · Oostenrijk · Jordanië",matches:[
+    {id:"J1",sd:1,home:"Argentinië",away:"Algerije"},
+    {id:"J2",sd:1,home:"Oostenrijk",away:"Jordanië"},
+    {id:"J3",sd:2,home:"Argentinië",away:"Oostenrijk"},
+    {id:"J4",sd:2,home:"Jordanië",away:"Algerije"},
+    {id:"J5",sd:3,home:"Algerije",away:"Oostenrijk"},
+    {id:"J6",sd:3,home:"Jordanië",away:"Argentinië"}
   ]},
-  {letter:"K",teams:"Portugal · Colombia · Oezbekistan · Congo DR/Jamaica",matches:[
-    {id:"K1",home:"Portugal",away:"Congo DR"},
-    {id:"K2",home:"Oezbekistan",away:"Colombia"},
-    {id:"K3",home:"Portugal",away:"Oezbekistan"},
-    {id:"K4",home:"Colombia",away:"Congo DR"},
-    {id:"K5",home:"Colombia",away:"Portugal"},
-    {id:"K6",home:"Congo DR",away:"Oezbekistan"}
+  {letter:"K",teams:"Portugal · DR Congo · Oezbekistan · Colombia",matches:[
+    {id:"K1",sd:1,home:"Portugal",away:"DR Congo"},
+    {id:"K2",sd:1,home:"Oezbekistan",away:"Colombia"},
+    {id:"K3",sd:2,home:"Portugal",away:"Oezbekistan"},
+    {id:"K4",sd:2,home:"Colombia",away:"DR Congo"},
+    {id:"K5",sd:3,home:"Colombia",away:"Portugal"},
+    {id:"K6",sd:3,home:"DR Congo",away:"Oezbekistan"}
   ]},
-  {letter:"L",teams:"Engeland · Kroatië · Panama · Ghana",matches:[
-    {id:"L1",home:"Engeland",away:"Kroatië"},
-    {id:"L2",home:"Ghana",away:"Panama"},
-    {id:"L3",home:"Engeland",away:"Ghana"},
-    {id:"L4",home:"Panama",away:"Kroatië"},
-    {id:"L5",home:"Panama",away:"Engeland"},
-    {id:"L6",home:"Kroatië",away:"Ghana"}
+  {letter:"L",teams:"Engeland · Kroatië · Ghana · Panama",matches:[
+    {id:"L1",sd:1,home:"Engeland",away:"Kroatië"},
+    {id:"L2",sd:1,home:"Ghana",away:"Panama"},
+    {id:"L3",sd:2,home:"Engeland",away:"Ghana"},
+    {id:"L4",sd:2,home:"Panama",away:"Kroatië"},
+    {id:"L5",sd:3,home:"Kroatië",away:"Ghana"},
+    {id:"L6",sd:3,home:"Panama",away:"Engeland"}
   ]}
 ];
 
@@ -981,7 +981,7 @@ const MODES = [
   {id:"bbp",    icon:"📈", name:"BBP per capita",    desc:"De onzichtbare hand van God.",
    note:"BBP per capita als proxy voor voetbalinfrastructuur. Het log-verschil tussen landen stuurt de doelpuntenverwachting."},
   {id:"bier",   icon:"🍺", name:"Bierconsumptie",   desc:"🍺",
-   note:"Tsjechië drinkt 188 liter per hoofd per jaar. Iran 1. De rest spreekt voor zich."},
+   note:"Tsjechië drinkt 188 liter per hoofd per jaar. Iran 1. De rest spreekt voor zich. \"Tussen pot en pint.\""},
   {id:"choco",  icon:"🍫", name:"Chocolade",         desc:"Ze smelten de paashaas.",
    note:"Van praline naar finale: chocoladeconsumptie per hoofd (kg/jaar). Zwitserland domineert."},
   {id:"maximus",    icon:"🐱", name:"Maximus",              desc:"Eendracht maakt macht.",

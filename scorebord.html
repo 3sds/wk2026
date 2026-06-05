@@ -76,6 +76,7 @@ body{padding-top:0;max-width:900px;margin:0 auto;padding:0 1.25rem 5rem}
 .rang-table tr:hover td{background:var(--paper)}
 .rang-table tr.top1 td{background:rgba(212,160,23,0.08)}
 .rang-table tr.top3 td{background:rgba(200,16,46,0.03)}
+.rang-table tr.last td{background:rgba(180,150,80,0.04);opacity:.75}
 .model-badge{font-family:var(--font-mono);font-size:0.6rem;color:var(--muted);background:var(--paper2);border:1px solid var(--border);border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:middle}
 .pts-totaal{font-weight:600;color:var(--ink)}
 .pts-highlight{color:var(--red2);font-weight:600}
@@ -156,7 +157,7 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
 </style>
 </head>
 <body>
-<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html" class="active">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html" class="nav-placeholder">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html" class="active">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
 
 <header class="masthead">
   <div class="masthead-top">
@@ -231,7 +232,7 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
   <!-- LIVE STATS -->
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:2rem" id="live-stats-wrap">
     <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px;box-shadow:var(--shadow)">
-      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-bottom:4px">⚽ Totaal doelpunten</div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-bottom:4px">⚽ Totaal doelpunten tot nu toe</div>
       <div style="font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--ink)" id="stat-doelpunten">—</div>
     </div>
     <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px;box-shadow:var(--shadow)">
@@ -265,19 +266,55 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
 const SCOREBORD_URL = "https://script.google.com/macros/s/AKfycbxIBSYYVlf1ixg9mwtkF7_cNvYPvx82UeHinUC3PPAvo5svsvjfUpHEz0d_WczFG0NH/exec";
 
 const KAMPIOEN_VLAG = {
-  "Frankrijk":"🇫🇷","Spanje":"🇪🇸","Argentinië":"🇦🇷","Engeland":"🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-  "Portugal":"🇵🇹","Brazilië":"🇧🇷","Nederland":"🇳🇱","Marokko":"🇲🇦",
-  "België":"🇧🇪","Duitsland":"🇩🇪","Kroatië":"🇭🇷","Italië":"🇮🇹",
-  "Colombia":"🇨🇴","Senegal":"🇸🇳","Mexico":"🇲🇽","VS":"🇺🇸",
-  "Uruguay":"🇺🇾","Japan":"🇯🇵","Zwitserland":"🇨🇭","Ecuador":"🇪🇨",
-  "Australië":"🇦🇺","Zuid-Korea":"🇰🇷","Iran":"🇮🇷","Schotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿",
-  "Tsjechië":"🇨🇿","Bosnië":"🇧🇦","Oekraïne":"🇺🇦","Panama":"🇵🇦",
-  "Noorwegen":"🇳🇴","Ivoorkust":"🇨🇮","Saudi-Arabië":"🇸🇦","Paraguay":"🇵🇾",
-  "Ghana":"🇬🇭","Turkije":"🇹🇷","Oostenrijk":"🇦🇹","Egypte":"🇪🇬",
-  "Algerije":"🇩🇿","Tunesië":"🇹🇳","Haïti":"🇭🇹","Kaapverdië":"🇨🇻",
-  "Jordanië":"🇯🇴","Oezbekistan":"🇺🇿","Congo DR":"🇨🇩","Nieuw-Zeeland":"🇳🇿",
-  "Irak":"🇮🇶","Curaçao":"🇨🇼","Zuid-Afrika":"🇿🇦","Qatar":"🇶🇦",
-  "Canada":"🇨🇦","Vlaanderen":"🇧🇪"
+  "Frankrijk":"🇫🇷",
+  "Spanje":"🇪🇸",
+  "Argentinië":"🇦🇷",
+  "Engeland":"🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+  "Portugal":"🇵🇹",
+  "Brazilië":"🇧🇷",
+  "Nederland":"🇳🇱",
+  "Marokko":"🇲🇦",
+  "België":"🇧🇪",
+  "Duitsland":"🇩🇪",
+  "Kroatië":"🇭🇷",
+  "Colombia":"🇨🇴",
+  "Senegal":"🇸🇳",
+  "Mexico":"🇲🇽",
+  "VS":"🇺🇸",
+  "Uruguay":"🇺🇾",
+  "Japan":"🇯🇵",
+  "Zwitserland":"🇨🇭",
+  "Ecuador":"🇪🇨",
+  "Australië":"🇦🇺",
+  "Zuid-Korea":"🇰🇷",
+  "Iran":"🇮🇷",
+  "Schotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+  "Tsjechië":"🇨🇿",
+  "Bosnië":"🇧🇦",
+  "Zweden":"🇸🇪",
+  "Panama":"🇵🇦",
+  "Noorwegen":"🇳🇴",
+  "Ivoorkust":"🇨🇮",
+  "Saoedi-Arabië":"🇸🇦",
+  "Paraguay":"🇵🇾",
+  "Ghana":"🇬🇭",
+  "Turkije":"🇹🇷",
+  "Oostenrijk":"🇦🇹",
+  "Egypte":"🇪🇬",
+  "Algerije":"🇩🇿",
+  "Tunesië":"🇹🇳",
+  "Haïti":"🇭🇹",
+  "Kaapverdië":"🇨🇻",
+  "Jordanië":"🇯🇴",
+  "Oezbekistan":"🇺🇿",
+  "DR Congo":"🇨🇩",
+  "Nieuw-Zeeland":"🇳🇿",
+  "Irak":"🇮🇶",
+  "Curaçao":"🇨🇼",
+  "Zuid-Afrika":"🇿🇦",
+  "Qatar":"🇶🇦",
+  "Canada":"🇨🇦",
+  "Vlaanderen":"🇧🇪"
 };
 
 const MODEL_LABELS = {
@@ -393,7 +430,7 @@ function renderRanglijst(d, tab) {
   document.getElementById("rang-head").innerHTML =
     "<tr><th>#</th><th>Deelnemer</th><th>🏆</th>" +
     "<th>" + cols[tab].label + "</th>" +
-    (tab==="totaal" ? "<th>Voorrondes</th><th>Kwalificatie</th><th>Bonus</th>" : "") +
+    (tab==="totaal" ? "<th>Voorrondes</th><th>Kwalificatie</th><th>Knockout</th><th>Bonus</th>" : "") +
     "</tr>";
 
   document.getElementById("rang-body").innerHTML = sorted.map(function(p, i) {
@@ -408,6 +445,7 @@ function renderRanglijst(d, tab) {
       (tab==="totaal" ?
         "<td>" + p.ptn.groep + "</td>" +
         "<td>" + (p.ptn.doorkomer||0) + "</td>" +
+        "<td>" + (p.ptn.knockout||0) + "</td>" +
         "<td>" + p.ptn.bonus + "</td>" : "") +
       "</tr>";
   }).join("");
@@ -442,22 +480,26 @@ function renderLiveStats(meta) {
 function renderPuntensysteem(ps) {
   if (!ps) return;
   var items = [
+    {l:"── Groepsfase ──", v:"", header:true},
     {l:"Juiste uitslag",       v:ps.uitslag},
     {l:"Juiste score",         v:ps.score},
     {l:"Groepswinnaar",        v:ps.groepswinnaar},
     {l:"Nummer 2",             v:ps.nummer2},
     {l:"Beste derde",          v:ps.besteDerde},
-    {l:"Kampioen (groep)",     v:ps.kampioen},
-    {l:"Topscorer",            v:ps.topscorer},
-    {l:"Schiftingen",          v:"tiebreaker"},
+    {l:"── Knock-out ──", v:"", header:true},
     {l:"R32 winnaar",          v:ps.koR32||3},
     {l:"R16 winnaar",          v:ps.koR16||5},
     {l:"Kwartfinalist",        v:ps.koQF||6},
     {l:"Halvefinalist",        v:ps.koSF||9},
-    {l:"Finalist",             v:ps.koFinale||15},
-    {l:"Kampioen (knockout)",  v:ps.koKampioen||20}
+    {l:"Finalist",             v:12},
+    {l:"Kampioen (knockout)",  v:15},
+    {l:"── Bonus ──", v:"", header:true},
+    {l:"Kampioen (groep)",     v:ps.kampioen},
+    {l:"Topscorer",            v:ps.topscorer},
+    {l:"Schiftingen",          v:"tiebreaker"}
   ];
   document.getElementById("pts-systeem").innerHTML = items.map(function(x){
+    if (x.header) return "<div style='grid-column:1/-1;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:8px 0 2px;border-bottom:1px solid var(--border);margin-top:4px'>" + x.l.replace(/──\s*/g,'').replace(/\s*──/g,'') + "</div>";
     return "<div class='pts-card'>" +
       "<div class='pts-card-label'>" + x.l + "</div>" +
       "<div class='pts-card-val'>" + x.v + (typeof x.v==="number"?" pt":"") + "</div>" +
