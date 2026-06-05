@@ -256,23 +256,28 @@ var RONDES = [
 ];
 
 async function laadTabel() {
-  try {
-    const r = await fetch(API_URL + "?actie=tabel");
-    tabelData = await r.json();
+  var old = document.getElementById("jsonp-tabel");
+  if (old) old.parentNode.removeChild(old);
 
+  window.__bracketCallback = function(result) {
+    tabelData = result;
     if (!tabelData.groepsvolledig) {
       document.getElementById("loading").textContent =
         "De groepsfase is nog niet volledig gespeeld. Dit formulier wordt beschikbaar zodra alle uitslagen bekend zijn.";
       return;
     }
-
     initTabel(tabelData.r32);
     document.getElementById("loading").style.display = "none";
     document.getElementById("content").style.display = "block";
-  } catch(e) {
-    document.getElementById("loading").textContent =
-      "Fout bij laden. Controleer de API_URL.";
-  }
+  };
+
+  var script = document.createElement("script");
+  script.id = "jsonp-tabel";
+  script.src = API_URL + "?actie=bracket&callback=__bracketCallback";
+  script.onerror = function() {
+    document.getElementById("loading").textContent = "Beschikbaar vanaf zondag 28 juni.";
+  };
+  document.body.appendChild(script);
 }
 
 function initTabel(r32) {
