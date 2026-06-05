@@ -283,14 +283,32 @@ const KAMPIOEN_VLAG = {
 const MODEL_LABELS = {
   random:"🎲",fifa:"🏅",historisch:"📜",
   god:"⚗️",bbp:"📈",bier:"🍺",
-  choco:"🍫",maximus:"🐱",manueel:"✏️"
+  choco:"🍫",maximus:"🐱",manueel:"✏️",
+  // Fallbacks voor oude inzendingen met volledige tekst
+  "gokken zoals didier reynders":"🎲",
+  "gokken zoals didier":"🎲",
+  "fifa ranking":"🏅",
+  "de geschiedenis herhaalt zich":"📜",
+  "statistiek":"⚗️",
+  "lies, damned lies, and statistics.":"⚗️",
+  "de onzichtbare hand van god.":"📈",
+  "de onzichtbare hand":"📈",
+  "tussen pot en pint":"🍺",
+  "ze smelten de paashaas":"🍫",
+  "eendracht maakt macht":"🐱",
+  "maak dat de kat wijs":"🐱"
 };
+
+function modelLabel(m) {
+  if (!m) return "✏️";
+  return MODEL_LABELS[m] || MODEL_LABELS[m.toLowerCase()] || m.substring(0,3) + "…";
+}
 
 var huidigTab = "totaal";
 var data = null;
 
 function vlag(land){ return KAMPIOEN_VLAG[land] || "🏳️"; }
-function modelLabel(m){ return MODEL_LABELS[m] || m; }
+
 
 function laadData() {
   document.getElementById("last-update").textContent = "Laden…";
