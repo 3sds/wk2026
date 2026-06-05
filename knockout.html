@@ -444,12 +444,18 @@ async function submitForm() {
 
   showStatus("Bezig met versturen…", "info");
   try {
-    await fetch(API_URL, {
-      method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify(payload)
-    });
-    showStatus("✓ Knockout-pronostiek ontvangen!", "success");
+    // Gebruik GET + JSONP want no-cors POST stuurt geen body mee naar Apps Script
+    window.__koCallback = function(result) {
+      if (result && result.status === "ok") {
+        showStatus("✓ Knockout-pronostiek ontvangen!", "success");
+      } else {
+        showStatus("Fout: " + (result ? result.message : "onbekend"), "danger");
+      }
+    };
+    var script = document.createElement("script");
+    script.src = API_URL + "?actie=knockout&callback=__koCallback&data=" + encodeURIComponent(JSON.stringify(payload));
+    script.onerror = function() { showStatus("Fout bij verzending.", "danger"); };
+    document.body.appendChild(script);
   } catch(e) {
     showStatus("Fout bij verzending. Probeer opnieuw.", "danger");
   }
