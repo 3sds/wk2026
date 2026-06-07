@@ -2,6 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Het grote DS WK Scorebord 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -154,10 +155,41 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
 @media(max-width:560px){
   .nav-links a { padding: 5px 7px; font-size: 0.62rem; }
 }
+
+/* ── DROPDOWN ── */
+.nav-dropdown { position: relative; display: inline-block; }
+.nav-dropdown-trigger { cursor: pointer; }
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--ink);
+  border-top: 2px solid var(--red);
+  border-radius: 0 0 var(--r) var(--r);
+  min-width: 160px;
+  z-index: 200;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown-menu:hover { display: block; }
+.nav-dropdown-menu a {
+  display: block;
+  padding: 9px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background .1s, color .1s;
+}
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.nav-dropdown-menu a.active { color: #fff; background: var(--red); }
 </style>
 </head>
 <body>
-<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html" class="active">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a><a href="https://3sds.github.io/wk2026/data.html">Data-analyse</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html" class="active">Scorebord</a><a href="https://3sds.github.io/wk2026/pronostiek.html" class="nav-dropdown-trigger">Doe mee ▾</a><a href="https://3sds.github.io/wk2026/data.html">Data</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
 
 <header class="masthead">
   <div class="masthead-top">
