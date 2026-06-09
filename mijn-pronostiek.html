@@ -249,16 +249,6 @@ function laadPronostiek() {
   var old = document.getElementById("jsonp-prono");
   if (old) old.parentNode.removeChild(old);
 
-  // Laad ook echte uitslagen voor vergelijking
-  window.__scoreboardCallback = function(sbData) {
-    window.__echteScores = {};
-    window.__puntensysteem = sbData.meta ? sbData.meta.puntensysteem : {};
-    if (sbData.meta && sbData.meta.aantalGespeeld > 0) {
-      // Haal echte scores uit deelnemers (niet direct beschikbaar in meta)
-      // We gebruiken de uitslagen via een aparte call
-    }
-  };
-
   window.__pronoCallback = function(data) {
     if (data.status === "not_found") {
       document.getElementById("resultaat").style.display = "block";
@@ -275,29 +265,10 @@ function laadPronostiek() {
     renderPronostiek(data);
   };
 
-  // Haal eerst echte uitslagen op
-  var oldSb = document.getElementById("jsonp-sb");
-  if (oldSb) oldSb.parentNode.removeChild(oldSb);
-
-  window.__uitlagenCallback = function(sbData) {
-    // Sla echte scores op
-    window.__echteScores = {};
-    window.__pts = (sbData.meta && sbData.meta.puntensysteem) ? sbData.meta.puntensysteem : {uitslag:2,score:3};
-    // Echte scores zitten niet direct in scorebord — gebruik uitslagen endpoint
-    // We halen ze op via een tweede call
-    var scriptP = document.createElement("script");
-    scriptP.id = "jsonp-prono";
-    scriptP.src = API_URL + "?actie=pronostiek&naam=" + encodeURIComponent(naam) + "&callback=__pronoCallback";
-    document.body.appendChild(scriptP);
-  };
-
-  // Haal uitslagen op via scorebord (bevat echteScores indirect)
-  // Eenvoudiger: gebruik een aparte uitslagen-actie
-  window.__pronoCallback = window.__pronoCallback; // redefine hieronder
-  var scriptSb = document.createElement("script");
-  scriptSb.id = "jsonp-sb";
-  scriptSb.src = API_URL + "?actie=uitslagen&callback=__uitlagenCallback";
-  document.body.appendChild(scriptSb);
+  var script = document.createElement("script");
+  script.id = "jsonp-prono";
+  script.src = API_URL + "?actie=pronostiek&naam=" + encodeURIComponent(naam) + "&callback=__pronoCallback";
+  document.body.appendChild(script);
 }
 
 // Enter-toets
