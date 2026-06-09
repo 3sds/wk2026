@@ -313,13 +313,26 @@ function renderPronostiek(d) {
       var parts = score.split("-");
       var sh = parts[0] !== undefined ? parts[0] : "";
       var sa = parts[1] !== undefined ? parts[1] : "";
-      html += '<div class="match-row">' +
+      var ptn = d.ptnPerWedstrijd ? d.ptnPerWedstrijd[id] : null;
+
+      var ptnHtml = "";
+      if (ptn) {
+        var kleur = ptn.correct_score ? "var(--green)" : ptn.correct_uitslag ? "var(--gold)" : "var(--muted2)";
+        var label = ptn.correct_score ? "+" + ptn.pts + " pt ✓" : ptn.correct_uitslag ? "+" + ptn.pts + " pt" : "0 pt";
+        ptnHtml = '<div style="font-family:var(--font-mono);font-size:0.65rem;color:' + kleur + ';text-align:right">' + label + '</div>' +
+                  '<div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted)">' + ptn.echte + '</div>';
+      } else {
+        ptnHtml = '<div></div><div></div>';
+      }
+
+      html += '<div class="match-row-pts">' +
         '<div class="team-home">' + m.thuis + '</div>' +
         (sh !== "" ?
           '<div class="score-val">' + sh + '</div><div class="sep">–</div><div class="score-val">' + sa + '</div>' :
           '<div class="score-empty">—</div><div class="sep">–</div><div class="score-empty">—</div>'
         ) +
         '<div class="team-away">' + m.uit + '</div>' +
+        ptnHtml +
       '</div>';
     });
     html += '</div>';
