@@ -138,57 +138,91 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
 .placeholder-note { font-family:var(--font-mono);font-size:0.75rem;color:var(--muted);padding:3rem 1rem;text-align:center;background:var(--paper2);border-radius:var(--r); }
 
 
+
+.slider-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px}
+.slider-btn{background:var(--paper2);border:1px solid var(--border2);border-radius:var(--r);padding:6px 14px;cursor:pointer;font-size:0.9rem;color:var(--ink);transition:background .12s}
+.slider-btn:hover{background:var(--paper3)}
+.slider-label{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--ink);min-width:80px;text-align:center}
 </style>
 </head>
 <body>
-<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><div class="nav-dropdown"><a href="https://3sds.github.io/wk2026/pronostiek.html" class="nav-dropdown-trigger">Doe mee ▾</a><div class="nav-dropdown-menu"></div></div><a href="https://3sds.github.io/wk2026/data.html" class="active">Data</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a></div></div></nav>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><div class="nav-dropdown"><a href="https://3sds.github.io/wk2026/pronostiek.html" class="nav-dropdown-trigger">Doe mee ▾</a><div class="nav-dropdown-menu"><a href="https://3sds.github.io/wk2026/pronostiek.html">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a></div></div><a href="https://3sds.github.io/wk2026/data.html" class="active">Data</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a><a href="https://3sds.github.io/wk2026/mijn-pronostiek.html">Mijn pronostiek</a></div></div></nav>
 
 <div class="page-body">
 
   <section class="section">
-    <div class="section-head">
-      <span class="section-num">01</span>
-      <span class="section-label">Grootste kanshebber per model</span>
-    </div>
+    <div class="section-head"><span class="section-num">01</span><span class="section-label">Wie wint het WK?</span></div>
     <div class="chart-wrap">
-      <img src="mc_kansen_winnen.png" alt="Grootste kanshebber per model" class="chart-img" onerror="this.parentElement.innerHTML=plaatshouder('mc_kansen_winnen.png')">
+      <img src="prono_kampioen.png" alt="Voorspelde WK-winnaar" class="chart-img" onerror="this.parentElement.innerHTML=plaatshouder('prono_kampioen.png')">
     </div>
-    <p class="chart-note">10.000 Monte Carlo simulaties per model · groepsfase + volledige knock-outfase</p>
+    <p class="chart-note">Keuze van alle deelnemers · DS WK 2026</p>
   </section>
 
   <section class="section">
-    <div class="section-head">
-      <span class="section-num">02</span>
-      <span class="section-label">Kans België om kampioen te worden</span>
+    <div class="section-head"><span class="section-num">02</span><span class="section-label">Wat verwachten jullie van de Belgen?</span></div>
+    <div class="chart-wrap">
+      <img src="prono_belgie.png" alt="Voorspellingen Belgische wedstrijden" class="chart-img" onerror="this.parentElement.innerHTML=plaatshouder('prono_belgie.png')">
     </div>
+    <p class="chart-note">Gemiddelde score + spreiding W/G/V per wedstrijd · DS WK 2026</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><span class="section-num">03</span><span class="section-label">Het verste doelpunt</span></div>
+    <div class="chart-wrap">
+      <img src="prono_verste_goal.png" alt="Spreiding verste doelpunt" class="chart-img" onerror="this.parentElement.innerHTML=plaatshouder('prono_verste_goal.png')">
+    </div>
+    <p class="chart-note">Spreiding van alle gokjes op een halve veld · DS WK 2026</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><span class="section-num">04</span><span class="section-label">Wie wordt topscorer?</span></div>
+    <div class="chart-wrap">
+      <img src="prono_topscorer.png" alt="Voorspelde topscorer" class="chart-img" onerror="this.parentElement.innerHTML=plaatshouder('prono_topscorer.png')">
+    </div>
+    <p class="chart-note">Top 15 · DS WK 2026</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><span class="section-num">05</span><span class="section-label">Wie wint de groep?</span></div>
+    <div class="slider-wrap">
+      <div class="slider-nav">
+        <button class="slider-btn" onclick="prevGroep()">&#9664;</button>
+        <span class="slider-label" id="slider-label">Groep A</span>
+        <button class="slider-btn" onclick="nextGroep()">&#9654;</button>
+      </div>
+      <div class="chart-wrap">
+        <img id="slider-img" src="prono_groep_A.png" alt="Groepswinnaar" class="chart-img" onerror="this.src=''">
+      </div>
+    </div>
+    <p class="chart-note">Keuze van alle deelnemers per groep · DS WK 2026</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><span class="section-num">06</span><span class="section-label">Kanshebbers per model</span></div>
+    <div class="chart-wrap">
+      <img src="mc_kansen_winnen.png" alt="Grootste kanshebber per model" class="chart-img" onerror="this.parentElement.innerHTML=plaatshouder('mc_kansen_winnen.png')">
+    </div>
+    <p class="chart-note">10.000 Monte Carlo simulaties per model</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><span class="section-num">07</span><span class="section-label">Kans België om kampioen te worden</span></div>
     <div class="chart-wrap">
       <img src="mc_belgie_kampioen.png" alt="Kans België om kampioen te worden" class="chart-img" onerror="this.parentElement.innerHTML=plaatshouder('mc_belgie_kampioen.png')">
     </div>
     <p class="chart-note">Kans per model · 10.000 Monte Carlo simulaties</p>
   </section>
 
-  <section class="section">
-    <div class="section-head">
-      <span class="section-num">03</span>
-      <span class="section-label">Meer analyses</span>
-    </div>
-    <div class="update-note">
-      ⏳ Update verwacht na speeldag 1 (14 juni 2026)
-    </div>
-  </section>
-
 </div>
 
+<footer
+
+<footer
 <footer>
   <div style="font-size:1.1rem;margin-bottom:.5rem">🐙</div>
   De grote DS WK Data-analyse 2026<br>
   <span style="opacity:.6">Gegenereerd met Claude Sonnet 4.6 · Blijf vrij</span>
 </footer>
 
-<script>
-function plaatshouder(naam) {
-  return '<div class="placeholder-note">📊 ' + naam + ' wordt hier getoond zodra de PNG geüpload is naar GitHub.</div>';
-}
-</script>
-</body>
+
 </html>

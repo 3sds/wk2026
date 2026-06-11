@@ -118,24 +118,7 @@ body{max-width:820px;margin:0 auto;padding:0 1.25rem 5rem}
 </head>
 <body>
 
-<nav class="ds-nav">
-  <div class="ds-nav-inner">
-    <a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a>
-    <div class="nav-links">
-      <a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a>
-      <div class="nav-dropdown">
-        <a href="https://3sds.github.io/wk2026/pronostiek.html" class="nav-dropdown-trigger">Doe mee ▾</a>
-        <div class="nav-dropdown-menu">
-          <a href="https://3sds.github.io/wk2026/pronostiek.html">Groepsfase</a>
-          <a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a>
-        </div>
-      </div>
-      <a href="https://3sds.github.io/wk2026/data.html">Data</a>
-      <a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a>
-      <a href="https://3sds.github.io/wk2026/mijn-pronostiek.html" class="active">Mijn pronostiek</a>
-    </div>
-  </div>
-</nav>
+<nav class="ds-nav"><div class="ds-nav-inner"><a href="https://3sds.github.io/wk2026/scorebord.html" class="nav-logo"><em>DS</em> WK 2026</a><div class="nav-links"><a href="https://3sds.github.io/wk2026/scorebord.html">Scorebord</a><div class="nav-dropdown"><a href="https://3sds.github.io/wk2026/pronostiek.html" class="nav-dropdown-trigger">Doe mee ▾</a><div class="nav-dropdown-menu"><a href="https://3sds.github.io/wk2026/pronostiek.html">Groepsfase</a><a href="https://3sds.github.io/wk2026/knockout.html">Knock-out</a></div></div><a href="https://3sds.github.io/wk2026/data.html">Data</a><a href="https://3sds.github.io/wk2026/reglement.html">Reglement</a><a href="https://3sds.github.io/wk2026/mijn-pronostiek.html" class="active">Mijn pronostiek</a></div></div></nav>
 
 <header class="masthead">
   <div class="masthead-top">
@@ -160,7 +143,6 @@ body{max-width:820px;margin:0 auto;padding:0 1.25rem 5rem}
 
 <div class="zoek-wrap">
   <input type="text" id="naam-input" placeholder="Jouw naam (bv. Jan Janssen)" autocomplete="off">
-  <input type="password" id="code-input" placeholder="Code" style="width:100px">
   <button class="btn-primary" onclick="laadPronostiek()">Zoek</button>
 </div>
 
@@ -238,13 +220,7 @@ const GEHEIME_CODE = "ds2026";  // ← wijzig dit naar jouw eigen code
 
 function laadPronostiek() {
   var naam = document.getElementById("naam-input").value.trim();
-  var code = document.getElementById("code-input").value.trim();
   if (!naam) return;
-  if (code !== GEHEIME_CODE) {
-    document.getElementById("resultaat").style.display = "block";
-    document.getElementById("resultaat").innerHTML = '<div class="fout-msg">Beschikbaar na de groepsfase.</div>';
-    return;
-  }
 
   var old = document.getElementById("jsonp-prono");
   if (old) old.parentNode.removeChild(old);
@@ -272,7 +248,7 @@ function laadPronostiek() {
 }
 
 // Enter-toets
-["naam-input","code-input"].forEach(function(id){
+["naam-input"].forEach(function(id){
   document.getElementById(id).addEventListener("keydown", function(e) {
     if (e.key === "Enter") laadPronostiek();
   });
