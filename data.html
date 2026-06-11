@@ -225,4 +225,17 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
 </footer>
 
 
+<script>
+var groepen = ["A","B","C","D","E","F","G","H","I","J","K","L"];
+var groepIdx = 0;
+function updateSlider(){
+  document.getElementById("slider-img").src = "prono_groep_" + groepen[groepIdx] + ".png";
+  document.getElementById("slider-label").textContent = "Groep " + groepen[groepIdx];
+}
+function nextGroep(){ groepIdx=(groepIdx+1)%groepen.length; updateSlider(); }
+function prevGroep(){ groepIdx=(groepIdx-1+groepen.length)%groepen.length; updateSlider(); }
+function plaatshouder(naam){
+  return '<div class="placeholder-note">&#128202; ' + naam + ' wordt hier getoond zodra de PNG ge\xFCpload is naar GitHub.</div>';
+}
+</script>
 </html>
