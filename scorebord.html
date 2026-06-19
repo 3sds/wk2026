@@ -286,15 +286,6 @@ footer{text-align:center;margin-top:4rem;font-family:var(--font-mono);font-size:
     </div>
   </div>
 
-  <!-- LIVE PRONOSTIEKEN -->
-  <section id="live-prono-sectie" style="display:none;margin-bottom:2rem">
-    <div class="section-head" style="display:flex;align-items:baseline;gap:.75rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)">
-      <span style="font-family:var(--font-mono);font-size:0.6rem;color:var(--red);font-weight:500;border:1px solid var(--red);border-radius:3px;padding:1px 5px">⚽ LIVE</span>
-      <span id="live-prono-titel" style="font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--ink)"></span>
-    </div>
-    <div id="live-prono-tabel"></div>
-  </section>
-
   <!-- PUNTENSYSTEEM -->
   <section class="section">
     <div class="section-head">
@@ -596,7 +587,9 @@ function renderRanglijst(d, tab) {
   });
 
   document.getElementById("rang-head").innerHTML =
-    "<tr><th>#</th><th>Deelnemer</th><th>🏆</th>" +
+    var liveMatch = getLiveMatch();
+  var liveKolom = liveMatch ? "<th style='font-family:var(--font-mono);font-size:0.68rem;color:var(--red)'>⚽ " + liveMatch.th.split(" ")[0] + "–" + liveMatch.tu.split(" ")[0] + "</th>" : "";
+  return "<tr><th>#</th><th>Deelnemer</th>" + liveKolom +
     "<th>" + cols[tab].label + "</th>" +
     (tab==="totaal" ? "<th>Voorrondes</th><th>Kwalificatie</th><th>Knockout</th><th>Bonus</th>" : "") +
     "</tr>";
@@ -606,9 +599,10 @@ function renderRanglijst(d, tab) {
     var pts = cols[tab].fn(p);
     return "<tr class='" + rowClass + "'>" +
       "<td>" + (i+1) + "</td>" +
+      var scoreCell = liveMatch ? "<td style='font-family:var(--font-mono);font-size:0.85rem;font-weight:600;color:var(--ink);text-align:center'>" + ((p.scores && p.scores[liveMatch.id]) ? p.scores[liveMatch.id] : "—") + "</td>" : "";
       "<td>" + p.naam +
         "<span class='model-badge'>" + modelLabel(p.model) + "</span></td>" +
-      "<td>" + vlag(p.kampioen) + "</td>" +
+      scoreCell +
       "<td class='pts-highlight'>" + pts + "</td>" +
       (tab==="totaal" ?
         "<td>" + p.ptn.groep + "</td>" +
@@ -676,6 +670,18 @@ laadData();
 setInterval(laadData, 60000); // automatisch vernieuwen elke minuut
 
 // ── Live wedstrijd widget ──────────────────────────
+
+function getLiveMatch() {
+  var now = new Date();
+  for (var i = 0; i < SCHEMA_TIJDEN.length; i++) {
+    var m = SCHEMA_TIJDEN[i];
+    var start = new Date(m.t);
+    var einde = new Date(start.getTime() + 115 * 60000);
+    if (now >= start && now <= einde) return m;
+  }
+  return null;
+}
+
 function updateLiveWidget() {
   var now = new Date();
   var bezig = null, volgende = null;
@@ -721,7 +727,7 @@ function updateLiveWidget() {
 
 // Update elke minuut
 updateLiveWidget();
-setInterval(updateLiveWidget, 60000);
+setInterval(function(){ updateLiveWidget(); if(data) renderRanglijst(data.deelnemers, huidigTab); }, 60000);
 
 
 // ── Live pronostieken voor lopende wedstrijd ──
