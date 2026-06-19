@@ -587,9 +587,7 @@ function renderRanglijst(d, tab) {
   });
 
   document.getElementById("rang-head").innerHTML =
-    var liveMatch = getLiveMatch();
-  var liveKolom = liveMatch ? "<th style='font-family:var(--font-mono);font-size:0.68rem;color:var(--red)'>⚽ " + liveMatch.th.split(" ")[0] + "–" + liveMatch.tu.split(" ")[0] + "</th>" : "";
-  return "<tr><th>#</th><th>Deelnemer</th>" + liveKolom +
+      return "<tr><th>#</th><th>Deelnemer</th>" + liveKolom +
     "<th>" + cols[tab].label + "</th>" +
     (tab==="totaal" ? "<th>Voorrondes</th><th>Kwalificatie</th><th>Knockout</th><th>Bonus</th>" : "") +
     "</tr>";
@@ -597,9 +595,9 @@ function renderRanglijst(d, tab) {
   document.getElementById("rang-body").innerHTML = sorted.map(function(p, i) {
     var rowClass = i===0 ? "top1" : i<3 ? "top3" : "";
     var pts = cols[tab].fn(p);
+    var scoreCell = liveMatch ? "<td style='font-family:var(--font-mono);font-size:0.85rem;font-weight:600;color:var(--ink);text-align:center'>" + ((p.scores && p.scores[liveMatch.id]) ? p.scores[liveMatch.id] : "—") + "</td>" : "";
     return "<tr class='" + rowClass + "'>" +
       "<td>" + (i+1) + "</td>" +
-      var scoreCell = liveMatch ? "<td style='font-family:var(--font-mono);font-size:0.85rem;font-weight:600;color:var(--ink);text-align:center'>" + ((p.scores && p.scores[liveMatch.id]) ? p.scores[liveMatch.id] : "—") + "</td>" : "";
       "<td>" + p.naam +
         "<span class='model-badge'>" + modelLabel(p.model) + "</span></td>" +
       scoreCell +
