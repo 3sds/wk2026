@@ -402,12 +402,33 @@ function laadData() {
   document.body.appendChild(script);
 }
 
+function detecteerHuidigTab() {
+  var n = data.meta.aantalGespeeld || 0;
+  if (n === 0) return "totaal";
+  if (n <= 24) return "sd1";   // speeldag 1: 24 wedstrijden
+  if (n <= 48) return "sd2";   // speeldag 2: 24 wedstrijden
+  if (n <= 72) return "sd3";   // speeldag 3: 24 wedstrijden
+  if (n > 72)  return "knockout";
+  return "totaal";
+}
+
 function renderAlles() {
   if (!data || !data.deelnemers) return;
   var d = data.deelnemers;
   document.getElementById("stat-gespeeld").textContent = data.meta.aantalGespeeld || 0;
   document.getElementById("stat-deelnemers").textContent = d.length;
   renderPodium(d);
+
+  // Zet actieve tab op huidige speeldag als nog niet manueel gekozen
+  if (!window.__tabManueel) {
+    var autoTab = detecteerHuidigTab();
+    huidigTab = autoTab;
+    // Update tab-knoppen visueel
+    document.querySelectorAll(".tab").forEach(function(btn){
+      btn.classList.toggle("active", btn.getAttribute("onclick").indexOf("'" + autoTab + "'") > -1);
+    });
+  }
+
   renderRanglijst(d, huidigTab);
   renderPuntensysteem(data.meta.puntensysteem);
   renderLiveStats(data.meta);
@@ -438,6 +459,7 @@ function renderPodium(d) {
 }
 
 function toonTab(tab, btn) {
+  window.__tabManueel = true;
   huidigTab = tab;
   document.querySelectorAll(".tab").forEach(function(b){ b.classList.remove("active"); });
   btn.classList.add("active");
@@ -456,8 +478,29 @@ function renderRanglijst(d, tab) {
     knockout:  {label:"Knockout",   fn:function(x){return x.ptn.knockout||0}}
   };
 
-  // Sorteer op geselecteerde kolom
-  var sorted = d.slice().sort(function(a,b){ return cols[tab].fn(b) - cols[tab].fn(a); });
+  // Kies de juiste afwijking op basis van tab
+  function getAfwijking(x, tab) {
+    if (tab === "sd1") return x.afwijkingGoalsSd1 !== undefined ? x.afwijkingGoalsSd1 : 9999;
+    if (tab === "sd2") return x.afwijkingGoalsSd2 !== undefined ? x.afwijkingGoalsSd2 : 9999;
+    if (tab === "sd3") return x.afwijkingGoalsSd3 !== undefined ? x.afwijkingGoalsSd3 : 9999;
+    return x.afwijkingGoalsTotaal !== undefined ? x.afwijkingGoalsTotaal : (x.afwijkingGoals !== undefined ? x.afwijkingGoals : 9999);
+  }
+
+  var sorted = d.slice().sort(function(a,b){
+    var ptsDiff = cols[tab].fn(b) - cols[tab].fn(a);
+    if (ptsDiff !== 0) return ptsDiff;
+    // Tiebreaker 1: kleinste afwijking doelpunten (speeldag-specifiek of totaal)
+    var da = getAfwijking(a, tab), db = getAfwijking(b, tab);
+    if (da !== db) return da - db;
+    // Tiebreaker 2: schiftingsvraag 1
+    var s1a = Math.abs((a.schifting1||0) - (data.meta.echteSchifting1||0));
+    var s1b = Math.abs((b.schifting1||0) - (data.meta.echteSchifting1||0));
+    if (s1a !== s1b) return s1a - s1b;
+    // Tiebreaker 3: schiftingsvraag 2
+    var s2a = Math.abs((a.schifting2||0) - (data.meta.echteSchifting2||0));
+    var s2b = Math.abs((b.schifting2||0) - (data.meta.echteSchifting2||0));
+    return s2a - s2b;
+  });
 
   document.getElementById("rang-head").innerHTML =
     "<tr><th>#</th><th>Deelnemer</th><th>🏆</th>" +
