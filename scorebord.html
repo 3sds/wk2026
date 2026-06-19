@@ -586,6 +586,8 @@ function renderRanglijst(d, tab) {
     return s2a - s2b;
   });
 
+  var liveMatch = getLiveMatch();
+  var liveKolom = liveMatch ? "<th style='font-family:var(--font-mono);font-size:0.68rem;color:var(--red)'>⚽ " + liveMatch.th.split(" ")[0] + "–" + liveMatch.tu.split(" ")[0] + "</th>" : "";
   document.getElementById("rang-head").innerHTML =
     "<tr><th>#</th><th>Deelnemer</th>" + liveKolom +
     "<th>" + cols[tab].label + "</th>" +
