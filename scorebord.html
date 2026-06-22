@@ -601,7 +601,7 @@ function renderRanglijst(d, tab) {
     return "<tr class='" + rowClass + "'>" +
       "<td>" + (i+1) + "</td>" +
       "<td>" + p.naam +
-        "<span class='model-badge'>" + modelLabel(p.model) + "</span></td>" +
+        "<span class='model-badge'>" + vlag(p.kampioen) + "</span></td>" +
       scoreCell +
       "<td class='pts-highlight'>" + pts + "</td>" +
       (tab==="totaal" ?
@@ -676,7 +676,7 @@ function getLiveMatch() {
   for (var i = 0; i < SCHEMA_TIJDEN.length; i++) {
     var m = SCHEMA_TIJDEN[i];
     var start = new Date(m.t);
-    var einde = new Date(start.getTime() + 115 * 60000);
+    var einde = new Date(start.getTime() + 125 * 60000);
     if (now >= start && now <= einde) return m;
   }
   return null;
@@ -694,7 +694,7 @@ function updateLiveWidget() {
   for (var i = 0; i < gesorteerd.length; i++) {
     var m = gesorteerd[i];
     var start = new Date(m.t);
-    var einde = new Date(start.getTime() + 115 * 60000); // 115 min incl. blessuretijd
+    var einde = new Date(start.getTime() + 125 * 60000); // 115 min incl. blessuretijd
     if (now >= start && now <= einde) {
       bezig = m; break;
     }
@@ -784,7 +784,7 @@ updateLiveWidget = function() {
   var bezig = null;
   SCHEMA_TIJDEN.forEach(function(m) {
     var start = new Date(m.t);
-    var einde = new Date(start.getTime() + 115 * 60000);
+    var einde = new Date(start.getTime() + 125 * 60000);
     if (now >= start && now <= einde) bezig = m;
   });
   if (bezig) {
