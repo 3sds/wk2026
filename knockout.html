@@ -326,7 +326,11 @@ function renderTabel() {
     duelsWrap.className = "ronde-duels";
     duelsWrap.id = "ronde-" + ronde.id;
 
-    var matchIds = Object.keys(keuzes[ronde.id]).sort();
+    var matchIds = Object.keys(keuzes[ronde.id]).sort(function(a, b) {
+      var na = parseInt(a.split("-")[1]);
+      var nb = parseInt(b.split("-")[1]);
+      return na - nb;
+    });
     matchIds.forEach(function(matchId){
       var match = keuzes[ronde.id][matchId];
       var duel = document.createElement("div");
