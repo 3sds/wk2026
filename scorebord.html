@@ -376,7 +376,40 @@ const SCHEMA_TIJDEN = [
   {id:"K5",t:"2026-06-29T20:00:00Z",th:"Colombia",tu:"Portugal"},
   {id:"K6",t:"2026-06-29T20:00:00Z",th:"DR Congo",tu:"Oezbekistan"},
   {id:"L5",t:"2026-06-30T01:00:00Z",th:"Kroatië",tu:"Ghana"},
-  {id:"L6",t:"2026-06-30T01:00:00Z",th:"Panama",tu:"Engeland"}
+  {id:"L6",t:"2026-06-30T01:00:00Z",th:"Panama",tu:"Engeland"},
+  // ── Knockout ──
+  {id:"R32-1",t:"2026-06-28T23:00:00Z",th:"Zuid-Afrika",tu:"Canada"}
+  {id:"R32-2",t:"2026-06-29T20:30:00Z",th:"Duitsland",tu:"Paraguay"}
+  {id:"R32-3",t:"2026-06-29T17:00:00Z",th:"Nederland",tu:"Marokko"}
+  {id:"R32-4",t:"2026-06-30T01:00:00Z",th:"Brazilië",tu:"Japan"}
+  {id:"R32-5",t:"2026-06-30T21:00:00Z",th:"Frankrijk",tu:"Zweden"}
+  {id:"R32-6",t:"2026-06-30T17:00:00Z",th:"Ivoorkust",tu:"Noorwegen"}
+  {id:"R32-7",t:"2026-07-01T01:00:00Z",th:"Mexico",tu:"Ecuador"}
+  {id:"R32-8",t:"2026-07-01T16:00:00Z",th:"Engeland",tu:"DR Congo"}
+  {id:"R32-9",t:"2026-07-02T00:00:00Z",th:"VS",tu:"Bosnië"}
+  {id:"R32-10",t:"2026-07-01T20:00:00Z",th:"België",tu:"Senegal"}
+  {id:"R32-11",t:"2026-07-02T23:00:00Z",th:"Portugal",tu:"Kroatië"}
+  {id:"R32-12",t:"2026-07-02T19:00:00Z",th:"Spanje",tu:"Oostenrijk"}
+  {id:"R32-13",t:"2026-07-03T03:00:00Z",th:"Zwitserland",tu:"Algerije"}
+  {id:"R32-14",t:"2026-07-03T18:00:00Z",th:"Argentinië",tu:"Kaapverdië"}
+  {id:"R32-15",t:"2026-07-03T22:00:00Z",th:"Colombia",tu:"Ghana"}
+  {id:"R32-16",t:"2026-07-04T01:30:00Z",th:"Australië",tu:"Egypte"}
+  {id:"R16-1",t:"2026-07-04T21:00:00Z",th:"W74",tu:"W77"}
+  {id:"R16-2",t:"2026-07-04T17:00:00Z",th:"W73",tu:"W75"}
+  {id:"R16-3",t:"2026-07-05T20:00:00Z",th:"W76",tu:"W78"}
+  {id:"R16-4",t:"2026-07-06T00:00:00Z",th:"W79",tu:"W80"}
+  {id:"R16-5",t:"2026-07-06T19:00:00Z",th:"W83",tu:"W84"}
+  {id:"R16-6",t:"2026-07-07T00:00:00Z",th:"W81",tu:"W82"}
+  {id:"R16-7",t:"2026-07-07T16:00:00Z",th:"W86",tu:"W88"}
+  {id:"R16-8",t:"2026-07-07T20:00:00Z",th:"W85",tu:"W87"}
+  {id:"QF-1",t:"2026-07-09T20:00:00Z",th:"W89",tu:"W90"}
+  {id:"QF-2",t:"2026-07-10T19:00:00Z",th:"W93",tu:"W94"}
+  {id:"QF-3",t:"2026-07-11T21:00:00Z",th:"W91",tu:"W92"}
+  {id:"QF-4",t:"2026-07-12T01:00:00Z",th:"W95",tu:"W96"}
+  {id:"SF-1",t:"2026-07-14T19:00:00Z",th:"W97",tu:"W98"}
+  {id:"SF-2",t:"2026-07-15T19:00:00Z",th:"W99",tu:"W100"}
+  {id:"3P-1",t:"2026-07-18T21:00:00Z",th:"R101",tu:"R102"}
+  {id:"F-1",t:"2026-07-19T19:00:00Z",th:"W101",tu:"W102"}
 ];
 
 const SCOREBORD_URL = "https://script.google.com/macros/s/AKfycbxIBSYYVlf1ixg9mwtkF7_cNvYPvx82UeHinUC3PPAvo5svsvjfUpHEz0d_WczFG0NH/exec";
@@ -498,6 +531,7 @@ function detecteerHuidigTab() {
 
 function renderAlles() {
   if (!data || !data.deelnemers) return;
+  updateKnockoutTeams();
   var d = data.deelnemers;
   document.getElementById("stat-gespeeld").textContent = data.meta.aantalGespeeld || 0;
   document.getElementById("stat-deelnemers").textContent = d.length;
@@ -587,7 +621,10 @@ function renderRanglijst(d, tab) {
   });
 
   var liveMatch = getLiveMatch();
-  var liveKolom = liveMatch ? "<th style='font-family:var(--font-mono);font-size:0.68rem;color:var(--red)'>⚽ " + liveMatch.th.split(" ")[0] + "–" + liveMatch.tu.split(" ")[0] + "</th>" : "";
+  var toonMatch = liveMatch || getNextMatch();
+  var toonKleur = liveMatch ? "var(--red)" : "var(--muted)";
+  var toonIcon  = liveMatch ? "⚽" : "⏱";
+  var liveKolom = toonMatch ? "<th style='font-family:var(--font-mono);font-size:0.68rem;color:" + toonKleur + "'>" + toonIcon + " " + toonMatch.th.split(" ")[0] + "–" + toonMatch.tu.split(" ")[0] + "</th>" : "";
   document.getElementById("rang-head").innerHTML =
     "<tr><th>#</th><th>Deelnemer</th>" + liveKolom +
     "<th>" + cols[tab].label + "</th>" +
@@ -597,7 +634,30 @@ function renderRanglijst(d, tab) {
   document.getElementById("rang-body").innerHTML = sorted.map(function(p, i) {
     var rowClass = i===0 ? "top1" : i<3 ? "top3" : "";
     var pts = cols[tab].fn(p);
-    var scoreCell = liveMatch ? "<td style='font-family:var(--font-mono);font-size:0.85rem;font-weight:600;color:var(--ink);text-align:center'>" + ((p.scores && p.scores[liveMatch.id]) ? p.scores[liveMatch.id] : "—") + "</td>" : "";
+    var scoreCell = "";
+    if (toonMatch) {
+      var isKO = toonMatch.id.indexOf("R32-")===0 || toonMatch.id.indexOf("R16-")===0 ||
+                 toonMatch.id.indexOf("QF-")===0  || toonMatch.id.indexOf("SF-")===0  ||
+                 toonMatch.id.indexOf("F-")===0;
+      var gok = "";
+      if (isKO) {
+        // Knockout: gok = teamnaam uit koKeuzes (niet beschikbaar hier, skip voor nu)
+        // Gebruik p.koKeuzes als die beschikbaar is
+        gok = p.koKeuzes ? (p.koKeuzes[toonMatch.id] || "—") : "—";
+        // Check of gok nog valide is (team speelt in deze match)
+        var thOk = toonMatch.th && !toonMatch.th.startsWith("W") && !toonMatch.th.startsWith("R");
+        var tuOk = toonMatch.tu && !toonMatch.tu.startsWith("W") && !toonMatch.tu.startsWith("R");
+        var valide = !thOk || !tuOk || gok === "—" ||
+                     gok.toLowerCase() === toonMatch.th.toLowerCase() ||
+                     gok.toLowerCase() === toonMatch.tu.toLowerCase();
+        var cel = valide ? gok : "<span style='color:var(--muted2)'>✗ " + gok + "</span>";
+        scoreCell = "<td style='font-family:var(--font-mono);font-size:0.8rem;font-weight:600;color:" + toonKleur + ";text-align:center'>" + cel + "</td>";
+      } else {
+        // Groepsfase: toon score
+        var sc = p.scores && p.scores[toonMatch.id] ? p.scores[toonMatch.id] : "—";
+        scoreCell = "<td style='font-family:var(--font-mono);font-size:0.85rem;font-weight:600;color:" + toonKleur + ";text-align:center'>" + sc + "</td>";
+      }
+    }
     return "<tr class='" + rowClass + "'>" +
       "<td>" + (i+1) + "</td>" +
       "<td>" + p.naam +
@@ -670,6 +730,30 @@ laadData();
 setInterval(laadData, 60000); // automatisch vernieuwen elke minuut
 
 // ── Live wedstrijd widget ──────────────────────────
+
+function getNextMatch() {
+  var now = new Date();
+  var volgende = null;
+  var gesorteerd = SCHEMA_TIJDEN.slice().sort(function(a,b){ return new Date(a.t)-new Date(b.t); });
+  for (var i = 0; i < gesorteerd.length; i++) {
+    var start = new Date(gesorteerd[i].t);
+    if (now < start) { volgende = gesorteerd[i]; break; }
+  }
+  return volgende;
+}
+
+
+// Update SCHEMA_TIJDEN met echte knockout teams uit scorebord data
+function updateKnockoutTeams() {
+  if (!data || !data.meta || !data.meta.koTijden) return;
+  var ko = data.meta.koTijden;
+  SCHEMA_TIJDEN.forEach(function(m) {
+    if (ko[m.id]) {
+      m.th = ko[m.id].th || m.th;
+      m.tu = ko[m.id].tu || m.tu;
+    }
+  });
+}
 
 function getLiveMatch() {
   var now = new Date();
